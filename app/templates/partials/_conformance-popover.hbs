@@ -1,0 +1,12 @@
+{{#if status}}
+  <ul class="list-group">
+    {{#each failed as |fail|}}
+      <li class="list-group-item list-group-item-danger">{{fail.suite}}: {{fail.key}}</li>
+    {{/each}}
+    {{#each passed as |pass|}}
+      <li class="list-group-item list-group-item-success">{{pass.suite}}: {{pass.key}}</li>
+    {{/each}}
+  </ul>
+{{else}}
+  None
+{{/if}}
