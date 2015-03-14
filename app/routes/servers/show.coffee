@@ -16,7 +16,6 @@ ServersShowRoute = Ember.Route.extend({
       run = @store.createRecord('testRun', {'server': @currentModel.server})
       run.set('conformance', @currentModel.server.get('conformance'))
       run.get('testResults').pushObjects(@currentModel.tests.filterBy('selected').map((test) => @store.createRecord('testResult', {'test': test})))
-      debugger
       run.save().then(=>
         run.get('testResults').filterBy('id', null).invoke('deleteRecord');
         @transitionTo('test_runs.show', run)

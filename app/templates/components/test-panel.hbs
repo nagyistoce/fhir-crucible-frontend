@@ -1,0 +1,16 @@
+<div class="toggleable panel-heading">
+  <h4 class="panel-title">
+    <label >
+      {{input type="checkbox" name=test.id checked=test.selected}}
+      {{test.name}}
+    </label>
+    <a class="collapsed" data-toggle="collapse" {{bind-attr data-target=toggleSelector}} aria-expanded="false">
+    <small>(more)</small></a>
+  </h4>
+</div>
+<div {{bind-attr id=toggleId}} class="panel-collapse collapse">
+  <div class="panel-body">
+    {{test.description}}<br>
+    <a {{bind-attr href=testDownloadURL}} download>Test Definition</a>
+  </div>
+</div>

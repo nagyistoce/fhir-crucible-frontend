@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    {{#if registered}}
+      <div class="alert alert-success" role="alert">
+        Registration successful, you may now login.
+      </div>
+    {{/if}}
+    {{#if loginFailed}}
+      <div class="alert alert-danger" role="alert">
+        Invalid email or password.
+      </div>
+    {{/if}}
+
+    <div class="row auth">
+      <h4 class="login col-md-2">
+        <img src="/assets/images/logo_dark.png">
+      </h4>
+
+      <div class="col-md-10">
+        <form {{action 'authenticate' on='submit'}}>
+          <div class="login-inputs registration row">
+            <div class="form-group login-input col-md-12">
+              {{input type="email" value=identification autofocus=true placeholder="Please enter username" classNames="form-control"}}
+            </div>
+            <div class="form-group login-input col-md-12">
+              {{input type="password" value=password autofocus="off" placeholder="Please enter password" classNames="form-control"}}
+            </div>
+          </div>
+          <div class="login-footer row">
+            <div class="login-options col-md-8">
+              {{#link-to 'users.sign-up'}}Sign Up{{/link-to}} | {{#link-to 'index'}}Forgot Your Password?{{/link-to}}
+            </div>
+            <div class="login-btn col-md-4">
+              <input type="submit" value="Login" class="btn">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

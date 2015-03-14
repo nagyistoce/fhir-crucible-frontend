@@ -16,6 +16,17 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+    },
+
+    'simple-auth': {
+      authorizer: 'authorizer:crucible',
+      store: 'simple-auth-session-store:local-storage',
+      authenticationRoute: 'users.login'
+    },
+
+    'simple-auth-devise': {
+      serverTokenEndpoint: '/api/users/sign_in',
+      identificationAttributeName: 'email'
     }
   };
 

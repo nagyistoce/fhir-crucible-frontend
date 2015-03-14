@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    {{#if hasErrors}}
+      <div class="alert alert-danger" role="alert">
+        <p>The following errors prevented you from registering:</p>
+        <ul>
+          {{#each errors as |error|}}
+            <li>{{error}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    {{/if}}
+    <div class="row auth">
+      <h4 class="login col-md-2">
+        <img src="/assets/images/logo_dark.png" alt="logo">
+      </h4>
+
+      <div class="col-md-10">
+        <form {{action 'register' on='submit'}}>
+          <div class="login-inputs registration row">
+            <div class="form-group login-input col-md-12">
+              {{input type="email" value=identification autofocus=true placeholder="Please enter desired username" classNames="form-control"}}
+            </div>
+            <div class="form-group login-input col-md-12">
+              {{input type="password" value=password autocomplete="off" placeholder="Please enter desired password" classNames="form-control"}}
+            </div>
+            <div class="form-group login-input col-md-12">
+              {{input type="password" value=passwordConfirmation autocomplete="off" placeholder="Please re-enter desired password" classNames="form-control"}}
+            </div>
+          </div>
+          <div class="login-footer row">
+            <div class="login-options col-md-8">
+              {{#link-to 'users.login'}}Click to login{{/link-to}} | {{#link-to 'index'}}Return to Crucible{{/link-to}}
+            </div>
+            <div class="login-btn col-md-4">
+              <input type="submit" value="Login" class="btn" {{bind-attr disabled=formLoading}}>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

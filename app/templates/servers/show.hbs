@@ -46,24 +46,7 @@
                     </div>
                   </div>
                   {{#each tests as |test|}}
-                    <div class="toggleable panel-heading">
-                      <h4 class="panel-title">
-                        <label >
-                          {{input type="checkbox" name=test.id checked=test.selected}}
-                          {{test.name}}
-                        </label>
-                        <a class="collapsed" data-toggle="collapse" data-target="#test{{unbound test.reference}}" aria-expanded="false" >
-                        <small>(more)</small></a>
-
-                      </h4>
-                    </div>
-                    <div id="test{{unbound test.reference}}" class="panel-collapse collapse">
-                      <div class="panel-body">
-                        {{test.description}}<br>
-                        <a href="/ctl/{{unbound test.specificTitle}}.xml" download>Test Definition</a>
-                      </div>
-                    </div>
-
+                    {{test-panel test=test}}
                   {{/each}}
                 </div>
               </div>
