@@ -6,13 +6,14 @@ ServersShowController = Ember.Controller.extend({
 
   actions:
     executeTests:->
-      run = @store.createRecord('testRun', {'server': @currentModel.server})
-      run.set('conformance', @currentModel.server.get('conformance'))
-      run.get('testResults').pushObjects(@currentModel.tests.filterBy('selected').map((test) => @store.createRecord('testResult', {'test': test})))
+      run = @store.createRecord('testRun', { server: @get('server') })
+      run.set('conformance', @get('server.conformance'))
+      run.get('testResults').pushObjects(@get('tests').filterBy('selected').map((test) => @store.createRecord('testResult', {'test': test})))
       run.save().then(=>
         run.get('testResults').filterBy('id', null).invoke('deleteRecord');
-        @transitionTo('test_runs.show', run)
+        @transitionToRoute('test_runs.show', run)
       )
+      return
 })
 
 `export default ServersShowController`
