@@ -1,0 +1,35 @@
+<div class="modal-dialog modal-center">
+  <div class="modal-content">
+    <form {{bind-attr class="formClass"}} {{action 'submit' on='submit'}}>
+      <div class="modal-body">
+        <h4 class="login">
+          <div>CRUCIBLE</div>
+          <img src="/assets/images/logo_dark.png" alt="">
+        </h4>
+        <div class="login-inputs row">
+          {{#if loginFailed}}
+            <div class="col-md-12">
+              <div class="alert alert-danger" role="alert">
+                Invalid email address or password.
+              </div>
+            </div>
+          {{/if}}
+          <div class="form-group login-input col-md-12">
+            {{input type="email" value=identification autofocus="autofocus" classNames="form-control" placeholder="Username"}}
+          </div>
+          <div class="form-group login-input col-md-12">
+            {{input type="password" value=password autocomplete="off" classNames="form-control" placeholder="Password"}}
+          </div>
+        </div>
+        <div class="login-footer row">
+          <div class="login-options col-md-8">
+            <a href="">FORGOT PASSWORD</a> | <a href="/users/sign-up" {{action 'register'}}>REGISTER</a>
+          </div>
+          <div class="login-btn col-md-4">
+            <input class="btn" type="submit" value="Login">
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

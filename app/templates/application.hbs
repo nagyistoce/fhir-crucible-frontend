@@ -1,7 +1,9 @@
 {{#if enableHeader}}
-  {{crucible-header session=session invalidateSession="invalidateSession"}}
+  {{crucible-header session=session invalidateSession="invalidateSession" openModal="openModal"}}
 {{/if}}
 {{outlet}}
 {{#if enableFooter}}
   {{crucible-footer}}
 {{/if}}
+
+{{outlet 'modal'}}
