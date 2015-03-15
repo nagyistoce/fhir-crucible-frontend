@@ -1,16 +1,8 @@
 `import Ember from 'ember'`
-`import uuid from '../utils/uuid'`
+`import TabbableMixin from '../mixins/tabbable'`
 
-TestPanel = Ember.Component.extend({
+TestPanel = Ember.Component.extend(TabbableMixin, {
   test: null
-
-  toggleId: (->
-    uuid()
-  ).property(),
-
-  toggleSelector: (->
-    "##{@get('toggleId')}"
-  ).property('toggleId')
 
   testDownloadURL: (->
     "/ctl/#{@get('test.specificTitle')}.xml"

@@ -1,0 +1,103 @@
+<div class="toggleable panel-heading">
+  <h4 class="panel-title">
+    <label>{{result.test.name}}</label>
+    <a class="collapsed" data-toggle="collapse" {{bind-attr data-target=result.toggleSelector}} aria-expanded="false">
+    <small>(more)</small></a>
+    {{#if result.test.hasResults}}
+      <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate tests"></span>
+    {{/if}}
+    <i {{bind-attr class=":glyphicon result.passed:glyphicon-ok-circle:glyphicon-remove-circle result.passed:passed:failed"}}></i>
+  </h4>
+</div>
+<div {{bind-attr id=result.toggleId}} class="panel-collapse collapse">
+  {{result.test.description}}
+  <br />
+  <div class="row">
+    <div class="col-md-7">
+      <table class="table table-hover report-table nav nav-stacked">
+        <tbody>
+          {{#each result.results as |test|}}
+            <tr data-toggle="pill" {{bind-attr data-target=test.toggleSelector}}>
+              <td>
+                {{test.id}}
+              </td>
+              <td>
+                {{test.description}}
+              </td>
+              <td>
+                <span {{bind-attr class=test.status}}>{{test.status}}</span>
+              </td>
+              <td>
+                {{#if test.warnings}}<i class="glyphicon glyphicon-warning-sign warning"></i>{{/if}}
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-5 tab-content details">
+      {{#each result.results as |test|}}
+        <div class="tab-pane" {{bind-attr id=test.toggleId}}>
+          <div class="media">
+            {{#if test.message}}
+              <div class="media">
+                <div class="media-body">
+                  <h4 class="media-heading">Message</h4>
+                  {{test.message}}
+                </div>
+              </div>
+            {{/if}}
+            {{#if test.warnings}}
+              <div class="media">
+                <div class="media-body">
+                  <h4 class="media-heading">Warnings</h4>
+                  {{#each test.warnings as |warning|}}
+                    <div>{{warning}}</div>
+                  {{/each}}
+                </div>
+              </div>
+            {{/if}}
+            {{#if test.links}}
+              <div class="media">
+                <div class="media-body">
+                  <h4 class="media-heading">Links</h4>
+                  {{#each test.links as |link|}}
+                    <div><a {{bind-attr href="link"}} target="_blank">Related FHIR Spec Location</a></div>
+                  {{/each}}
+                </div>
+              </div>
+            {{/if}}
+            {{#if test.requires}}
+              <div class="media">
+                <div class="media-body">
+                  <h4 class="media-heading">Test Requires</h4>
+                    {{#each test.requires as |requirement|}}
+                      <div>{{#if requirement.resource}}{{requirement.resource}}{{else}}System{{/if}}: {{requirement.methods}}</div>
+                    {{/each}}
+                </div>
+              </div>
+            {{/if}}
+            {{#if test.validates}}
+              <div class="media">
+                <div class="media-body">
+                  <h4 class="media-heading">Test Validates</h4>
+                    {{#each test.validates as |requirement|}}
+                      <div>{{#if requirement.resource}}{{requirement.resource}}{{else}}System{{/if}}: {{requirement.methods}}</div>
+                    {{/each}}
+                </div>
+              </div>
+            {{/if}}
+            {{#if test.data}}
+              <div class="media">
+                <div class="media-body">
+                  <h4 class="media-heading">Data</h4>
+                  {{test.data}}
+                </div>
+              </div>
+            {{/if}}
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
