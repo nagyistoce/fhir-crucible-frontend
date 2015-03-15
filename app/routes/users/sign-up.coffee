@@ -1,6 +1,7 @@
 `import Ember from 'ember'`
+`import HeaderFooterDisablerMixin from '../../mixins/header-footer-disabler'`
 
-SignUpRoute = Ember.Route.extend({
+SignUpRoute = Ember.Route.extend(HeaderFooterDisablerMixin, {
   resetController: (controller, isExiting) ->
     if isExiting
       controller.setProperties({
