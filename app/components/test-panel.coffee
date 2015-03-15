@@ -1,11 +1,11 @@
 `import Ember from 'ember'`
-`import UuidGeneratorMixin from '../mixins/uuid-generator'`
+`import uuid from '../utils/uuid'`
 
-TestPanel = Ember.Component.extend(UuidGeneratorMixin, {
+TestPanel = Ember.Component.extend({
   test: null
 
   toggleId: (->
-    @_generateUuid()
+    uuid()
   ).property(),
 
   toggleSelector: (->
