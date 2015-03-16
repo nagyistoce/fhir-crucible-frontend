@@ -13,9 +13,9 @@
     <ul class="nav navbar-nav pull-right">
       {{#if session.isAuthenticated}}
         <li><a href="/users" class="navButton">Dashboard</a></li>
+      {{else}}
+        <li><a class="navButton" href="/">Server Test</a></li>
       {{/if}}
-      <li><a class="navButton" href="{{!-- <% if user_signed_in? %>#/servers/new<% else %>/#<%end%> --}}">Single Server Test</a></li>
-      <li><a class="navButton" href="#">Multi Server Test</a></li>
       {{#if session.isAuthenticated}}
         <li><a href="#" class="navButton" {{action 'invalidateSession'}}>Logout</a></li>
       {{else}}
