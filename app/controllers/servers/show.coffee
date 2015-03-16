@@ -5,6 +5,9 @@ ServersShowController = Ember.Controller.extend({
   server: Ember.computed.oneWay('model')
 
   actions:
+    selectDeselectAll: ->
+      # toggle the checkbox of 'selectDeselect' and toggle the checkboxes
+
     executeTests:->
       run = @store.createRecord('testRun', { server: @get('server') })
       run.set('conformance', @get('server.conformance'))

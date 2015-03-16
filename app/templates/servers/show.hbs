@@ -8,11 +8,10 @@
             <h2>Review Conformance and Select Tests</h2>
           </div>
           <div class="col-md-2">
-            <button type="submit" class="btn orange_btn" {{action "executeTests"}}>RUN</button>
+            <button type="submit" class="btn" {{action "executeTests"}}>RUN</button>
           </div>
         </div>
         <p class="helper_text">Each FHIR Interface will first generate a conformance statement. Based on the conformance, a given set of recommended tests will be shown to the user.</p>
-
         {{#if runningTestCount}}
           <div class="row">
             <div class="progress">
@@ -37,14 +36,13 @@
             <!-- TEST PANEL START -->
             <div class="tab-pane active" id="test-data">
               <div class="col-md-12 tab-content-holder">
-                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <a {{action "selectAll"}}>Select All</a>
-                      |
-                      <a {{action "selectNone"}}>Select None</a>
-                    </div>
+                <div class="row server selectBox">
+                  <div class="col-sm-4">
+                    {{input type="checkbox" name=selectDeselect checked=true}}
+                    <a {{action "selectDeselectAll"}}>Select/Deselect All</a>
                   </div>
+                </div>
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                   {{#each tests as |test|}}
                     {{test-panel test=test}}
                   {{/each}}
