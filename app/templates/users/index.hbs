@@ -6,7 +6,7 @@
           <div class="add_server_button" {{action 'addServer'}}><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add Server</div>
           <div id='serverList' class="col-md-10">
             <h1>My Servers</h1>
-            {{#each proxiedServers as |server|}}<p {{bind-attr class="server.selected:active :clickable-list-item"}} {{action 'toggleServer' server}}>{{server.content.url}}<button {{action 'runTest' server}} class="btn">Run Test</button></p>{{/each}}
+            {{#each proxiedServers as |server|}}<p {{bind-attr class="server.selected:active :clickable-list-item"}} {{action 'toggleServer' server}}>{{server.content.url}}<button {{action 'runTest' server.content}} class="btn">Run Test</button></p>{{/each}}
           </div>
           {{input action="submit" value=url class="form-control" id="addServerInput" placeholder="Please enter FHIR Server URL"}}
           <div class="chart" {{action 'sideChart'}}></div>
