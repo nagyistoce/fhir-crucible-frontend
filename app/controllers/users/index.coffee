@@ -9,7 +9,7 @@ UsersIndexController = Ember.Controller.extend({
   ).property('proxiedServers.@each.selected')
 
   currentTestRuns: (->
-    @get('testRuns').filter(( (testRun) ->
+   @model.testRuns.filter(( (testRun) ->
       # return true if this.length == 0
       @mapBy('id').indexOf(testRun.get('server.id')) > -1
     ), @get('currentServers'))
