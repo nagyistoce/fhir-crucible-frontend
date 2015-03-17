@@ -18,7 +18,9 @@ UsersIndexController = Ember.Controller.extend({
 
   _updateSelectedTestRuns: ->
     serverIds = @get('currentServers').mapBy('id')
-    return [] if serverIds.length == 0
+    if serverIds.length == 0
+      @set('aggregatedTestRuns', [])
+      return []
     testRuns = @get('testRuns')
     promises = @get('testRuns').map((testRun) -> testRun.get('server'))
     Ember.RSVP.all(promises).then(=>
