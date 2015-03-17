@@ -2,20 +2,30 @@
 
 UsersIndexController = Ember.Controller.extend({
   servers: Ember.computed.oneWay('model.servers')
+  testRuns: Ember.computed.oneWay('model.testRuns')
   proxiedServers: Ember.computed.map('servers', (server) -> Ember.Object.create(content: server, selected: false))
 
   url: null
+  aggregatedTestRuns: []
 
   currentServers: (->
     @get('proxiedServers').filterBy('selected', true).mapBy('content')
   ).property('proxiedServers.@each.selected')
 
-  currentTestRuns: (->
-   @model.testRuns.filter(( (testRun) ->
-      # return true if this.length == 0
-      @mapBy('id').indexOf(testRun.get('server.id')) > -1
-    ), @get('currentServers'))
-  ).property('currentServers')
+  _currentServersObserver: (->
+    Ember.run.once(@, @_updateSelectedTestRuns)
+  ).observes('currentServers.[]', 'testRuns.[]').on('init')
+
+  _updateSelectedTestRuns: ->
+    serverIds = @get('currentServers').mapBy('id')
+    return [] if serverIds.length == 0
+    testRuns = @get('testRuns')
+    promises = @get('testRuns').map((testRun) -> testRun.get('server'))
+    Ember.RSVP.all(promises).then(=>
+      @set('aggregatedTestRuns', testRuns.filter((testRun) -> serverIds.indexOf(testRun.get('server.id')) > -1))
+      return
+    )
+    return
 
   actions:
     toggleServer: (server) ->
