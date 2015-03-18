@@ -27,7 +27,7 @@
 
   <div class="row">
     <div class="palette user col-md-12">
-      {{histogram-chart data=aggregatedTestRuns binningField="id" timeSpan="day" bandPadding=0.1 byDate=false rollupBy="testResults.length"}}
+      {{histogram-chart data=aggregatedTestRuns servers=serverIds binningField="id" timeSpan="day" bandPadding=0.1 byDate=false rollupBy="testResults.length"}}
     </div>
   </div>
 

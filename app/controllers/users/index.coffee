@@ -3,10 +3,12 @@
 UsersIndexController = Ember.Controller.extend({
   servers: Ember.computed.oneWay('model.servers')
   testRuns: Ember.computed.oneWay('model.testRuns')
-  proxiedServers: Ember.computed.map('servers', (server) -> Ember.Object.create(content: server, selected: false))
+  proxiedServers: Ember.computed.map('servers', (server) ->
+   Ember.Object.create(content: server, selected: false))
 
   url: null
   aggregatedTestRuns: []
+  serverIds: []
 
   currentServers: (->
     @get('proxiedServers').filterBy('selected', true).mapBy('content')
@@ -18,13 +20,15 @@ UsersIndexController = Ember.Controller.extend({
 
   _updateSelectedTestRuns: ->
     serverIds = @get('currentServers').mapBy('id')
+    @set('serverIds', @get('proxiedServers').mapBy('content.id'))
     if serverIds.length == 0
       @set('aggregatedTestRuns', [])
       return []
     testRuns = @get('testRuns')
     promises = @get('testRuns').map((testRun) -> testRun.get('server'))
     Ember.RSVP.all(promises).then(=>
-      @set('aggregatedTestRuns', testRuns.filter((testRun) -> serverIds.indexOf(testRun.get('server.id')) > -1))
+      @set('aggregatedTestRuns', testRuns.filter((testRun) ->
+        serverIds.indexOf(testRun.get('server.id')) > -1))
       return
     )
     return

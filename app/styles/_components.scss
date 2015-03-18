@@ -110,6 +110,11 @@
   }
 }
 
+// D3 Visualization Styles
+.axis text {
+  font: 10px sans-serif;
+}
+
 .metadata-selector{
   .nav-pills > li > a{
     color: $brand-primary;
