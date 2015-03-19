@@ -2,7 +2,8 @@
 
 ConformanceViewComponent = Em.Component.extend
   server: null
-  testResults: null
+  # FIXME: Set to empty array to hotfix null.mapBy error from merging results
+  testResults: []
   actions: ["read", "vread", "update", "delete", "historyInstance", "validate", "historyType", "create", "searchType"]
   conformanceResults: (->
     # We're going to make a computed property that merges conformance and testResults
