@@ -1,31 +1,13 @@
 <div class="col-md-12 tab-content-holder">
-  {{#if isMultiple}}
-    <div class="row conformance header-data">
-      <div class="col-md-3">
-        <select class="form-control" id="multiserver-selector" {{action 'multiserverSelect' on='change'}}>
-          <option>Server 1 OR Server 2</option>
-          <option>Server 1 AND Server 2</option>
-          <option>Server 1 - EXCLUSIVE</option>
-          <option>Server 2 - EXCLUSIVE</option>
-        </select>
-      </div>
-      <div class="col-md-8 info-box">
-        <h5 class="conformance">Server 1: {{name}}</h5>
-        <h5 class="conformance">Server 2: {{name2}}</h5>
-      </div>
+  <div class="row conformance header-data">
+    <div class="col-md-12">
+      <h4 class="conformance">Server: {{server.conformance.name}}</h4>
     </div>
-  {{else}}
-    <div class="row conformance header-data">
-      <div class="col-md-12">
-        <h4 class="conformance">Server: {{name}}</h4>
-      </div>
-    </div>
-  {{/if}}
-
+  </div>
   <!-- BEGIN RESOURCE CHART -->
   <div class="row conformance">
     <div id="resource-chart" class="col-md-12">
-      {{#each rest as |r|}}
+      {{#each server.conformance.rest as |r|}}
         <div class="col-md-12 tab-content-holder">
           <div class="panel-title table-header row">
             <div class="table-cell col-md-2"><br>
@@ -33,9 +15,15 @@
             </div>
             <div class="table-cell col-md-10">
               <span class="table-label-holder">
-                {{#each operations as |operation|}}
-                  <span class="table-cell">{{operation}}</span>
-                {{/each}}
+                <span class="table-cell">Read</span>
+                <span class="table-cell">VRead</span>
+                <span class="table-cell">Update</span>
+                <span class="table-cell">Delete</span>
+                <span class="table-cell">History</span>
+                <span class="table-cell">Validate</span>
+                <span class="table-cell">HistoryType</span>
+                <span class="table-cell">Create</span>
+                <span class="table-cell">SearchType</span>
               </span>
             </div>
           </div>
@@ -47,15 +35,63 @@
               <h4 class="panel-title">
                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion" aria-expanded="false" data-target="#resource{{unbound res.fhirType}}">{{res.fhirType}}</a>
                 <span class="test-circle-holder">
-                  <span {{bind-attr class=":glyphicon res.read :conformance-test-badge res.results.read.status"}} aria-hidden="true">{{res.read}}{{#if res.results.read.status}}{{#bootstrap-popover title="'''''" tagName="span"}}{{render 'partials/_conformancePopover' res.results.read}}{{/bootstrap-popover}}{{/if}}</span>
-                  <span {{bind-attr class=":glyphicon res.vread :conformance-test-badge res.results.vread.status"}} aria-hidden="true">{{res.vread}}{{#if res.results.vread.status}}{{#bootstrap-popover title="'''''" tagName="span"}}{{render 'partials/_conformancePopover' res.results.vread}}{{/bootstrap-popover}}{{/if}}</span>
-                  <span {{bind-attr class=":glyphicon res.update :conformance-test-badge res.results.update.status"}} aria-hidden="true">{{res.update}}{{#if res.results.update.status}}{{#bootstrap-popover title="'''''" tagName="span"}}{{render 'partials/_conformancePopover' res.results.update}}{{/bootstrap-popover}}{{/if}}</span>
-                  <span {{bind-attr class=":glyphicon res.delete :conformance-test-badge res.results.delete.status"}} aria-hidden="true">{{res.delete}}{{#if res.results.delete.status}}{{#bootstrap-popover title="'''''" tagName="span"}}{{render 'partials/_conformancePopover' res.results.delete}}{{/bootstrap-popover}}{{/if}}</span>
-                  <span {{bind-attr class=":glyphicon res.historyInstance :conformance-test-badge res.results.history-instance.status"}} aria-hidden="true">{{res.validate}}{{#if res.results.history-instance.status}}{{#bootstrap-popover title="'''''" tagName="span"}}{{render 'partials/_conformancePopover' res.results.history-instance}}{{/bootstrap-popover}}{{/if}}</span>
-                  <span {{bind-attr class=":glyphicon res.validate :conformance-test-badge res.results.validate.status"}} aria-hidden="true">{{res.historyInstance}}{{#if res.results.validate.status}}{{#bootstrap-popover title="'''''" tagName="span"}}{{render 'partials/_conformancePopover' res.results.validate}}{{/bootstrap-popover}}{{/if}}</span>
-                  <span {{bind-attr class=":glyphicon res.historyType :conformance-test-badge res.results.history-type.status"}} aria-hidden="true">{{res.historyType}}{{#if res.results.history-type.status}}{{#bootstrap-popover title="'''''" tagName="span"}}{{render 'partials/_conformancePopover' res.results.history-type}}{{/bootstrap-popover}}{{/if}}</span>
-                  <span {{bind-attr class=":glyphicon res.create :conformance-test-badge res.results.create.status"}} aria-hidden="true">{{res.searchType}}{{#if res.results.create.status}}{{#bootstrap-popover title="'''''" tagName="span"}}{{render 'partials/_conformancePopover' res.results.create}}{{/bootstrap-popover}}{{/if}}</span>
-                  <span {{bind-attr class=":glyphicon res.searchType :conformance-test-badge res.results.search-type.status"}} aria-hidden="true">{{res.create}}{{#if res.results.search-type.status}}{{#bootstrap-popover title="'''''" tagName="span"}}{{render 'partials/_conformancePopover' res.results.search-type}}{{/bootstrap-popover}}{{/if}}</span>
+                  <span {{bind-attr class=":glyphicon res.read:test-filled:test-empty res.readStatus :conformance-test-badge"}} aria-hidden="true">
+                    {{#if results.read.status}}
+                      {{#bootstrap-popover title="'''''" tagName="span"}}
+                        {{render 'partials/_conformancePopover' results.read}}
+                      {{/bootstrap-popover}}
+                  {{/if}}</span>
+                  <span {{bind-attr class=":glyphicon res.vread:test-filled:test-empty res.vreadStatus :conformance-test-badge"}} aria-hidden="true">
+                    {{#if results.vread.status}}
+                      {{#bootstrap-popover title="'''''" tagName="span"}}
+                        {{render 'partials/_conformancePopover' results.vread}}
+                      {{/bootstrap-popover}}
+                  {{/if}}</span>
+                  <span {{bind-attr class=":glyphicon res.update:test-filled:test-empty res.updateStatus :conformance-test-badge"}} aria-hidden="true">
+                    {{#if results.update.status}}
+                      {{#bootstrap-popover title="'''''" tagName="span"}}
+                        {{render 'partials/_conformancePopover' results.update}}
+                      {{/bootstrap-popover}}
+                  {{/if}}</span>
+                  <span {{bind-attr class=":glyphicon res.delete:test-filled:test-empty res.deleteStatus :conformance-test-badge"}} aria-hidden="true">
+                    {{#if results.delete.status}}
+                      {{#bootstrap-popover title="'''''" tagName="span"}}
+                        {{render 'partials/_conformancePopover' results.delete}}
+                      {{/bootstrap-popover}}
+                  {{/if}}</span>
+                  <span {{bind-attr class=":glyphicon res.historyInstance:test-filled:test-empty res.historyInstanceStatus :conformance-test-badge"}} aria-hidden="true">
+                    {{#if results.history-instance.status}}
+                      {{#bootstrap-popover title="'''''" tagName="span"}}
+                        {{render 'partials/_conformancePopover' results.history-instance}}
+                      {{/bootstrap-popover}}
+                    {{/if}}</span>
+                  <span {{bind-attr class=":glyphicon res.validate:test-filled:test-empty res.validateStatus :conformance-test-badge"}} aria-hidden="true">
+                    {{#if results.validate.status}}
+                      {{#bootstrap-popover title="'''''" tagName="span"}}
+                        {{render 'partials/_conformancePopover' results.validate}}
+                      {{/bootstrap-popover}}
+                    {{/if}}
+                  </span>
+                  <span {{bind-attr class=":glyphicon res.historyType:test-filled:test-empty res.historyTypeStatus :conformance-test-badge"}} aria-hidden="true">
+                    {{#if results.history-type.status}}
+                      {{#bootstrap-popover title="'''''" tagName="span"}}
+                        {{render 'partials/_conformancePopover' results.history-type}}
+                      {{/bootstrap-popover}}
+                    {{/if}}
+                  </span>
+                  <span {{bind-attr class=":glyphicon res.create:test-filled:test-empty res.createStatus :conformance-test-badge"}} aria-hidden="true">
+                    {{#if results.create.status}}
+                      {{#bootstrap-popover title="'''''" tagName="span"}}
+                        {{render 'partials/_conformancePopover' results.create}}
+                      {{/bootstrap-popover}}
+                  {{/if}}</span>
+                  <span {{bind-attr class=":glyphicon res.searchType:test-filled:test-empty res.searchTypeStatus :conformance-test-badge"}} aria-hidden="true">
+                    {{#if results.search-type.status}}
+                      {{#bootstrap-popover title="'''''" tagName="span"}}
+                        {{render 'partials/_conformancePopover' results.search-type}}
+                      {{/bootstrap-popover}}
+                    {{/if}}
+                    </span>
                 </span>
               </h4>
             </div>
@@ -127,18 +163,18 @@
       <!-- START CONFORMANCE METADATA  -->
       <div id="conformance-metadata" class="tab-pane active">
         <div class="panel-body">
-          {{conformance-metadata title="NAME" value=name isMultiple=isMultiple value2=name2}}
-          {{conformance-metadata title="IDENTIFIER" value=identifier isMultiple=isMultiple value2=identifier2}}
-          {{conformance-metadata title="VERSION" value=versionNum isMultiple=isMultiple value2=versionNum2}}
-          {{conformance-metadata title="PUBLISHER INFORMATION" value=publisher isMultiple=isMultiple value2=publisher2}}
-          {{conformance-metadata title="DESCRIPTION" value=description isMultiple=isMultiple value2=description2}}
-          {{conformance-metadata title="STATUS" value=status isMultiple=isMultiple value2=status2}}
-          {{conformance-metadata title="EXPERIMENTAL" value=date isMultiple=isMultiple value2=date2 boolean=true}}
-          {{conformance-metadata title="DATE" value=date isMultiple=isMultiple value2=date2}}
-          {{conformance-metadata title="SOFTWARE" value="unknown" isMultiple=isMultiple value2="unknown"}}
-          {{conformance-metadata title="IMPLEMENTATION" value=kno isMultiple=isMultiple value2=kno2}}
-          {{conformance-metadata title="FHIR VERSION" value=fhirVersion isMultiple=isMultiple value2=fhirVersion2}}
-          {{conformance-metadata title="ACCEPT UNKNOWN" value=acceptUnknown isMultiple=isMultiple value2=acceptUnknown2 boolean=true}}
+          {{conformance-metadata title="NAME" value=server.conformance.name}}
+          {{conformance-metadata title="IDENTIFIER" value=server.conformance.identifier}}
+          {{conformance-metadata title="VERSION" value=server.conformance.versionNum}}
+          {{conformance-metadata title="PUBLISHER INFORMATION" value=server.conformance.publisher}}
+          {{conformance-metadata title="DESCRIPTION" value=server.conformance.description}}
+          {{conformance-metadata title="STATUS" value=server.conformance.status}}
+          {{conformance-metadata title="EXPERIMENTAL" value=server.conformance.date boolean=true}}
+          {{conformance-metadata title="DATE" value=server.conformance.date}}
+          {{conformance-metadata title="SOFTWARE" value="unknown"}}
+          {{conformance-metadata title="IMPLEMENTATION" value="unknown"}}
+          {{conformance-metadata title="FHIR VERSION" value=server.conformance.fhirVersion}}
+          {{conformance-metadata title="ACCEPT UNKNOWN" value=server.conformance.acceptUnknown boolean=true}}
           <div class="row">
             <div class="col-md-4">
               <div><label>FORMATS SUPPORTED:</label></div>
@@ -147,7 +183,7 @@
               <div>{{#each format as |f|}}{{f}} {{/each}}</div>
             </div>
           </div>
-          {{conformance-metadata title="ADDITIONAL PROFILES SUPPORTED" value=profile.length isMultiple=isMultiple value2=profile.length2}}
+          {{conformance-metadata title="ADDITIONAL PROFILES SUPPORTED" value=profile.length}}
         </div>
       </div>
       <!-- END CONFORMANCE METADATA  -->

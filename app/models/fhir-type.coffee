@@ -13,14 +13,27 @@ FhirType = DS.Model.extend({
   operation: DS.attr()
   results: DS.attr()
   read: (-> @get('operation')['read']||false).property('operation')
+  readStatus: (->
+    if @get('operation')['read']?
+      console.log @get('operation')['read']
+    @get('operation')['read']?.status
+  ).property('operation')
   vread: (-> @get('operation')['vread']||false).property('operation')
+  vreadStatus: (-> @get('operation')['vread']?.status).property('operation')
   update: (-> @get('operation')['update']||false).property('operation')
+  updateStatus: (-> @get('operation')['update']?.status).property('operation')
   delete: (-> @get('operation')['delete']||false).property('operation')
+  deleteStatus: (-> @get('operation')['delete']?.status).property('operation')
   historyInstance: (-> @get('operation')['history-instance']||false).property('operation')
+  historyInstanceStatus: (-> @get('operation')['history-instance']?.status).property('operation')
   validate: (-> @get('operation')['validate']||false).property('operation')
+  validateStatus: (-> @get('operation')['validate']?.status).property('operation')
   historyType: (-> @get('operation')['history-type']||false).property('operation')
+  historyTypeStatus: (-> @get('operation')['history-type']?.status).property('operation')
   create: (-> @get('operation')['create']||false).property('operation')
+  createStatus: (-> @get('operation')['create']?.status).property('operation')
   searchType: (-> @get('operation')['search-type']||false).property('operation')
+  searchTypeStatus: (-> @get('operation')['search-type']?.status).property('operation')
 })
 
 `export default FhirType`

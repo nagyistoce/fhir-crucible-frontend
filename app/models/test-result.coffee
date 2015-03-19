@@ -10,6 +10,11 @@ TestResult = DS.Model.extend(Tabbable, {
   hasResults: (->
     @get('results.length') == @get('test.methods.length')
   ).property('results.@each')
+  validatedResources: (->
+    # This line flattens the array structure produced by mapBy
+    # See Array.prototype.reduce for how it works
+    @get('results').mapBy('validatedResources').reduce(((prev, cur) -> prev.concat(cur)), [])
+  ).property('results')
 })
 
 `export default TestResult`

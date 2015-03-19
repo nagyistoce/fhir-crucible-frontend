@@ -8,6 +8,7 @@ Mode = DS.Model.extend({
   xmlId: DS.attr()
   results: DS.attr()
   resource: DS.hasMany('fhir-type')
+  resourceNames: (-> @get('resource').mapBy('fhirType')).property('resource')
 })
 
 `export default Mode`

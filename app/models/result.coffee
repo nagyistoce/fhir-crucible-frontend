@@ -15,6 +15,15 @@ Result = DS.Model.extend(Tabbable, {
   # warnings: DS.hasMany('warning')
   failed: (-> (@get('status') == 'fail' or @get('status') == 'error')).property('status')
   passed: (->!@get('failed')).property('failed')
+  validatedResources: (->
+    resources = []
+    @get('validates').map( (res) =>
+      res.methods.forEach( (meth) =>
+        resources.push({resource: res.resource, method: meth, passed:@get('passed'), test: @get('key')})
+      )
+    )
+    resources
+  ).property('validates')
 })
 
 `export default Result`
