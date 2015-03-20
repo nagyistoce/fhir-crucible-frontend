@@ -19,7 +19,7 @@ Result = DS.Model.extend(Tabbable, {
     resources = []
     @get('validates')?.map( (res) =>
       res.methods.forEach( (meth) =>
-        resources.push({resource: res.resource, method: meth, passed:@get('passed'), test: @get('key')})
+        resources.push({resource: res.resource, method: meth, passed:@get('passed'), test: @get('key'), description: @get('description')})
       )
     )
     resources
