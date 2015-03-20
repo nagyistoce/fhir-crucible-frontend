@@ -7,14 +7,18 @@
             <h2>Review Test Results</h2>
           </div>
           <div class="col-md-2">
-            <button class="btn orange_btn" {{action "rerun"}}>Rerun</button>
+            {{#if testsExecuting}}
+              <button class="btn orange_btn" disabled><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</button>
+            {{else}}
+              <button class="btn orange_btn" {{action "rerun"}}>Rerun</button>
+            {{/if}}
           </div>
         </div>
         <p class="helper_text">Each of the run tests provide details on the results of the test along with information about how the test relates to the specification and the server's conformance document. </p>
-        {{#if runningTestCount}}
+        {{#if testsExecuting}}
           <div class="row">
             <div class="progress">
-              <div {{bind-attr class=":progress-bar :progress-bar-striped :active"}} role="progressbar" {{bind-attr aria-valuenow=executionProgress}} aria-valuemin="0" aria-valuemax="100" {{bind-attr style=progressStyle}}>
+              <div {{bind-attr class=":progress-bar :progress-bar-striped :active :execution-progressbar"}} role="progressbar" {{bind-attr aria-valuenow=executionProgress}} aria-valuemin="0" aria-valuemax="100">
                 <span class="sr-only">{{executionProgress}}% Complete</span>
               </div>
             </div>

@@ -46,7 +46,7 @@
 
 .progress-bar{
   background-color: $brand-secondary;
-  width: 40%;
+  width: 2%;
 }
 
 @mixin circle($color, $diameter){
@@ -104,7 +104,7 @@
 
 .right-circle{
   margin-left: 34px;
-  margin-right: 27px;  
+  margin-right: 27px;
   height:16px;
   width:8px;
   border-radius: 0px 90px 90px 0px;
@@ -115,7 +115,7 @@
 
 .left-circle{
   margin-left: 27px;
-  margin-right: 34px;   
+  margin-right: 34px;
   height:16px;
   width:8px;
   border-radius: 90px 0px 0px 90px;
