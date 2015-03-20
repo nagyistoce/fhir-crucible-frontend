@@ -1,13 +1,13 @@
 <div class="col-md-12 tab-content-holder">
   <div class="row conformance header-data">
     <div class="col-md-12">
-      <h4 class="conformance">Server: {{server.conformance.name}}</h4>
+      <h4 class="conformance">Server: {{conformance.name}}</h4>
     </div>
   </div>
   <!-- BEGIN RESOURCE CHART -->
   <div class="row conformance">
     <div id="resource-chart" class="col-md-12">
-      {{#each server.conformance.rest as |r|}}
+      {{#each conformance.rest as |r|}}
         <div class="col-md-12 tab-content-holder">
           <div class="panel-title table-header row">
             <div class="table-cell col-md-2"><br>
@@ -35,63 +35,9 @@
               <h4 class="panel-title">
                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion" aria-expanded="false" data-target="#resource{{unbound res.fhirType}}">{{res.fhirType}}</a>
                 <span class="test-circle-holder">
-                  <span {{bind-attr class=":glyphicon res.read:test-filled:test-empty res.readStatus :conformance-test-badge"}} aria-hidden="true">
-                    {{#if results.read.status}}
-                      {{#bootstrap-popover title="'''''" tagName="span"}}
-                        {{render 'partials/_conformancePopover' results.read}}
-                      {{/bootstrap-popover}}
-                  {{/if}}</span>
-                  <span {{bind-attr class=":glyphicon res.vread:test-filled:test-empty res.vreadStatus :conformance-test-badge"}} aria-hidden="true">
-                    {{#if results.vread.status}}
-                      {{#bootstrap-popover title="'''''" tagName="span"}}
-                        {{render 'partials/_conformancePopover' results.vread}}
-                      {{/bootstrap-popover}}
-                  {{/if}}</span>
-                  <span {{bind-attr class=":glyphicon res.update:test-filled:test-empty res.updateStatus :conformance-test-badge"}} aria-hidden="true">
-                    {{#if results.update.status}}
-                      {{#bootstrap-popover title="'''''" tagName="span"}}
-                        {{render 'partials/_conformancePopover' results.update}}
-                      {{/bootstrap-popover}}
-                  {{/if}}</span>
-                  <span {{bind-attr class=":glyphicon res.delete:test-filled:test-empty res.deleteStatus :conformance-test-badge"}} aria-hidden="true">
-                    {{#if results.delete.status}}
-                      {{#bootstrap-popover title="'''''" tagName="span"}}
-                        {{render 'partials/_conformancePopover' results.delete}}
-                      {{/bootstrap-popover}}
-                  {{/if}}</span>
-                  <span {{bind-attr class=":glyphicon res.historyInstance:test-filled:test-empty res.historyInstanceStatus :conformance-test-badge"}} aria-hidden="true">
-                    {{#if results.history-instance.status}}
-                      {{#bootstrap-popover title="'''''" tagName="span"}}
-                        {{render 'partials/_conformancePopover' results.history-instance}}
-                      {{/bootstrap-popover}}
-                    {{/if}}</span>
-                  <span {{bind-attr class=":glyphicon res.validate:test-filled:test-empty res.validateStatus :conformance-test-badge"}} aria-hidden="true">
-                    {{#if results.validate.status}}
-                      {{#bootstrap-popover title="'''''" tagName="span"}}
-                        {{render 'partials/_conformancePopover' results.validate}}
-                      {{/bootstrap-popover}}
-                    {{/if}}
-                  </span>
-                  <span {{bind-attr class=":glyphicon res.historyType:test-filled:test-empty res.historyTypeStatus :conformance-test-badge"}} aria-hidden="true">
-                    {{#if results.history-type.status}}
-                      {{#bootstrap-popover title="'''''" tagName="span"}}
-                        {{render 'partials/_conformancePopover' results.history-type}}
-                      {{/bootstrap-popover}}
-                    {{/if}}
-                  </span>
-                  <span {{bind-attr class=":glyphicon res.create:test-filled:test-empty res.createStatus :conformance-test-badge"}} aria-hidden="true">
-                    {{#if results.create.status}}
-                      {{#bootstrap-popover title="'''''" tagName="span"}}
-                        {{render 'partials/_conformancePopover' results.create}}
-                      {{/bootstrap-popover}}
-                  {{/if}}</span>
-                  <span {{bind-attr class=":glyphicon res.searchType:test-filled:test-empty res.searchTypeStatus :conformance-test-badge"}} aria-hidden="true">
-                    {{#if results.search-type.status}}
-                      {{#bootstrap-popover title="'''''" tagName="span"}}
-                        {{render 'partials/_conformancePopover' results.search-type}}
-                      {{/bootstrap-popover}}
-                    {{/if}}
-                    </span>
+                  {{#each actions as |operation|}}
+                    {{resource-operation resource=res validatedResources=validatedResources operation=operation}}
+                  {{/each}}
                 </span>
               </h4>
             </div>
@@ -163,18 +109,18 @@
       <!-- START CONFORMANCE METADATA  -->
       <div id="conformance-metadata" class="tab-pane active">
         <div class="panel-body">
-          {{conformance-metadata title="NAME" value=server.conformance.name}}
-          {{conformance-metadata title="IDENTIFIER" value=server.conformance.identifier}}
-          {{conformance-metadata title="VERSION" value=server.conformance.versionNum}}
-          {{conformance-metadata title="PUBLISHER INFORMATION" value=server.conformance.publisher}}
-          {{conformance-metadata title="DESCRIPTION" value=server.conformance.description}}
-          {{conformance-metadata title="STATUS" value=server.conformance.status}}
-          {{conformance-metadata title="EXPERIMENTAL" value=server.conformance.date boolean=true}}
-          {{conformance-metadata title="DATE" value=server.conformance.date}}
+          {{conformance-metadata title="NAME" value=conformance.name}}
+          {{conformance-metadata title="IDENTIFIER" value=conformance.identifier}}
+          {{conformance-metadata title="VERSION" value=conformance.versionNum}}
+          {{conformance-metadata title="PUBLISHER INFORMATION" value=conformance.publisher}}
+          {{conformance-metadata title="DESCRIPTION" value=conformance.description}}
+          {{conformance-metadata title="STATUS" value=conformance.status}}
+          {{conformance-metadata title="EXPERIMENTAL" value=conformance.date boolean=true}}
+          {{conformance-metadata title="DATE" value=conformance.date}}
           {{conformance-metadata title="SOFTWARE" value="unknown"}}
           {{conformance-metadata title="IMPLEMENTATION" value="unknown"}}
-          {{conformance-metadata title="FHIR VERSION" value=server.conformance.fhirVersion}}
-          {{conformance-metadata title="ACCEPT UNKNOWN" value=server.conformance.acceptUnknown boolean=true}}
+          {{conformance-metadata title="FHIR VERSION" value=conformance.fhirVersion}}
+          {{conformance-metadata title="ACCEPT UNKNOWN" value=conformance.acceptUnknown boolean=true}}
           <div class="row">
             <div class="col-md-4">
               <div><label>FORMATS SUPPORTED:</label></div>

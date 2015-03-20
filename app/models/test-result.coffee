@@ -13,7 +13,7 @@ TestResult = DS.Model.extend(Tabbable, {
   validatedResources: (->
     # This line flattens the array structure produced by mapBy
     # See Array.prototype.reduce for how it works
-    @get('results').mapBy('validatedResources').reduce(((prev, cur) -> prev.concat(cur)), [])
+    @get('results')?.mapBy('validatedResources').reduce(((prev, cur) -> prev.concat(cur)), [])
   ).property('results')
 })
 
