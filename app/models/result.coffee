@@ -17,7 +17,8 @@ Result = DS.Model.extend(Tabbable, {
   passed: (->!@get('failed')).property('failed')
   validatedResources: (->
     resources = []
-    @get('validates').map( (res) =>
+    # FIXME: validates should not return a non-Array value...
+    (@get('validates') || []).map( (res) =>
       res.methods.forEach( (meth) =>
         resources.push({resource: res.resource, method: meth, passed:@get('passed'), test: @get('key')})
       )
