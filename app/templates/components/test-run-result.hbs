@@ -41,6 +41,7 @@
       {{#each result.results as |test|}}
         <div class="tab-pane" {{bind-attr id=test.toggleId}}>
           <div class="media">
+            <h4 {{bind-attr style="text-align: center"}}>{{test.id}}</h4>
             {{#if test.message}}
               <div class="media">
                 <div class="media-body">

@@ -26,4 +26,19 @@
       text-decoration: none;
     }
   }
+  &.secondary{
+    font-size: 12px;
+    height: 30px;
+    background-color: white;
+    border-color: $brand-accent;
+    color: $brand-accent;
+    &:hover{
+      background-color: $brand-accent;
+      color: white;
+    }
+    &:active{
+      background-color: $brand-accent;
+      color: white;
+    }    
+  }
 }
