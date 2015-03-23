@@ -32,26 +32,29 @@
                   </td>
                 {{/each}}
               </tr>
+              <tr>
+                <td colspan="10">
+                  <div id="resource{{unbound res.fhirType}}" class="panel-collapse collapse">
+                    Conforms to
+                    <a {{bind-attr href="{{res.profile.reference}}"}}>{{res.profile.reference}}</a>
+                    <table class="table">
+                      <tr>
+                        <th>Search Param</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                      </tr>
+                      {{#each res.searchParam as |param|}}
+                        <tr>
+                          <td>{{param.name}}</td>
+                          <td>{{param.fhirType}}</td>
+                          <td>{{param.documentation}}</td>
+                        </tr>
+                      {{/each}}
+                    </table>
+                  </div>
+                </td>
+              </tr>
             {{/each}}
-
-            <div id="resource{{unbound res.fhirType}}" class="panel-collapse collapse">
-              Conforms to
-              <a {{bind-attr href="{{res.profile.reference}}"}}>{{res.profile.reference}}</a>
-              <table class="table">
-                <tr>
-                  <th>Search Param</th>
-                  <th>Type</th>
-                  <th>Description</th>
-                </tr>
-                {{#each res.searchParam as |param|}}
-                  <tr>
-                    <td>{{param.name}}</td>
-                    <td>{{param.fhirType}}</td>
-                    <td>{{param.documentation}}</td>
-                  </tr>
-                {{/each}}
-              </table>
-            </div>
           {{/each}}
         </tbody>
       </table>
