@@ -3,7 +3,7 @@
 
 Result = DS.Model.extend(Tabbable, {
   code: DS.attr()
-  # data: DS.attr()
+  responseData: DS.attr()
   description: DS.attr()
   key: DS.attr()
   message: DS.attr()
@@ -12,7 +12,7 @@ Result = DS.Model.extend(Tabbable, {
   links: DS.attr()#hasMany('link')
   requires: DS.attr()#hasMany('resource')
   validates: DS.attr()#hasMany('resource')
-  # warnings: DS.hasMany('warning')
+  warnings: DS.attr()
   failed: (-> (@get('status') == 'fail' or @get('status') == 'error')).property('status')
   passed: (->!@get('failed')).property('failed')
   validatedResources: (->
