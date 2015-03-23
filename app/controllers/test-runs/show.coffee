@@ -1,8 +1,11 @@
 `import Ember from 'ember'`
 
 TestRunsShowController = Ember.Controller.extend({
-  testRunServer: Ember.computed.oneWay('model.server')
+  server: null
+
   name: null
+  editingServerName: false
+  savingServerName: false
 
   testsExecuting: (->
     @get('model.testResults').mapBy('hasResults').contains(false)
@@ -26,15 +29,23 @@ TestRunsShowController = Ember.Controller.extend({
       @transitionToRoute('servers.show', @get('model.server'))
 
     editServerName: ->
-      @set('name', null)
-      $('#editServerNameInput').toggle()
+      @setProperties(name: @get('server.name'), editingServerName: true)
       return
 
     submit: ->
-      server = @store.createRecord('server', name: @get('name'))
-      server.save()
-      @set('name', null)
-      $('#editServerNameInput').hide()
+      @set('savingServerName', true)
+
+      successFn = =>
+        @setProperties(editingServerName: false, savingServerName: false)
+
+      errorFn = =>
+        alert('There was a problem saving the server name, please try again.')
+        @setProperties(editingServerName: false, savingServerName: false)
+        return
+
+      server = @get('server')
+      server.set('name', @get('name'))
+      server.save().then(successFn, errorFn)
       return
 })
 

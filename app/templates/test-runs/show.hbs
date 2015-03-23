@@ -16,17 +16,33 @@
         </div>
         <p class="helper_text">Each of the run tests provide details on the results of the test along with information about how the test relates to the specification and the server's conformance document.</p>
         <div class="row server-header-data">
-          <div class=".col-md-6 .col-md-offset-3">
-            <div class="server-title">SERVER TESTING</div>
-            <div class="server-url">SERVER URL:
-              <a {{bind-attr href="content.server.url"}} target="_blank">{{content.server.url}}</a>
-            </div>
-            <div class="server-name">SERVER NAME:
-              {{!-- {{bind-attr href="content.server.name"}} --}}
-              {{input action="submit" value=name class="form-control" id="editServerNameInput" placeholder="FHIR Server name"}}
-              <button class="btn secondary" style="width:150px;" {{action "editServerName"}}>
-                <i class="fa fa-pencil-square-o"></i> Edit Server Name
-              </button>
+          <div class="col-md-8 col-md-offset-2">
+            <div class="row">
+              <div class="server-url">
+                <div class="col-md-3">SERVER URL:</div>
+                <div class="col-md-9">
+                  <a {{bind-attr href="content.server.url"}} target="_blank">{{content.server.url}}</a>
+                </div>
+              </div>
+              <div class="server-name">
+                <div class="col-md-3">SERVER NAME:</div>
+                <div class="col-md-9">
+                  {{#if editingServerName}}
+                    <form {{action "submit" on="submit"}}>
+                      <div class="row">
+                        <div class="col-sm-8">
+                          {{input type="text" value=name class="form-control" id="editServerNameInput" placeholder="FHIR Server name" disabled=savingServerName}}
+                        </div>
+                        <div class="col-sm-4">
+                          <input type="submit" class="btn secondary" value="Save" {{bind-attr disabled=savingServerName}} />
+                        </div>
+                      </div>
+                    </form>
+                  {{else}}
+                    {{content.server.name}} <a href="#" {{action "editServerName"}}><i class="fa fa-pencil-square-o"></i></a>
+                  {{/if}}
+                </div>
+              </div>
             </div>
           </div>
         </div>
