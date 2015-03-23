@@ -9,7 +9,6 @@ TestPanel = Ember.Component.extend({
   ).property('test.specificTitle')
 
   _expandedObserver: (->
-    @$('a.expandable').toggleClass('collapsed', !@get('proxiedTest.expanded'))
     @$('div.panel-collapse').collapse(if @get('proxiedTest.expanded') then 'show' else 'hide')
     return
   ).observes('proxiedTest.expanded')

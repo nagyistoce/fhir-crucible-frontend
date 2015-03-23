@@ -4,7 +4,7 @@
       {{input type="checkbox" name=test.id checked=proxiedTest.selected}}
       {{test.name}}
     </label>
-    <a {{action 'expandCollapse'}} class="collapsed expandable" aria-expanded="false" href="#"><small>({{#if proxiedTest.expanded}}less{{else}}more{{/if}})</small></a>
+    <a {{action 'expandCollapse'}} {{bind-attr class="proxiedTest.expanded::collapsed"}} aria-expanded="false" href="#"><small>({{#if proxiedTest.expanded}}less{{else}}more{{/if}})</small></a>
   </h4>
 </div>
 <div class="panel-collapse collapse">
