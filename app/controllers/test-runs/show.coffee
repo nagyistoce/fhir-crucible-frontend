@@ -2,6 +2,7 @@
 
 TestRunsShowController = Ember.Controller.extend({
   testRunServer: Ember.computed.oneWay('model.server')
+  name: null
 
   testsExecuting: (->
     @get('model.testResults').mapBy('hasResults').contains(false)
@@ -23,6 +24,18 @@ TestRunsShowController = Ember.Controller.extend({
   actions:
     rerun: ->
       @transitionToRoute('servers.show', @get('model.server'))
+
+    editServerName: ->
+      @set('name', null)
+      $('#editServerNameInput').toggle()
+      return
+
+    submit: ->
+      server = @store.createRecord('server', name: @get('name'))
+      server.save()
+      @set('name', null)
+      $('#editServerNameInput').hide()
+      return
 })
 
 `export default TestRunsShowController`

@@ -22,16 +22,11 @@
               <a {{bind-attr href="content.server.url"}} target="_blank">{{content.server.url}}</a>
             </div>
             <div class="server-name">SERVER NAME:
-              {{content.server.name}}
-              <span class="edit-server">
-                {{#if "content.server.name"}}
-                  {{content.server.name}}
-                {{else}}
-                  <button class="btn" style="width:170px;" {{action "addServerName"}}>
-                    <i class="fa fa-pencil-square-o"></i> Add Server Name
-                  </button>
-                {{/if}}
-              </span>
+              {{!-- {{bind-attr href="content.server.name"}} --}}
+              {{input action="submit" value=name class="form-control" id="editServerNameInput" placeholder="FHIR Server name"}}
+              <button class="btn secondary" style="width:150px;" {{action "editServerName"}}>
+                <i class="fa fa-pencil-square-o"></i> Edit Server Name
+              </button>
             </div>
           </div>
         </div>
