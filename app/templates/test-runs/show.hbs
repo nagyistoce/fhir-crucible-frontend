@@ -14,10 +14,25 @@
             {{/if}}
           </div>
         </div>
-        <p class="helper_text">Each of the run tests provide details on the results of the test along with information about how the test relates to the specification and the server's conformance document. </p>
+        <p class="helper_text">Each of the run tests provide details on the results of the test along with information about how the test relates to the specification and the server's conformance document.</p>
         <div class="row server-header-data">
-          <div class="col-md-12">
-            <a {{bind-attr href="content.server.url"}} target="_blank">{{content.server.url}}</a>
+          <div class=".col-md-6 .col-md-offset-3">
+            <div class="server-title">SERVER TESTING</div>
+            <div class="server-url">SERVER URL:
+              <a {{bind-attr href="content.server.url"}} target="_blank">{{content.server.url}}</a>
+            </div>
+            <div class="server-name">SERVER NAME:
+              {{content.server.name}}
+              <span class="edit-server">
+                {{#if "content.server.name"}}
+                  {{content.server.name}}
+                {{else}}
+                  <button class="btn" style="width:170px;" {{action "addServerName"}}>
+                    <i class="fa fa-pencil-square-o"></i> Add Server Name
+                  </button>
+                {{/if}}
+              </span>
+            </div>
           </div>
         </div>
         {{#if testsExecuting}}

@@ -3,8 +3,9 @@
 ServersShowController = Ember.Controller.extend({
   tests: []
   proxiedTests: Ember.computed.map('tests', (test) -> Ember.Object.create(content: test, selected: false, expanded: false) )
-  proxiedSelectedTests: Ember.computed.filterBy('proxiedTests', 'selected', true)
+
   selectedTests: Ember.computed.mapBy('proxiedSelectedTests', 'content')
+  proxiedSelectedTests: Ember.computed.filterBy('proxiedTests', 'selected', true)
 
   proxiedExpandedTests: Ember.computed.filterBy('proxiedTests', 'expanded', true)
 
@@ -28,6 +29,10 @@ ServersShowController = Ember.Controller.extend({
   ).property('proxiedExpandedTests.length', 'tests.length')
 
   actions:
+    addServerName: ->
+      @set('server.name', 'Server Name')
+      return
+
     selectDeselectAll: ->
       # toggle the checkbox of 'selectDeselect' and toggle the checkboxes
       selected = @get('selectedTests')
