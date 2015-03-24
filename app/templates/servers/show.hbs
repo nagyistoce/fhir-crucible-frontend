@@ -20,7 +20,7 @@
           <div class="col-md-12">
             <a {{bind-attr href="server.url"}} target="_blank">{{server.url}}</a>
           </div>
-        </div> 
+        </div>
         {{#if runningTestCount}}
           <div class="row">
             <div class="progress">
@@ -47,15 +47,15 @@
               <div class="col-md-12 tab-content-holder">
                 <div class="row server selectBox">
                   <div class="col-sm-2">
-                    <button type="button" class="btn secondary" {{action "selectDeselectAll"}}>Select All</button>
+                    <button type="button" class="btn secondary" {{action "selectDeselectAll"}}>{{selectAllBtnText}}</button>
                   </div>
                   <div class="col-sm-2">
-                    <button type="button" class="btn secondary" {{action "selectDeselectAll"}}>Expand All</button>
+                    <button type="button" class="btn secondary" {{action "expandCollapseAll"}}>{{expandCollapseBtnText}}</button>
                   </div>
                 </div>
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                  {{#each tests as |test|}}
-                    {{test-panel test=test}}
+                  {{#each proxiedTests as |test|}}
+                    {{test-panel proxiedTest=test}}
                   {{/each}}
                 </div>
               </div>
