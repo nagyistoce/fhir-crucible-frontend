@@ -56,6 +56,12 @@
 
 
 .testRun{
-  fill: $brand-secondary;
+  fill: $brand-accent;
   stroke: none;
+}
+
+.testPlaceholder{
+  fill: $background;
+  stroke: none;
+
 }

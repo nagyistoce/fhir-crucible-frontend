@@ -31,7 +31,11 @@
     </div>
   </div>
   <div class="row">
-    {{test-activity-chart tests=content.tests testRuns=content.testRuns servers=content.servers}}
+    <div class="palette user col-md-12">
+      {{test-activity-chart tests=content.tests testRuns=content.testRuns servers=content.servers}}
+      {{test-timeline testRuns=content.testRuns}}
+    </div>
+
   </div>
 
   <div class="row">

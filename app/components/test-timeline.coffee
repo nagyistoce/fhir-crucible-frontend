@@ -1,11 +1,9 @@
 `import Ember from 'ember'`
 
-TestActivityChart = Ember.Component.extend
-  servers: Em.A()
-  tests: Em.A()
+TestTimeline = Ember.Component.extend
   testRuns: Em.A()
   width: 600
-  height: 1500
+  height: 1
   boxSize: 11
   yScale: d3.scale.ordinal()
   xScale: d3.scale.ordinal()
@@ -19,35 +17,19 @@ TestActivityChart = Ember.Component.extend
       .direction('e')
       .offset([0,10])
       .html((d) -> "test: #{d.test.get('name')}<br/> server #{d.server.get('url')} <br/> #{d.test.get('methods').join("<br/>")}")
-    testData = @tests.sortBy('name').mapBy('id')
-    serverData = @servers.sortBy('url').mapBy('id')
     testRunData = []
     @testRuns.forEach (testRun) =>
       testRun.get('testResults').forEach (result) =>
-        testRunData.push({server_id: testRun._data.server, test_id: result._data.test, server: testRun.get('server'), test: result.get('test')})
-    @height = serverData.length * (@boxSize+2*@boxPadding)+@margin
-    @width = testData.length * (@boxSize+2*@boxPadding)+@margin
-    # Let's build the yScale, it's going to be based on the height of the SVG
-    # and the number of tests we have. We're going to use d3.scale.ordinal
-    @yScale.domain(serverData)
+        testRunData.push({server_id: testRun._data.server, test_id: result._data.test, date: moment(testRun._data.date), server: testRun.get('server'), test: result.get('test')})
+    @height = 7 * (@boxSize+2*@boxPadding)+@margin
+    @yScale.domain(d3.range(0,7))
       .range(d3.range(@margin, @height, @boxSize+2*@boxPadding))
-    @xScale.domain(testData)
+    @xScale.domain(d3.range(0,52))
       .range(d3.range(@margin, @width, @boxSize+2*@boxPadding))
-
+    debugger
 
 
     svg = d3.select("##{@elementId}").select("svg")
-    serverData.forEach (s) =>
-      console.log @yScale(s)
-      testData.forEach (t) =>
-        svg.append('rect')
-        .attr('height',@boxSize)
-        .attr('width', @boxSize)
-        .attr('x', () => @xScale(t))
-        .attr('y', () => @yScale(s))
-        .attr('rx', @boxSize/4)
-        .attr('ry', @boxSize/4)
-        .classed('testPlaceholder', true)
 
     svg.selectAll(".testRun").data(testRunData)
       .enter()
@@ -62,8 +44,8 @@ TestActivityChart = Ember.Component.extend
       .on('mouseover', tip.show)
       .on('mouseout', tip.hide)
       .call(tip)
-    # svg.attr('viewBox', "0 0 #{@width} #{@height}")
+    # svg.attr('viewBox', "0 0 #{svg.node().getBBox().width} #{svg.node().getBBox().height}")
 
   ).observes('servers', 'tests', 'testRuns').on('didInsertElement')
 
-`export default TestActivityChart`
+`export default TestTimeline`
