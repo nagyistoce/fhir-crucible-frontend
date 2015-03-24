@@ -4,10 +4,6 @@ TestPanel = Ember.Component.extend({
   proxiedTest: null
   test: Ember.computed.oneWay('proxiedTest.content')
 
-  testDownloadURL: (->
-    "/ctl/#{@get('test.specificTitle')}.xml"
-  ).property('test.specificTitle')
-
   _expandedObserver: (->
     @$('div.panel-collapse').collapse(if @get('proxiedTest.expanded') then 'show' else 'hide')
     return
