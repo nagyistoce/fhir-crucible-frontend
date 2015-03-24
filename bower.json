@@ -16,6 +16,10 @@
     "jquery": "1.11.2",
     "jquery-placeholder": "2.1.1",
     "loader.js": "ember-cli/loader.js#3.2.0",
-    "qunit": "1.17.1"
+    "qunit": "1.17.1",
+    "d3-tip": "~0.6.6"
+  },
+  "resolutions": {
+    "d3": "3.5.5"
   }
 }

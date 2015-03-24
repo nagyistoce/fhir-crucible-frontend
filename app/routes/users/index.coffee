@@ -4,9 +4,9 @@
 UsersIndexRoute = Ember.Route.extend(DefaultRoute, {
   model: ->
     Ember.RSVP.hash(
-      servers: @store.find('server')
-      testRuns: @store.find('testRun')
-      tests: @store.find('test')
+      servers: @store.findAll('server')
+      testRuns: @store.findAll('testRun')
+      tests: @store.findAll('test')
     )
 })
 

@@ -30,6 +30,9 @@
       {{histogram-chart data=aggregatedTestRuns binningField="date" timeSpan="hour" bandPadding=0.1 byDate=true rollupBy=aggregatedTestRuns.length}}
     </div>
   </div>
+  <div class="row">
+    {{test-activity-chart tests=content.tests testRuns=content.testRuns servers=content.servers}}
+  </div>
 
   <div class="row">
     <div class="palette user col-md-12">
