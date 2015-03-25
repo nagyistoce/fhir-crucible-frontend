@@ -1,3 +1,9 @@
+.conformance-badge-popover {
+  opacity: 0;
+  cursor: default;
+}
+
+
 .test-results {
   .pass, .fail, .skip, .error {
     font-weight: bold;
@@ -36,19 +42,15 @@
   }
 }
 
-.conformance-badge-popover {
-  opacity: 0;
-  cursor: default;
-}
-
 .server.selectBox{
   margin-bottom: 30px;
   text-align: left;
   color: $brand-accent;
   font-size: 20px;
-  button{
+  
+  button {
     border: none;
-    font-size: 16px;
+    font-size: 16px; 
     text-align: left;
   }
 }
@@ -59,13 +61,13 @@
 
 .server-details {
   height: 60px;
+  background-color: $background;
   border-radius: 10px;
-  margin: 50px 0;
 
   .server-icon {
-    font-size: 55px;
+    font-size: 50px;
     line-height: 60px;
-    color: $brand-accent;
+    color: #4A4A4A;
     text-align: right;
   }
 
@@ -76,10 +78,6 @@
 
     .server-name {
       font-size: 22px;
-      color: $brand-primary;
-    }
-    .server-url {
-      a{color: $brand-primary;}
     }
   }
 }
@@ -126,10 +124,15 @@
   margin-bottom: 30px;
   text-align: left;
   color: $brand-accent;
-}
-
+  font-size: 20px;
+  
   button {
-    margin: 20px;
+    border: none;
+    font-size: 16px; 
+    text-align: left;
   }
 }
 
+.popover-js{
+  width: 200px;
+}
