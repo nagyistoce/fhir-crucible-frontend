@@ -75,7 +75,11 @@ table > tbody > tr > td {
   }
 }
 
-.tr-hide {
-  display: none;
+/* Bootstrap overrides for report-table */
+.table.report-table > tbody > tr > td {
+  border-top: none;
 }
 
+.table.report-table tr{
+  border-bottom: none;
+}
