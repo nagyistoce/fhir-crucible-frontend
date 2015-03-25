@@ -45,17 +45,28 @@
   margin-bottom: 30px;
   text-align: left;
   color: $brand-accent;
+  font-size: 20px;
+  button{
+    border: none;
+    font-size: 16px; 
+    text-align: left;
+  }
+}
+
+.popover-js{
+  width: 200px;
 }
 
 .server-details {
   height: 60px;
-  background-color: $background;
   border-radius: 10px;
+  margin-top: 50px;
+  margin-bottom: 50px;  
 
   .server-icon {
-    font-size: 50px;
+    font-size: 55px;
     line-height: 60px;
-    color: #4A4A4A;
+    color: $brand-accent;
     text-align: right;
   }
 
@@ -66,15 +77,13 @@
 
     .server-name {
       font-size: 22px;
+      color: $brand-primary;
+    }
+    .server-url {
+      a{color: $brand-primary;}
     }
   }
 }
-
-.server-list {
-  .server-details {
-    margin: 10px;
-    background-color: #fff;
-  }
 
   button {
     margin: 20px;
