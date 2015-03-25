@@ -33,7 +33,34 @@
   cursor: default;
 }
 
-.server.selectBox{
+.server.selectBox {
 	margin-bottom: 30px;
 	text-align: left;
+}
+
+.server-details {
+  height: 60px;
+  background-color: $background;
+  border-radius: 10px;
+
+  .server-icon {
+    font-size: 50px;
+    line-height: 60px;
+    color: #4A4A4A;
+    text-align: right;
+  }
+
+  .server-url-name {
+    text-align: left;
+    line-height: 26px;
+    padding: 5px 0 0 0;
+
+    .server-name {
+      font-size: 22px;
+    }
+
+    .server-url {
+
+    }
+  }
 }
