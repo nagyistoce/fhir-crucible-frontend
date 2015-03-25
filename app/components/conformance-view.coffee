@@ -1,7 +1,6 @@
 `import Ember from 'ember'`
 
 ConformanceViewComponent = Ember.Component.extend
-  trHide: true
   conformance: null
   testResults: null
   operations: ["read", "vread", "update", "delete", "historyInstance", "validate", "historyType", "create", "searchType"]

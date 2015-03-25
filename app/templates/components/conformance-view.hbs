@@ -4,8 +4,8 @@
     {{!-- <div id="resource-chart" class="col-md-12"> --}}
     {{!-- {{#each conformance.rest as |r|}} --}}
     <div id="resource-chart" class="table-responsive">
-      <table class="col-md-12 table table-mega-striped table-condensed">
-        <thead>
+      <table class="col-md-12 table table-mega-striped table-condensed table-fixed-header">
+        <thead class="header">
           <tr>
             <th>Resource Type</th>
             <th>Read</th>
@@ -59,78 +59,6 @@
         </tbody>
       </table>
     </div>
-
-
-
-{{!--         <div class="tab-content-holder">
-        <div class="panel-title table-header row">
-          <div class="table-cell col-md-2"><br>
-            <span class="table-cell">Resource Type</span>
-          </div>
-          <div class="table-cell col-md-10">
-            <span class="table-label-holder">
-              <span class="table-cell">Read</span>
-              <span class="table-cell">VRead</span>
-              <span class="table-cell">Update</span>
-              <span class="table-cell">Delete</span>
-              <span class="table-cell">History</span>
-              <span class="table-cell">Validate</span>
-              <span class="table-cell">HistoryType</span>
-              <span class="table-cell">Create</span>
-              <span class="table-cell">SearchType</span>
-            </span>
-          </div>
-        </div>
-      </div> --}}
-
-{{!--     {{#each r.resource as |res|}}
-      <div class="panel">
-        <div class="panel-heading" role="tab" id="headingTest1">
-          <h4 class="panel-title">
-            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" aria-expanded="false" data-target="#resource{{unbound res.fhirType}}">{{res.fhirType}}</a>
-            <span class="test-circle-holder">
-              {{#each actions as |operation|}}
-                {{resource-operation resource=res validatedResources=validatedResources operation=operation}}
-              {{/each}}
-            </span>
-          </h4>
-        </div> --}}
-        {{!-- <div id="resource{{unbound res.fhirType}}" class="panel-collapse collapse">
-          <div class="panel-body">
-            Conforms to <a {{bind-attr href="{{res.profile.reference}}"}}>{{res.profile.reference}}</a>
-
-            <table class="table">
-              <thead>
-                <th>
-                  Search Param
-                </th>
-                <th>
-                  Type
-                </th>
-                <th>
-                  Description
-                </th>
-              </thead>
-              <tbody>
-                {{#each res.searchParam as |param|}}
-                <tr>
-                  <td>
-                    {{param.name}}
-                  </td>
-                  <td>
-                    {{param.fhirType}}
-                  </td>
-                  <td>
-                    {{param.documentation}}
-                  </td>
-                </tr>
-                {{/each}} --}}
-{{!--                 </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    {{/each}} --}}
 
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
       <div class="panel-title table-header row">
