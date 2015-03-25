@@ -16,11 +16,9 @@
           </div>
         </div>
         <p class="helper_text">Each FHIR Interface will first generate a conformance statement. Based on the conformance, a given set of recommended tests will be shown to the user.</p>
-        <div class="row server-header-data">
-          <div class="col-md-12">
-            <a {{bind-attr href="server.url"}} target="_blank">{{server.url}}</a>
-          </div>
-        </div>
+
+        {{server-details server=server}}
+
         {{#if runningTestCount}}
           <div class="row">
             <div class="progress">

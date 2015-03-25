@@ -2,13 +2,16 @@
 
 <table class="table">
   <tbody>
-    {{#each controller as |server|}}
+    {{#each model as |server|}}
       <tr>
           <td>
-            {{server.url}}
+            {{server-details server=server}}
           </td>
           <td>
-            {{#link-to "server" server}}<button class="btn btn-primary">Test</button>{{/link-to}}
+            <button class="btn secondary" {{action "deleteServer" server}}>Delete</button>
+          </td>
+          <td>
+            {{#link-to "servers.show" server}}<button class="btn btn-primary">Test</button>{{/link-to}}
           </td>
       </tr>
     {{/each}}

@@ -2,26 +2,30 @@
   margin-top: 50px;
 }
 
-.palette{
+.palette {
   text-align: center;
   background-color: $brand-tertiary;
   border-radius: 10px;
   padding: 60px;
   margin-bottom: 50px;
-  &.report{
+
+  &.report {
     padding-left: 100px;
     padding-right: 100px;
     padding-top: 50px;
     padding-bottom: 50px;
   }
+
   &.user{
     text-align: left;
+
     &.analytics{
       #addServerInput{
         display:none;
       }
       min-height: 200px;
     }
+
     &.header{
       min-height: 200px;
     }
@@ -90,14 +94,14 @@
     height: 25px;
     padding: 0px;
     display: none;
-  }  
+  }
   & .clickable-list-item{
     &:hover{
       font-weight: bold;
       font-size: 20px;
       & .btn{
         display: inline-block;
-      }  
+      }
     }
     &.active{
       font-weight: bold;

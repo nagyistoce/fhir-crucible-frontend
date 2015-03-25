@@ -1,7 +1,7 @@
 `import Ember from 'ember'`
 
 TestRunsShowController = Ember.Controller.extend({
-  testRunServer: Ember.computed.oneWay('model.server')
+  server: null
 
   testsExecuting: (->
     @get('model.testResults').mapBy('hasResults').contains(false)

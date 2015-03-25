@@ -14,12 +14,10 @@
             {{/if}}
           </div>
         </div>
-        <p class="helper_text">Each of the run tests provide details on the results of the test along with information about how the test relates to the specification and the server's conformance document. </p>
-        <div class="row server-header-data">
-          <div class="col-md-12">
-            <a {{bind-attr href="content.server.url"}} target="_blank">{{content.server.url}}</a>
-          </div>
-        </div>
+        <p class="helper_text">Each of the run tests provide details on the results of the test along with information about how the test relates to the specification and the server's conformance document.</p>
+
+        {{server-details server=server}}
+
         {{#if testsExecuting}}
           <div class="row">
             <div class="progress">

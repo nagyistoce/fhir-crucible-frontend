@@ -33,7 +33,7 @@ UsersIndexController = Ember.Controller.extend({
       false
 
     submit: ->
-      server = @store.createRecord('server', url: @get('url'));
+      server = @store.createRecord('server', url: @get('url'))
       server.save()
       @set('url', null)
       $('#addServerInput').hide()
