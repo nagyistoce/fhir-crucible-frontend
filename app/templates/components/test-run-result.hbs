@@ -41,7 +41,7 @@
       {{#each result.results as |test|}}
         <div class="tab-pane" {{bind-attr id=test.toggleId}}>
           <div class="media">
-            <h4 class="heading">{{test.id}}</h4>
+            <h4 class="heading">{{test.id}}: <span {{bind-attr class=test.status}}>{{test.status}}</span></h4>
             {{#if test.message}}
               <div class="media">
                 <div class="media-body">
