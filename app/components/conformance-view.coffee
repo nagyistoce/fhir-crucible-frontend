@@ -1,12 +1,21 @@
 `import Ember from 'ember'`
 
-ConformanceViewComponent = Em.Component.extend
+ConformanceViewComponent = Ember.Component.extend
+  trHide: true
   conformance: null
   testResults: null
-  actions: ["read", "vread", "update", "delete", "historyInstance", "validate", "historyType", "create", "searchType"]
+  operations: ["read", "vread", "update", "delete", "historyInstance", "validate", "historyType", "create", "searchType"]
 
   validatedResources: (->
     @get('testResults')?.mapBy('validatedResources')
   ).property('conformance', 'testResults.@each.results')
+
+  didInsertElement: ->
+    @$('.panel-collapse').on('show.bs.collapse', ->
+      Ember.$(@).closest('tr').removeClass('hidden')
+    ).on('hidden.bs.collapse', ->
+      Ember.$(@).closest('tr').addClass('hidden')
+    )
+    return
 
 `export default ConformanceViewComponent`

@@ -1,6 +1,7 @@
 `import DS from 'ember-data'`
+`import TabbableMixin from '../mixins/tabbable'`
 
-FhirType = DS.Model.extend({
+FhirType = DS.Model.extend(TabbableMixin, {
   fhirType: DS.attr()
   interaction: DS.attr()
   profile: DS.attr()

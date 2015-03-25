@@ -1,6 +1,6 @@
 `import Ember from 'ember'`
 
-ResourceOperationComponent = Em.Component.extend
+ResourceOperationComponent = Ember.Component.extend
   tagName: ''
   resource: null
   operation: null

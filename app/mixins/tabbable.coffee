@@ -3,7 +3,7 @@
 
 TabbableMixin = Ember.Mixin.create({
   toggleId: (->
-    uuid()
+    "tabbable-#{uuid()}"
   ).property()
 
   toggleSelector: (->
