@@ -14,6 +14,7 @@ BootstrapPopoverComponent = Ember.Component.extend({
 
     contents = @$('.popover-js')
     @_popover = @$().popover(
+      container: document.body
       trigger: 'hover'
       animation: false
       placement: @get('placement')

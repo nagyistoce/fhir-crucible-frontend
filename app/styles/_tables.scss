@@ -2,10 +2,11 @@
   margin-top: 20px;
   margin-bottom: 20px;
 
-  tr{
+  tr {
     border-bottom: 1px solid $background;
   }
-  thead{
+
+  thead {
     border-bottom: 1px solid $background;
   }
 }
@@ -19,34 +20,57 @@
   padding-right: 22px
 }
 
-table > tbody > tr > td{
+table > tbody > tr > td {
   text-align: left;
 }
 
-table > thead > tr > th{
+table > thead > tr > th {
   text-align: left;
 }
 
-.table-container{
+.table-container {
   height: 300px;
   overflow: auto;
 }
 
-span .table-cell{
+span .table-cell {
   display: inline-block;
   width: 70px;
   font-size: 14px;
   text-align: center;
 }
 
-table > tbody > tr > td{
-  .passed{
+table > tbody > tr > td {
+  .passed {
     float: none;
     margin-right: 0px;
   }
 
-  .failed{
+  .failed {
     float: none;
     margin-right: 0px;
+  }
+}
+
+.conformance {
+  table > tbody > tr > td {
+    border: none;
+  }
+
+  .table-mega-striped > tbody > tr:nth-child(4n-3) > td,
+  .table-mega-striped > tbody > tr:nth-child(4n-3) > th,
+  .table-mega-striped > tbody > tr:nth-child(4n-2) > td,
+  .table-mega-striped > tbody > tr:nth-child(4n-2) > th {
+     background-color: $background;
+  }
+
+  .table {
+    tr {
+      border: none;
+    }
+
+    &.inner-table {
+      background-color: transparent;
+    }
   }
 }
