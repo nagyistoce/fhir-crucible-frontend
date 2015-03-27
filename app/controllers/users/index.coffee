@@ -42,10 +42,10 @@ UsersIndexController = Ember.Controller.extend({
     )
   ).observes('serverIds').on('init')
 
-  # FIXME: Remove this after demo
+  # FIXME: Replace 30 days prior to current day with selected date range
   histogramDateRange: (->
-    start: moment( d3.time.day.offset(new Date(), -14) ).format("MMM Do")
-    stop: moment( d3.time.day.offset(new Date(), 15) ).format("MMM Do")
+    start: moment( d3.time.day.offset(new Date(), -29) ).format("MMM Do")
+    stop: moment( d3.time.day.offset(new Date(), 1) ).format("MMM Do")
   ).property('serverIds')
 
   actions:

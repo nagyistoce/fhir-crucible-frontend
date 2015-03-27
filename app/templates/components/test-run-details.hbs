@@ -1,25 +1,25 @@
 <div class="row">
   <div class="col-xs-4">
     <i {{bind-attr class=":fa :fa-lg :fa-square testRun.server.id"}}></i>
-    {{testRunName}}
+    {{testRunServerName}}
   </div>
   <div class="col-xs-2">
     {{testRunTime}}
   </div>
   <div class="col-xs-1">
-    {{testRun.summary.pass}} <i class="fa fa-check-circle"></i>
+    <i class="fa fa-fw fa-check-circle"></i> {{testRun.summary.pass}}
   </div>
   <div class="col-xs-1">
-    {{testRun.summary.fail}} <i class="fa fa-times-circle"></i>
+    <i class="fa fa-fw fa-times-circle"></i> {{testRun.summary.fail}}
   </div>
   <div class="col-xs-1">
-    {{testRun.summary.warning}} <i class="fa fa-warning"></i>
+    <i class="fa fa-fw fa-warning"></i> {{testRun.summary.warning}}
   </div>
   <div class="col-xs-1">
-    {{testRun.summary.skip}} <i class="fa fa-arrow-circle-right"></i>
+    <i class="fa fa-fw fa-arrow-circle-right"></i> {{testRun.summary.skip}}
   </div>
   <div class="col-xs-1">
-    {{testRun.summary.error}} <i class="fa fa-exclamation-circle"></i>
+    <i class="fa fa-fw fa-exclamation-circle"></i> {{testRun.summary.error}}
   </div>
   <div class="col-xs-1">
     {{#link-to 'test_runs.show' testRun}}

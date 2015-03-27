@@ -9,7 +9,7 @@ TestRunDetailsComponent = Ember.Component.extend({
     moment(@get('testRun.date')).format("lll")
   ).property('testRun.date')
 
-  testRunName: (->
+  testRunServerName: (->
     @get('testRun.server.name') || @get('testRun.server.url')
   ).property('testRun.server.name', 'testRun.server.url')
 

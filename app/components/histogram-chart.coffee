@@ -23,10 +23,10 @@ HistogramChartComponent = Ember.Component.extend({
     @width = 600 - @padding * 2
     @height = 200 - @padding * 2
 
-    # FIXME: Currently showing 1/2 month backward/forward...
+    # FIXME: Replace 30 days prior to current day with selected date range
     xCurrent = new Date()
-    xStartOffset = d3.time.day.offset(xCurrent, -15)
-    xStopOffset = d3.time.day.offset(xCurrent, 15)
+    xStartOffset = d3.time.day.offset(xCurrent, -30)
+    xStopOffset = d3.time.day.offset(xCurrent, 1)
 
     @xScale = d3.time.scale()
       .domain([xStartOffset, xStopOffset])
