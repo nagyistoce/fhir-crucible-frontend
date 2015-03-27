@@ -113,6 +113,7 @@
 // D3 Visualization Styles
 .axis text {
   font: 10px sans-serif;
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 }
 
 .metadata-selector{
@@ -131,4 +132,9 @@
       background-color: #eeeeee;
     }
   }
+}
+
+.histogram-bar-label {
+  font: 10px sans-serif;
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 }
