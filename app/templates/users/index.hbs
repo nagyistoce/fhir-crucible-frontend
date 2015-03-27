@@ -12,9 +12,18 @@
           <h1>My Servers</h1>
           {{#each proxiedServers as |server|}}
             <p {{bind-attr class="server.selected:active :clickable-list-item"}} {{action 'toggleServer' server}}>
-              <i {{bind-attr class=":fa :fa-lg :fa-2x :fa-square server.content.id"}}></i>
-              {{server.content.url}}
-              <button {{action 'runTest' server.content}} class="btn">Run Test</button>
+              <div class="row">
+                <div class="col-xs-3">
+                  <i {{bind-attr class=":fa :fa-lg :fa-2x :fa-square server.content.id"}}></i>
+                  {{server.content.name}}
+                </div>
+                <div class="col-xs-7">
+                  {{server.content.url}}
+                </div>
+                <div class="col-xs-2">
+                  <button {{action 'runTest' server.content}} class="btn">Run Test</button>
+                </div>
+              </div>
             </p>
           {{/each}}
         </div>
