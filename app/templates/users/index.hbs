@@ -31,8 +31,8 @@
       {{histogram-chart data=aggregatedTestRuns servers=serverIds binningField="id" timeSpan="day" bandPadding=0.1 byDate=false rollupBy="testResults.length"}}
       <h3>Test Runs</h3>
       <h4>[Selected Date]</h4>
-        {{#each aggregatedTestRuns as |test_run|}}
-          {{test-run-details test_run=test_run}}
+        {{#each aggregatedTestRuns as |testRun|}}
+          {{test-run-details testRun=testRun}}
         {{/each}}
     </div>
   </div>

@@ -1,11 +1,11 @@
 `import Ember from 'ember'`
 
 TestRunDetailsComponent = Ember.Component.extend({
-  test_run: null
+  testRun: null
 
   testRunTime: (->
-    moment(@test_run.get('date')).format("h:mm a")
-  ).property('test_run.date')
+    moment(@get('testRun.date')).format("h:mm a")
+  ).property('testRun.date')
 
 })
 

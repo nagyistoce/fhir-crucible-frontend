@@ -1,12 +1,12 @@
 <!-- <div class="toggleable panel-heading">
   <h4 class="pal-title">
-    [{{test_run.server.name}}]
-    [{{test_run.summary}}]
+    [{{testRun.server.name}}]
+    [{{testRun.summary}}]
     <label >
-      {{test_run.server.url}}
+      {{testRun.server.url}}
     </label>
     <label >
-      {{test_run.date}}
+      {{testRun.date}}
     </label>
     <a class="collapsed" data-toggle="collapse" data-target="#test1" aria-expanded="false" >
     <small>(more)</small></a>
@@ -14,7 +14,7 @@
 </div>
 <div id="test1" class="panel-collapse collapse">
   <div class="panel-body">
-    {{#each test_run.testResults as |test_result|}}
+    {{#each testRun.testResults as |test_result|}}
       <p>{{test_result.result}}</p>
     {{/each}}
   </div>
@@ -22,53 +22,53 @@
 
 <!-- <div class="test-run-details">
   <div class="test-run-detail server-name">
-    {{test_run.server.name}}
+    {{testRun.server.name}}
   </div>
   <div class="test-run-detail test-run-date">
-    {{test_run_time}}
+    {{testRun_time}}
   </div>
   <div class="test-run-detail">
-    {{test_run.summary.pass}} passed
+    {{testRun.summary.pass}} passed
   </div>
   <div class="test-run-detail">
-    {{test_run.summary.fail}} failed
+    {{testRun.summary.fail}} failed
   </div>
   <div class="test-run-detail">
-    {{test_run.summary.warning}} warnings
+    {{testRun.summary.warning}} warnings
   </div>
   <div class="test-run-detail">
-    {{test_run.summary.skip}} skipped
+    {{testRun.summary.skip}} skipped
   </div>
   <div class="test-run-detail">
-    {{test_run.summary.error}} errors
+    {{testRun.summary.error}} errors
   </div>
 </div> -->
 
 <div class="row">
   <div class="col-xs-2">
-    {{test_run.server.name}}
+    {{testRun.server.name}}
   </div>
   <div class="col-xs-1">
     {{testRunTime}}
   </div>
   <div class="col-xs-2">
-    {{test_run.summary.pass}} passed
+    {{testRun.summary.pass}} passed
   </div>
   <div class="col-xs-1">
-    {{test_run.summary.fail}} failed
+    {{testRun.summary.fail}} failed
   </div>
   <div class="col-xs-2">
-    {{test_run.summary.warning}} warnings
+    {{testRun.summary.warning}} warnings
   </div>
   <div class="col-xs-2">
-    {{test_run.summary.skip}} skipped
+    {{testRun.summary.skip}} skipped
   </div>
   <div class="col-xs-1">
-    {{test_run.summary.error}} errors
+    {{testRun.summary.error}} errors
   </div>
   <div class="col-xs-1">
-    {{#link-to 'test_runs.show' test_run}}
-      {{test_run.summary.total}} tests
+    {{#link-to 'test_runs.show' testRun}}
+      {{testRun.summary.total}} tests
     {{/link-to}}
   </div>
 </div>

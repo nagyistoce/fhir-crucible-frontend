@@ -2,7 +2,7 @@
 
 HistogramChartComponent = Ember.Component.extend({
   # The data to drive the histogram, just feed a raw Ember data
-  data: []
+  data: (-> []).property()
   # What field are we binning by, defaults to id
   binningField: null
   # If we are working by dates
@@ -66,7 +66,7 @@ HistogramChartComponent = Ember.Component.extend({
       .tickPadding(2)
 
     # data = @extractData(@data.toArray(), @rollupBy) #@bins.entries(@data.toArray())
-    test = @customBinnedData(@data.toArray(), "date", "server.id")
+    test = @customBinnedData(@get('data').toArray(), "date", "server.id")
     data = @customExtractData(test)
     @g = svg.append("g")
     @g.append("g")
@@ -124,7 +124,7 @@ HistogramChartComponent = Ember.Component.extend({
   customBinnedData: (models, binningField="date", secondBinning="server.id") ->
     bins = d3.nest()
       .key((d) ->
-        return d.get(binningField).setHours(2,0,0,0)
+        return new Date(d.get(binningField).getTime()).setHours(2,0,0,0)
       ).key((d) -> return d.get(secondBinning))
     bins.entries(models)
 
@@ -134,7 +134,7 @@ HistogramChartComponent = Ember.Component.extend({
     models.map (runsByDate) =>
       runsByDate.values.map (runsByServer) =>
         run = runsByServer.values[0]
-        syncedTime = run.get('date').setHours(2,0,0,0)
+        syncedTime = new Date(run.get('date').getTime()).setHours(2,0,0,0)
         if runsByServer.values.length > 1
           values = d3.sum(runsByServer.values, (v) -> v.get('testResults.length'))
         else
@@ -162,7 +162,7 @@ HistogramChartComponent = Ember.Component.extend({
       .rangeRoundBands([@padding, @width], (@bandPadding||0))
     @colorScale = d3.scale.category20()
       .domain([0..19])
-    stacks = @binnedData(@data, "testResults.length", "date", true )
+    stacks = @binnedData(@get('data'), "testResults.length", "date", true )
     @heightScale = d3.scale.linear()
       .domain([0, d3.max(stacks, (d) -> d.values )])
       .range([@padding+1, @height])
@@ -180,7 +180,7 @@ HistogramChartComponent = Ember.Component.extend({
 
   updateGraph:(->
     # data = @extractData(@data.toArray(), @rollupBy) #@bins.entries(@data.toArray())
-    test = @customBinnedData(@data.toArray(), "date", "server.id")
+    test = @customBinnedData(@get('data').toArray(), "date", "server.id")
     data = @customExtractData(test)
     # console.log data
     # debugger
