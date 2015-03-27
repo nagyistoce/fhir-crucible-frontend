@@ -18,6 +18,7 @@ HistogramChartComponent = Ember.Component.extend({
   rollupBy: null
 
   didInsertElement: ->
+    @tip = d3.tip().attr('class', 'd3-tip').html( (d) -> "#{d.serverName}: #{d.value} run(s)")
     svg = d3.select("##{@elementId}").select("svg")
     @padding = 5
     @width = 600 - @padding * 2
@@ -42,7 +43,8 @@ HistogramChartComponent = Ember.Component.extend({
 
     test = @customBinnedData(@get('data').toArray(), "date", "server.id")
     data = @customExtractData(test)
-    @g = svg.append("g")
+    @g = svg.append("g").call(@tip)
+
     @g.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(" + -1*@padding + "," + (@height - @padding) + ")")
@@ -94,6 +96,7 @@ HistogramChartComponent = Ember.Component.extend({
         offsets[syncedTime] += values
         extraction =
           id: @servers.indexOf(run.get('server.id'))
+          serverName: run.get('server.name') || run.get('server.url')
           value: values
           date: syncedTime
           offset: offsets[syncedTime] - values
@@ -122,6 +125,7 @@ HistogramChartComponent = Ember.Component.extend({
     @heightScale = d3.scale.linear()
       .domain([0, d3.max(@stacks, (d) -> d.values )])
       .range([@padding+1, @height-12])
+
     gEnter = @g.selectAll("rect")
       .data(data)
       .enter()
@@ -131,6 +135,9 @@ HistogramChartComponent = Ember.Component.extend({
       .attr("y", (d) => @height )
       .attr("width", 10 )
       .attr("height", 0)
+      .on('mouseover', (d) => @tip.show(d))
+      .on('mouseout', (d) => @tip.hide(d))
+
     @g.selectAll(".histogram-bar-label")
       .data(@stacks)
       .enter()
