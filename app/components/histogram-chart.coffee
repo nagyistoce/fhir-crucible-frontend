@@ -22,40 +22,15 @@ HistogramChartComponent = Ember.Component.extend({
     @padding = 5
     @width = 600 - @padding * 2
     @height = 200 - @padding * 2
-    # @bins = d3.nest()
-    #   .key((d) =>
-    #     if @byDate
-    #       return d3.time[@timeSpan||'day'](d.get(@binningField||"id"))
-    #     return d.get(@binningField||"id")
-    #   )
-    # if @byDate
-    #   @bins = @bins.key((d) ->
-    #     d.get("id")
-    #   )
 
-
-    # if @rollupBy
-    #   @bins.rollup((d) => #d3.sum(d, (g) => g.get(@rollupBy) )
-    #     rollup: d3.sum(d, (g) => g.get(@rollupBy) )
-    #     id: d[0].get('id')
-    #     date: d[0].get('date').setHours(0,0,0,0)
-    #   )
-    # else
-    #   @bins.rollup((d) ->
-    #     d.length
-    #   )
-
-    xStart = new Date(2015, 2, 1)
-    xStop = new Date(2015, 3, 1)
-    xStartOffset = d3.time.day.offset(xStart, 0)
-    xStopOffset = d3.time.day.offset(xStop, -1)
+    # FIXME: Currently showing 1/2 month backward/forward...
+    xCurrent = new Date()
+    xStartOffset = d3.time.day.offset(xCurrent, -15)
+    xStopOffset = d3.time.day.offset(xCurrent, 15)
 
     @xScale = d3.time.scale()
       .domain([xStartOffset, xStopOffset])
       .rangeRound([0, @width])
-      # .range([xStartOffset, xStopOffset].map(d3.time.scale()
-      #   .domain([xStart, xStop])
-      #   .range([0, @width])))
 
     xAxis = d3.svg.axis()
       .scale(@xScale)
@@ -65,7 +40,6 @@ HistogramChartComponent = Ember.Component.extend({
       .tickSize(4,0)
       .tickPadding(2)
 
-    # data = @extractData(@data.toArray(), @rollupBy) #@bins.entries(@data.toArray())
     test = @customBinnedData(@get('data').toArray(), "date", "server.id")
     data = @customExtractData(test)
     @g = svg.append("g")
@@ -74,7 +48,7 @@ HistogramChartComponent = Ember.Component.extend({
       .attr("transform", "translate(" + -1*@padding + "," + (@height - @padding) + ")")
       .call(xAxis)
     .selectAll("text")
-      .attr("y", 6)
+      .attr("y", 8)
       .attr("x", 6)
       .style("text-anchor", "start")
 
@@ -88,29 +62,6 @@ HistogramChartComponent = Ember.Component.extend({
       .attr("width", 10 )
       .attr("height", (d) => @heightScale( d.value ))
 
-  # getNestedSum: (datum) -> d3.sum(datum.values, (v) -> v.values.rollup)
-
-  # getNestedId: (datum) -> d3.sum(datum.values, (v) -> v.values.rollup)
-
-  # extractData: (models, rollup) ->
-  #   offsets = {}
-  #   paddingCount = {}
-  #   # index = 0
-  #   models.map (m) ->
-  #     syncedTime = m.get('date').setHours(8,0,0,0)
-  #     offsets[syncedTime] ?= 0
-  #     offsets[syncedTime] += m.get(rollup)
-  #     paddingCount[syncedTime] ?= 0
-  #     paddingCount[syncedTime] += 1
-  #     # console.log m
-  #     extracted =
-  #       id: m.get('server.id')
-  #       value: m.get(rollup)
-  #       date: syncedTime
-  #       offset: offsets[syncedTime] - m.get(rollup)
-  #       padding: paddingCount[syncedTime]-1
-  #       # index: index++
-  #
   binnedData: (models, rollup, binningField="id", byDate=false, timeSpan="day") ->
     bins = d3.nest()
       .key((d) ->
@@ -156,53 +107,65 @@ HistogramChartComponent = Ember.Component.extend({
       .attr("y", @height)
       .attr("height", 0)
       .remove()
+    @g.selectAll(".label")
+      .transition()
+      .duration(1000)
+      .attr("y", @height)
+      .remove()
 
     @barScale = d3.scale.ordinal()
       .domain(d3.range(0, data.length))
       .rangeRoundBands([@padding, @width], (@bandPadding||0))
     @colorScale = d3.scale.category20()
       .domain([0..19])
-    stacks = @binnedData(@get('data'), "testResults.length", "date", true )
+    @stacks = @binnedData(@get('data'), "testResults.length", "date", true )
     @heightScale = d3.scale.linear()
-      .domain([0, d3.max(stacks, (d) -> d.values )])
-      .range([@padding+1, @height])
+      .domain([0, d3.max(@stacks, (d) -> d.values )])
+      .range([@padding+1, @height-12])
     gEnter = @g.selectAll("rect")
       .data(data)
       .enter()
-    # # console.log data
     gEnter.append("rect")
       .style("fill", (d) => @colorScale( d.id ))
       .attr("x", (d) => @xScale( d.date ))
       .attr("y", (d) => @height )
       .attr("width", 10 )
       .attr("height", 0)
-
+    @g.selectAll(".label")
+      .data(@stacks)
+      .enter()
+      .append("svg:text")
+        .attr("class", "label")
+        .attr("x", (d) => @xScale( new Date(d.key).setHours(4,0,0,0) ))
+        .attr("y", (d) -> 0)
+        .text('0')
 
   updateGraph:(->
-    # data = @extractData(@data.toArray(), @rollupBy) #@bins.entries(@data.toArray())
     test = @customBinnedData(@get('data').toArray(), "date", "server.id")
     data = @customExtractData(test)
-    # console.log data
-    # debugger
     @setupScale(data)
     @g.selectAll("rect")
       .data(data)
       .transition()
       .duration(1000)
       .style("fill", (d) =>
-        # console.log "filling #{d.id}-#{d.value} with #{@colorScale(d.id)}"
         @colorScale( d.id ))
       .attr("x", (d) =>
-        # console.log "positioning #{d.id}-#{d.date} with #{@xScale(d.date)}"
         @xScale( d.date ))
       .attr("y", (d) =>
-        # console.log d
-        # console.log "positioning #{d.id}-#{d.value}-#{d.offset} with #{@heightScale(d.value)}, #{@heightScale( d.offset )}, #{@height - @heightScale( d.value + d.offset )}"
         @height - @heightScale( d.value + d.offset ))
       .attr("width", 10 )
       .attr("height", (d) =>
-        # console.log "setting #{d.id}-#{d.value} with #{@heightScale( d.value )}"
         @heightScale( d.value ))
+
+    @g.selectAll(".label")
+      .data( () => @stacks)
+      .transition()
+      .duration(1000)
+      .attr("x", (d) => @xScale( new Date(d.key).setHours(4,0,0,0) ))
+      .attr("y", (d) => (@height - @heightScale( d.values )) - 2 )
+      .text((d) -> d.values)
+
     ).observes('data')
 })
 

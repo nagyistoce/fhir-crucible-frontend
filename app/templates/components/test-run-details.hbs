@@ -1,70 +1,25 @@
-<!-- <div class="toggleable panel-heading">
-  <h4 class="pal-title">
-    [{{testRun.server.name}}]
-    [{{testRun.summary}}]
-    <label >
-      {{testRun.server.url}}
-    </label>
-    <label >
-      {{testRun.date}}
-    </label>
-    <a class="collapsed" data-toggle="collapse" data-target="#test1" aria-expanded="false" >
-    <small>(more)</small></a>
-  </h4>
-</div>
-<div id="test1" class="panel-collapse collapse">
-  <div class="panel-body">
-    {{#each testRun.testResults as |test_result|}}
-      <p>{{test_result.result}}</p>
-    {{/each}}
-  </div>
-</div> -->
-
-<!-- <div class="test-run-details">
-  <div class="test-run-detail server-name">
-    {{testRun.server.name}}
-  </div>
-  <div class="test-run-detail test-run-date">
-    {{testRun_time}}
-  </div>
-  <div class="test-run-detail">
-    {{testRun.summary.pass}} passed
-  </div>
-  <div class="test-run-detail">
-    {{testRun.summary.fail}} failed
-  </div>
-  <div class="test-run-detail">
-    {{testRun.summary.warning}} warnings
-  </div>
-  <div class="test-run-detail">
-    {{testRun.summary.skip}} skipped
-  </div>
-  <div class="test-run-detail">
-    {{testRun.summary.error}} errors
-  </div>
-</div> -->
-
 <div class="row">
-  <div class="col-xs-2">
+  <div class="col-xs-4">
+    <i {{bind-attr class=":fa :fa-lg :fa-square testRun.server.id"}}></i>
     {{testRun.server.name}}
   </div>
-  <div class="col-xs-1">
+  <div class="col-xs-2">
     {{testRunTime}}
   </div>
-  <div class="col-xs-2">
-    {{testRun.summary.pass}} passed
+  <div class="col-xs-1">
+    {{testRun.summary.pass}} <i class="fa fa-check-circle"></i>
   </div>
   <div class="col-xs-1">
-    {{testRun.summary.fail}} failed
-  </div>
-  <div class="col-xs-2">
-    {{testRun.summary.warning}} warnings
-  </div>
-  <div class="col-xs-2">
-    {{testRun.summary.skip}} skipped
+    {{testRun.summary.fail}} <i class="fa fa-times-circle"></i>
   </div>
   <div class="col-xs-1">
-    {{testRun.summary.error}} errors
+    {{testRun.summary.warning}} <i class="fa fa-warning"></i>
+  </div>
+  <div class="col-xs-1">
+    {{testRun.summary.skip}} <i class="fa fa-arrow-circle-right"></i>
+  </div>
+  <div class="col-xs-1">
+    {{testRun.summary.error}} <i class="fa fa-exclamation-circle"></i>
   </div>
   <div class="col-xs-1">
     {{#link-to 'test_runs.show' testRun}}
@@ -72,12 +27,3 @@
     {{/link-to}}
   </div>
 </div>
-
-
-
-
-  <!-- pass: 0
-  fail: 0
-  warning: 0
-  skip: 0
-  error: 0 -->

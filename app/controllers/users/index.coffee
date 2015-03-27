@@ -9,6 +9,7 @@ UsersIndexController = Ember.Controller.extend({
   url: null
   aggregatedTestRuns: []
   serverIds: []
+  serverColors: d3.scale.category20().domain([0..19])
 
   currentServers: (->
     @get('proxiedServers').filterBy('selected', true).mapBy('content')
@@ -32,6 +33,20 @@ UsersIndexController = Ember.Controller.extend({
       return
     )
     return
+
+  afterRenderColor: (->
+    Ember.run.scheduleOnce('afterRender', @, ->
+      @get('proxiedServers').mapBy('content.id').forEach((sid) =>
+        $(".#{sid}").css('color', @get('serverColors')(@get('serverIds').indexOf(sid)))
+      )
+    )
+  ).observes('serverIds').on('init')
+
+  # FIXME: Remove this after demo
+  histogramDateRange: (->
+    start: moment( d3.time.day.offset(new Date(), -14) ).format("MMM Do")
+    stop: moment( d3.time.day.offset(new Date(), 15) ).format("MMM Do")
+  ).property('serverIds')
 
   actions:
     toggleServer: (server) ->

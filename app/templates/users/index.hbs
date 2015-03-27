@@ -12,6 +12,7 @@
           <h1>My Servers</h1>
           {{#each proxiedServers as |server|}}
             <p {{bind-attr class="server.selected:active :clickable-list-item"}} {{action 'toggleServer' server}}>
+              <i {{bind-attr class=":fa :fa-lg :fa-2x :fa-square server.content.id"}}></i>
               {{server.content.url}}
               <button {{action 'runTest' server.content}} class="btn">Run Test</button>
             </p>
@@ -30,9 +31,9 @@
       <h1>My Tests</h1>
       {{histogram-chart data=aggregatedTestRuns servers=serverIds binningField="id" timeSpan="day" bandPadding=0.1 byDate=false rollupBy="testResults.length"}}
       <h3>Test Runs</h3>
-      <h4>[Selected Date]</h4>
+      <h4>{{histogramDateRange.start}} - {{histogramDateRange.stop}}</h4>
         {{#each aggregatedTestRuns as |testRun|}}
-          {{test-run-details testRun=testRun}}
+          {{test-run-details testRun=testRun servers=serverIds}}
         {{/each}}
     </div>
   </div>
