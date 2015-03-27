@@ -1,0 +1,83 @@
+<!-- <div class="toggleable panel-heading">
+  <h4 class="pal-title">
+    [{{test_run.server.name}}]
+    [{{test_run.summary}}]
+    <label >
+      {{test_run.server.url}}
+    </label>
+    <label >
+      {{test_run.date}}
+    </label>
+    <a class="collapsed" data-toggle="collapse" data-target="#test1" aria-expanded="false" >
+    <small>(more)</small></a>
+  </h4>
+</div>
+<div id="test1" class="panel-collapse collapse">
+  <div class="panel-body">
+    {{#each test_run.testResults as |test_result|}}
+      <p>{{test_result.result}}</p>
+    {{/each}}
+  </div>
+</div> -->
+
+<!-- <div class="test-run-details">
+  <div class="test-run-detail server-name">
+    {{test_run.server.name}}
+  </div>
+  <div class="test-run-detail test-run-date">
+    {{test_run_time}}
+  </div>
+  <div class="test-run-detail">
+    {{test_run.summary.pass}} passed
+  </div>
+  <div class="test-run-detail">
+    {{test_run.summary.fail}} failed
+  </div>
+  <div class="test-run-detail">
+    {{test_run.summary.warning}} warnings
+  </div>
+  <div class="test-run-detail">
+    {{test_run.summary.skip}} skipped
+  </div>
+  <div class="test-run-detail">
+    {{test_run.summary.error}} errors
+  </div>
+</div> -->
+
+<div class="row">
+  <div class="col-xs-2">
+    {{test_run.server.name}}
+  </div>
+  <div class="col-xs-1">
+    {{testRunTime}}
+  </div>
+  <div class="col-xs-2">
+    {{test_run.summary.pass}} passed
+  </div>
+  <div class="col-xs-1">
+    {{test_run.summary.fail}} failed
+  </div>
+  <div class="col-xs-2">
+    {{test_run.summary.warning}} warnings
+  </div>
+  <div class="col-xs-2">
+    {{test_run.summary.skip}} skipped
+  </div>
+  <div class="col-xs-1">
+    {{test_run.summary.error}} errors
+  </div>
+  <div class="col-xs-1">
+    {{#link-to 'test_runs.show' test_run}}
+      {{test_run.summary.total}} tests
+    {{/link-to}}
+  </div>
+</div>
+
+
+
+
+  <!-- pass: 0
+  fail: 0
+  warning: 0
+  skip: 0
+  error: 0 -->

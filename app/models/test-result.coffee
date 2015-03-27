@@ -7,6 +7,11 @@ TestResult = DS.Model.extend(Tabbable, {
   results: DS.hasMany('result', {async: true})
   hasRun: DS.attr("boolean")
   passed: (-> !@get('results').any((el) -> el.get('failed'))).property('results')
+  summary: (->
+    results = @get('results')?.mapBy('status').reduce(((prev, cur) -> prev.concat(cur)), [])
+    results.push @get('results').mapBy('warnings').reduce(((prev, cur) -> if cur?.length>0 then prev.concat('warning') else prev ), [])
+    results
+  ).property('results.@each')
   hasResults: (->
     @get('results.length') == @get('test.methods.length')
   ).property('results.@each')
