@@ -12,8 +12,18 @@
           <h1>My Servers</h1>
           {{#each proxiedServers as |server|}}
             <p {{bind-attr class="server.selected:active :clickable-list-item"}} {{action 'toggleServer' server}}>
-              {{server.content.url}}
-              <button {{action 'runTest' server.content}} class="btn">Run Test</button>
+              <div class="row">
+                <div class="col-xs-3">
+                  <i {{bind-attr class=":fa :fa-lg :fa-2x :fa-square server.content.id"}}></i>
+                  {{server.content.name}}
+                </div>
+                <div class="col-xs-7">
+                  {{server.content.url}}
+                </div>
+                <div class="col-xs-2">
+                  <button {{action 'runTest' server.content}} class="btn">Run Test</button>
+                </div>
+              </div>
             </p>
           {{/each}}
         </div>
@@ -27,36 +37,13 @@
 
   <div class="row">
     <div class="palette user col-md-12">
-      {{histogram-chart data=aggregatedTestRuns binningField="date" timeSpan="hour" bandPadding=0.1 byDate=true rollupBy=aggregatedTestRuns.length}}
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="palette user col-md-12">
       <h1>My Tests</h1>
-      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-        {{#each testRuns as |test_run|}}
-          <div class="toggleable panel-heading">
-            <h4 class="pal-title">
-              <label >
-                {{test_run.server.url}}
-              </label>
-              <label >
-                {{test_run.date}}
-              </label>
-              <a class="collapsed" data-toggle="collapse" data-target="#test1" aria-expanded="false" >
-              <small>(more)</small></a>
-            </h4>
-          </div>
-          <div id="test1" class="panel-collapse collapse">
-            <div class="panel-body">
-              {{#each test_run.testResults as |test_result|}}
-                <p>{{test_result.result}}</p>
-              {{/each}}
-            </div>
-          </div>
+      {{histogram-chart data=aggregatedTestRuns servers=serverIds binningField="id" timeSpan="day" bandPadding=0.1 byDate=false rollupBy="testResults.length"}}
+      <h3>Test Runs</h3>
+      <h4>{{histogramDateRange.start}} - {{histogramDateRange.stop}}</h4>
+        {{#each aggregatedTestRuns as |testRun|}}
+          {{test-run-details testRun=testRun servers=serverIds}}
         {{/each}}
-      </div>
     </div>
   </div>
 </div>

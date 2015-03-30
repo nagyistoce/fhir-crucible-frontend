@@ -5,6 +5,21 @@ TestRun = DS.Model.extend({
   conformance: DS.belongsTo("conformance")
   date: DS.attr("date")
   server: DS.belongsTo("server", {async: true})
+  summary: (->
+    summary =
+      pass: 0
+      fail: 0
+      warning: 0
+      skip: 0
+      error: 0
+      total: 0
+    results = @get('testResults').mapBy('summary').reduce(((prev, cur) -> prev.concat(cur)), [])
+    results.forEach( (tr) ->
+      summary[tr]++
+      summary['total']++
+    )
+    summary
+  ).property('testResults.@each.results')
   validatedResources: (->
     # This line flattens the array structure produced by mapBy
     # See Array.prototype.reduce for how it works

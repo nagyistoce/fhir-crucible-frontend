@@ -13,6 +13,7 @@
     <ul class="nav navbar-nav pull-right">
       {{#if session.isAuthenticated}}
         <li>{{#link-to 'users.index' classNames="navButton"}}Dashboard{{/link-to}}</li>
+        <li>{{#link-to 'servers.index' classNames="navButton"}}Servers{{/link-to}}</li>
         <li><a href="#" class="navButton" {{action 'invalidateSession'}}>Logout</a></li>
       {{else}}
         <li>{{#link-to 'index' classNames="navButton"}}Server Test{{/link-to}}</li>
