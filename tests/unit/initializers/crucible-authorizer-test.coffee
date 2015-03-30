@@ -1,5 +1,5 @@
 `import Ember from 'ember'`
-`import { initialize } from '../../../initializers/crucible-authorizer'`
+`import { initialize } from '../../../initializers/crucible-simple-auth'`
 `import { module, test } from 'qunit'`
 
 container = null

@@ -7,6 +7,8 @@ moduleFor 'controller:users/index', {
 
 # Replace this with your real tests.
 test 'it exists', (assert) ->
-  controller = @subject()
-  assert.ok controller
-
+  # Because we have async code in this controller we need to wrap it in Ember.run. It'd be better to wrap the code in the controller instead of the test.
+  Ember.run(this, ->
+    controller = @subject()
+    assert.ok controller
+  )

@@ -6,7 +6,6 @@ moduleForComponent 'vertical-bar-chart', {
 }
 
 test 'it renders', (assert) ->
-  assert.expect 2
 
   # creates the component instance
   component = @subject()

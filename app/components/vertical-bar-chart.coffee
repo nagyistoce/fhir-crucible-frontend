@@ -6,7 +6,7 @@ VerticalBarChartComponent = Ember.Component.extend({
     padding = 5
     @width = 600 - padding * 2
     @height = 200 - padding * 2
-    data = @data
+    data = @data||[]
     @barScale = d3.scale.ordinal()
       .domain(d3.range(0, data.length))
       .rangeRoundBands([padding, @width], (@bandPadding||0))

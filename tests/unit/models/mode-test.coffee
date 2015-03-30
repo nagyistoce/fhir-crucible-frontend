@@ -2,7 +2,7 @@
 
 moduleForModel 'mode', {
   # Specify the other units that are required for this test.
-  needs: []
+  needs: ['model:fhir-type']
 }
 
 test 'it exists', (assert) ->
