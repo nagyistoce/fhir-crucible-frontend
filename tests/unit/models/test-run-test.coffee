@@ -2,7 +2,7 @@
 
 moduleForModel 'test-run', {
   # Specify the other units that are required for this test.
-  needs: []
+  needs: ['model:test-result', 'model:conformance', 'model:server', 'model:test', 'model:result', 'model:mode']
 }
 
 test 'it exists', (assert) ->
