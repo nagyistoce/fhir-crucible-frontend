@@ -1,19 +1,27 @@
-<h1>Servers</h1>
+<div class="container main">
+  <div class="row">
+    <div class="palette col-md-12">
+      <h1>My Servers</h1>
 
-<table class="table">
-  <tbody>
-    {{#each model as |server|}}
-      <tr>
-          <td>
+      <div class="row server-list">
+        {{#each model as |server|}}
+          <div class="col-md-8">
             {{server-details server=server}}
-          </td>
-          <td>
-            <button class="btn secondary" {{action "deleteServer" server}}>Delete</button>
-          </td>
-          <td>
-            {{#link-to "servers.show" server}}<button class="btn btn-primary">Test</button>{{/link-to}}
-          </td>
-      </tr>
-    {{/each}}
-  </tbody>
-</table>
+          </div>
+
+          <div class="col-md-2">
+            <button class="btn secondary" {{action "deleteServer" server}}>
+              Delete
+            </button>
+          </div>
+
+          <div class="col-md-2">
+            {{#link-to "servers.show" server}}
+              <button class="btn btn-primary">Test</button>
+            {{/link-to}}
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>

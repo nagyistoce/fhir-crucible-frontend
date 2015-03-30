@@ -1,3 +1,61 @@
 .summary-cell {
-  text-align: center;   
+  text-align: center;
+}
+
+.tab-content {
+  &.details {
+    background-color: $background;
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 10px;
+
+    .test-run-result-id {
+      text-align: center;
+      font-weight: bold;
+    }
+  }
+}
+
+.test-results {
+  .pass, .fail, .skip, .error {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .pass {
+    color: $result-pass;
+  }
+
+  .fail {
+    color: $result-fail;
+  }
+
+  .error {
+    color: $result-error;
+  }
+
+  .skip {
+    color: $result-skip;
+  }
+
+  .warning {
+    color: $result-warning;
+  }
+
+  .details {
+    min-height: 247px;
+    max-height: 500px;
+    margin-top: 20px;
+    overflow: auto;
+  }
+}
+
+.test-run-result {
+
+  .panel-title{
+    label {
+      color: $brand-accent;
+    }
+}
+
 }
