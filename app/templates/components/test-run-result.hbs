@@ -10,16 +10,16 @@
     {{/if}}
   </h4>
 </div>
-<div {{bind-attr id=result.toggleId}} class="panel-collapse collapse test-results">
+<div {{bind-attr id=result.toggleId}} class="panel-collapse collapse">
   {{result.test.description}}
   <br />
   <div class="row">
-    <div class="col-md-6 listed-results">
+    <div class="col-md-7">
       <table class="table table-hover report-table nav nav-stacked">
         <tbody>
           {{#each result.results as |test|}}
             <!-- FIXME: Are we ok with embedded view & non-bind-attr?-->
-            {{#view 'results-row' class="results-row" data-target=test.toggleSelector}}
+            {{#view 'results-row' data-target=test.toggleSelector}}
               <td>
                 {{test.id}}
               </td>
@@ -37,11 +37,11 @@
         </tbody>
       </table>
     </div>
-    <div class="col-md-6 tab-content details">
+    <div class="col-md-5 tab-content details">
       {{#each result.results as |test|}}
         <div class="tab-pane" {{bind-attr id=test.toggleId}}>
           <div class="media">
-            <h4 class="heading">{{test.id}}: <span {{bind-attr class=test.status}}>{{test.status}}</span></h4>
+            <h4 {{bind-attr style="text-align: center"}}>{{test.id}}</h4>
             {{#if test.message}}
               <div class="media">
                 <div class="media-body">
