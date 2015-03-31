@@ -26,6 +26,11 @@ ServersShowController = Ember.Controller.extend({
       'Expand All'
   ).property('proxiedExpandedTests.length', 'tests.length')
 
+  # Boolean observer for determining if the server's conformance has loaded
+  conformanceLoaded: (->
+    @get('server.conformance.isLoaded') || false
+  ).property('server.conformance')
+
   actions:
     selectDeselectAll: ->
       # toggle the checkbox of 'selectDeselect' and toggle the checkboxes
