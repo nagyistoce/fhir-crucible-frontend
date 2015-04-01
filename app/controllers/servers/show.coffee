@@ -26,7 +26,12 @@ ServersShowController = Ember.Controller.extend({
       'Expand All'
   ).property('proxiedExpandedTests.length', 'tests.length')
 
-  # Boolean observer for determining if the server's conformance has loaded
+  # Boolean property for determining if we can execute selected tests
+  canExecuteTests: (->
+    !(@get('selectedTests.length') > 0)
+  ).property('selectedTests.length')
+
+  # Boolean property for determining if the server's conformance has loaded
   conformanceLoaded: (->
     @get('server.conformance.isLoaded') || false
   ).property('server.conformance')

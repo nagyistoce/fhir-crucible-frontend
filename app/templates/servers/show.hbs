@@ -14,7 +14,7 @@
               {{#unless conformanceLoaded}}
                 <button type="submit" disabled class="btn" ><i class="fa fa-lg fa-fw fa-spinner fa-pulse"></i> Loading...</button>
               {{else}}
-                <button type="submit" class="btn" {{action "executeTests"}}>RUN</button>
+                <button type="submit" class="btn" {{bind-attr disabled="canExecuteTests"}} {{action "executeTests"}}>RUN</button>
               {{/unless}}
             {{/if}}
           </div>
