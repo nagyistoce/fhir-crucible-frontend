@@ -23,11 +23,11 @@
   margin-left: 29px;
   margin-right: 29px;
   &.results-passed {
-    background: $success;
+    background: $result-pass;
     border: none;
   }
   &.results-failed {
-    background: $failure;
+    background: $result-fail;
     border: none;
   }
 }
