@@ -11,7 +11,11 @@
             {{#if savingTestRun}}
               <button type="submit" disabled class="btn" ><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Preparing...</button>
             {{else}}
-              <button type="submit" class="btn" {{action "executeTests"}}>RUN</button>
+              {{#unless conformanceLoaded}}
+                <button type="submit" disabled class="btn" ><i class="fa fa-lg fa-fw fa-spinner fa-pulse"></i> Loading...</button>
+              {{else}}
+                <button type="submit" class="btn" {{bind-attr disabled="canExecuteTests"}} {{action "executeTests"}}>RUN</button>
+              {{/unless}}
             {{/if}}
           </div>
         </div>
@@ -32,7 +36,7 @@
         <div class="row">
           <ul class="nav nav-tabs tabbed-data-container">
             <li class="tabbed-data active"><a data-toggle="tab" href="#test-data">Tests</a></li>
-            <li class="tabbed-data"><a data-toggle="tab"href="#conformance-data">Conformance</a></li>
+            <li class="tabbed-data"><a data-toggle="tab"href="#conformance-data">{{#unless conformanceLoaded}}<i class="fa fa-lg fa-fw fa-spinner fa-pulse"></i> {{/unless}}Conformance</a></li>
             {{!-- <li class="tabbed-data"><a data-toggle="tab"href="#heatmap-data">Heat Map</a></li> --}}
           </ul>
         </div>
