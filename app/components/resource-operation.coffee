@@ -25,7 +25,7 @@ ResourceOperationComponent = Ember.Component.extend
   operationTestStatus: (->
     operationTests = @validatedResources?.reduce(((prev, cur) -> prev.concat(cur)), []).filterBy('resource', @resource.get('fhirType')).filterBy('method', @operation)
     if operationTests?.length > 0
-      return if operationTests.everyBy('passed', true) then 'results-pass' else 'results-failed'
+      return if operationTests.everyBy('passed', true) then 'results-passed' else 'results-failed'
     else
       return null
   ).property('resource', 'validatedResources')
