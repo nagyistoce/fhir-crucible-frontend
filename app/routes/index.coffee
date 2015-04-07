@@ -5,11 +5,18 @@ IndexRoute = Ember.Route.extend(DefaultRoute, {
   actions:
     submit: ->
       if (@isMultiServer())
-        multiserver = @store.createRecord('multiserver',
-          url1: @controller.get('server1'),
-          url2: @controller.get('server2'))
-        multiserver.save()
-        @transitionTo('multiservers.show', multiserver)
+        server = @store.createRecord('server', url: @controller.get('server1'))
+        destinationServer = @store.createRecord('server', url: @controller.get('server2'))
+        server.save().then(=>
+          destinationServer.save().then(=>
+            multiserver = {
+              server: server
+              destinationServer: destinationServer
+              multiserver_id: "#{server.get('id')}-#{destinationServer.get('id')}"
+            }
+            @transitionTo('multiservers.show', multiserver)
+          )
+        )
       else
         server = @store.createRecord('server', url: @controller.get('server1'))
         server.save().then(=> @transitionTo('servers.show', server))

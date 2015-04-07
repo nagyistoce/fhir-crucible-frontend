@@ -2,18 +2,27 @@
 
 MultiserversShowRoute = Ember.Route.extend({
   model: (params) ->
-    @store.find('multiserver', params.multiserver_id)
-  afterModel: (server) ->
-    server.set("tests", @store.find("test", {multiserver: true}))
+    if params.server?
+      server = @store.find('server', params.server.server_id)
+      destinationServer = @store.find('server', params.destinationServer.server_id)
+      {
+        server: server
+        destinationServer: destinationServer
+      }
+    else
+      servers = params.multiserver_id.split('-')
+      server = @store.find('server', servers[0])
+      destinationServer = @store.find('server', servers[1])
+      {
+        server: server
+        destinationServer: destinationServer
+      }
 
-    conformance1 = DS.PromiseObject.create({promise: $.get("/api/servers/conformance?url=#{server.get("url1")}")})
-    conformance1.then(() -> server.set("conformance1", conformance1.content))
-    conformance2 = DS.PromiseObject.create({promise: $.get("/api/servers/conformance?url=#{server.get("url2")}")})
-    conformance2.then(() -> server.set("conformance2", conformance2.content))
-
-  actions:
-    executeTests:->
-      @transitionTo('multiservers.results', @currentModel)
+  afterModel: ->
+    @store.find("test", {multiserver: "true"}).then((tests) =>
+      @controllerFor('multiservers.show').set('tests', tests)
+      return
+    )
 })
 
 `export default MultiserversShowRoute`

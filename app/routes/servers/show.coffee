@@ -8,7 +8,7 @@ ServersShowRoute = Ember.Route.extend({
     # conformance = DS.PromiseObject.create({promise: $.get("/api/servers/conformance?url=#{model.server.get("url")}")})
     # conformance.then(() => model.server.set("conformance", @store.createRecord('conformance', json: [conformance.content])))
 
-    @store.findAll("test").then((tests) =>
+    @store.find("test", {multiserver: false}).then((tests) =>
       @controllerFor('servers.show').set('tests', tests)
       return
     )

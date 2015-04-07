@@ -5,6 +5,9 @@ TestRun = DS.Model.extend({
   conformance: DS.belongsTo("conformance")
   date: DS.attr("date")
   server: DS.belongsTo("server", {async: true})
+  destinationServer: DS.belongsTo("server", {async: true})
+  destinationConformance: DS.belongsTo("conformance")
+  isMultiserver: DS.attr("boolean")
   summary: (->
     summary =
       pass: 0
