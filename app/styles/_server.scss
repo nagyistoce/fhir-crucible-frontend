@@ -50,7 +50,7 @@
   
   button {
     border: none;
-    font-size: 16px; 
+    font-size: 16px;
     text-align: left;
   }
 }
@@ -61,13 +61,13 @@
 
 .server-details {
   height: 60px;
-  background-color: $background;
   border-radius: 10px;
+  margin: 50px 0;
 
   .server-icon {
-    font-size: 50px;
+    font-size: 55px;
     line-height: 60px;
-    color: #4A4A4A;
+    color: $brand-accent;
     text-align: right;
   }
 
@@ -78,45 +78,11 @@
 
     .server-name {
       font-size: 22px;
+      color: $brand-primary;
     }
-  }
-}
-
-.test-results {
-  .pass, .fail, .skip, .error {
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-  .pass {
-    color: #28BA0F;
-  }
-  .fail {
-    color: #B71817;
-  }
-  .error {
-    color: #4B0082;
-  }
-  .skip {
-    color: #00E1E1;
-  }
-  .warning {
-    background-color: #FFFFAF;
-    color: #C3C2C2;
-  }
-  .details {
-      border-left: 2px solid $background-lighten;
-      min-height: 250px;
-      max-height: 500px;
-      margin-top: 20px;
-      overflow: auto;
-      h4{
-        &.heading{
-          text-align: center;
-          margin-top: 0px;
-        }
-      }
-      padding: 15px;
-      padding-left: 20px;
+    .server-url {
+      a{color: $brand-primary;}
+    }
   }
 }
 
