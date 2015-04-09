@@ -9,7 +9,7 @@ TestRunsShowRoute = Ember.Route.extend(DefaultRoute, {
     if model.get('isMultiserver')
       model.get('server').then( (server) =>
         @controllerFor('test-runs/show').set('server', server)
-        model.get('destinationServer').then( (destinationServer)=>
+        model.get('destinationServer').then( (destinationServer) =>
           @controllerFor('test-runs/show').set('destinationServer', destinationServer)
         )
       )

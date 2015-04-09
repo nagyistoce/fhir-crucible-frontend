@@ -6,9 +6,15 @@ ResourceOperationComponent = Ember.Component.extend
   operation: null
   validatedResources: null
 
-  supported: (->
-    @resource.get(@operation)
-  ).property('resource')
+  supportedStatus: (->
+    if @resource.get(@operation)==true
+      "test-filled"
+    else if @resource.get(@operation)
+      # multiserver operations are defined as "left-circle"/"right-circle"
+      @resource.get(@operation)
+    else
+      "test-empty"
+  ).property('resource', 'validatedResources')
 
   operationTests: (->
     @validatedResources?.reduce(((prev, cur) -> prev.concat(cur)), []).filterBy('resource', @resource.get('fhirType')).filterBy('method', @operation)

@@ -24,6 +24,7 @@ app.import(app.bowerDirectory + '/d3/d3.js');
 app.import(app.bowerDirectory + '/Case/dist/Case.js');
 app.import(app.bowerDirectory + '/moment/moment.js');
 app.import(app.bowerDirectory + '/d3-tip/index.js');
+app.import(app.bowerDirectory + '/underscore/underscore.js');
 
 // --
 
