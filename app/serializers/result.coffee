@@ -7,9 +7,10 @@ ResultSerializer = DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
     validates: {embeddded:'always'}
     warnings: {embeddded:'always'}
   normalize: (type, hash, prop) ->
-    # Retain test result data as responseData since data is reserved
+    # Retain test id in separate attr, replace result id with Ember GUID
     hash.test_id = hash.id
     hash.id = Ember.generateGuid({},"result")
+    # Retain test result data as responseData since data is reserved
     hash.responseData = hash.data
     @_super(type,hash,prop)
 })

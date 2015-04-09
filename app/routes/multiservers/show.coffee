@@ -2,6 +2,7 @@
 
 MultiserversShowRoute = Ember.Route.extend({
   model: (params) ->
+    # Retrieve both servers either from passed in parameters (landing page)
     if params.server?
       @store.find('server', params.server.server_id).then( (server) =>
         @store.find('server', params.destinationServer.server_id).then( (destinationServer) =>
@@ -11,6 +12,7 @@ MultiserversShowRoute = Ember.Route.extend({
           }
         )
       )
+    # or the id parameter (from refreshing multiservers.show)
     else
       servers = params.multiserver_id.split('-')
       @store.find('server', servers[0]).then( (server) =>

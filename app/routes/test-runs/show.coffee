@@ -7,6 +7,7 @@ TestRunsShowRoute = Ember.Route.extend(DefaultRoute, {
 
   afterModel: (model) ->
     if model.get('isMultiserver')
+      # Retrieve both servers for multiserver test run
       model.get('server').then( (server) =>
         @controllerFor('test-runs/show').set('server', server)
         model.get('destinationServer').then( (destinationServer) =>
