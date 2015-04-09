@@ -32,12 +32,12 @@
                   </td>
                 {{/each}}
               </tr>
-              <tr>
+              <tr class="hidden">
                 <td colspan="10">
-                  <div id="resource{{unbound res.fhirType}}" class="panel-collapse collapse">
+                  <div {{bind-attr id=res.toggleId}} class="panel-collapse collapse" aria-expanded="false">
                     Conforms to
                     <a {{bind-attr href="{{res.profile.reference}}"}}>{{res.profile.reference}}</a>
-                    <table class="table">
+                    <table class="table inner-table">
                       <tr>
                         <th>Search Param</th>
                         <th>Type</th>
