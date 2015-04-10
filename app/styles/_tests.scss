@@ -43,10 +43,19 @@
   }
 
   .details {
-    min-height: 247px;
+    border-left: 2px solid $background-lighten;
+    min-height: 250px;
     max-height: 500px;
     margin-top: 20px;
     overflow: auto;
+    h4 {
+      &.heading {
+        text-align: center;
+        margin-top: 0px;
+      }
+    }
+    padding: 15px;
+    padding-left: 20px;
   }
 }
 
@@ -56,6 +65,5 @@
     label {
       color: $brand-accent;
     }
-}
-
+  }
 }

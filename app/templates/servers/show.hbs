@@ -49,10 +49,8 @@
               <div class="col-md-12 tab-content-holder">
                 <div class="row server selectBox">
                   <div class="col-sm-2">
-                    <button type="button" class="btn secondary" {{action "selectDeselectAll"}}>{{selectAllBtnText}}</button>
-                  </div>
-                  <div class="col-sm-2">
-                    <button type="button" class="btn secondary" {{action "expandCollapseAll"}}>{{expandCollapseBtnText}}</button>
+                    <button type="button" class="btn secondary" {{action "selectDeselectAll"}}><i class="fa fa-check"></i>&nbsp;{{selectAllBtnText}}</button>
+                    <button type="button" class="btn secondary" {{action "expandCollapseAll"}}><i class="fa fa-expand"></i>&nbsp;{{expandCollapseBtnText}}</button>
                   </div>
                 </div>
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">

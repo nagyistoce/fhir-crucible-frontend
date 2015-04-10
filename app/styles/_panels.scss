@@ -50,3 +50,17 @@
     text-align: left;
   }
 }
+
+.panel-collapse{
+  &.test-results{
+    margin-bottom: 15px;
+    & .listed-results {
+      padding-right: 0px;
+    }
+  }
+}
+
+
+
+
+
