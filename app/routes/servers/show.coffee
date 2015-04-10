@@ -12,6 +12,16 @@ ServersShowRoute = Ember.Route.extend({
       @controllerFor('servers.show').set('tests', tests)
       return
     )
+
+  actions:
+    # Clear out conformance and server models to reset conformance
+    willTransition: (transition) ->
+      server = @controllerFor('servers.show').get('server')
+      @store.find('conformance', server.get('conformance.id')).then( (conformance) =>
+        @store.unloadRecord(conformance)
+        @store.unloadRecord(server)
+      )
+      return
 })
 
 `export default ServersShowRoute`

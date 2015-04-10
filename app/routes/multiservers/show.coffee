@@ -31,6 +31,21 @@ MultiserversShowRoute = Ember.Route.extend({
       @controllerFor('multiservers.show').set('destinationServer', model.destinationServer)
       return
     )
+
+  actions:
+    # Clear out conformance and server models to reset conformance
+    willTransition: (transition) ->
+      server = @controllerFor('multiservers.show').get('server')
+      destinationServer = @controllerFor('multiservers.show').get('destinationServer')
+      @store.find('conformance', server.get('conformance.id')).then( (conformance) =>
+        @store.unloadRecord(conformance)
+        @store.unloadRecord(server)
+      )
+      @store.find('conformance', destinationServer.get('conformance.id')).then( (conformance) =>
+        @store.unloadRecord(conformance)
+        @store.unloadRecord(destinationServer)
+      )
+      return
 })
 
 `export default MultiserversShowRoute`
