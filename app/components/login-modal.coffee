@@ -3,7 +3,14 @@
 LoginModal = BootstrapModal.extend({
   identification: null
   password: null
+  loggingIn: false
   loginFailed: false
+  shouldCloseModal: false
+
+  _closeObserver: (->
+    @send('close') if @get('shouldCloseModal')
+    return
+  ).observes('shouldCloseModal').on('init')
 
   actions: {
     register: ->
