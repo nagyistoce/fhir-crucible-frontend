@@ -17,10 +17,7 @@ ServersShowRoute = Ember.Route.extend({
     # Clear out conformance and server models to reset conformance
     willTransition: (transition) ->
       server = @controllerFor('servers.show').get('server')
-      @store.find('conformance', server.get('conformance.id')).then( (conformance) =>
-        @store.unloadRecord(conformance)
-        @store.unloadRecord(server)
-      )
+      @store.unloadRecord(server)
       return
 })
 

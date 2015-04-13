@@ -37,14 +37,8 @@ MultiserversShowRoute = Ember.Route.extend({
     willTransition: (transition) ->
       server = @controllerFor('multiservers.show').get('server')
       destinationServer = @controllerFor('multiservers.show').get('destinationServer')
-      @store.find('conformance', server.get('conformance.id')).then( (conformance) =>
-        @store.unloadRecord(conformance)
-        @store.unloadRecord(server)
-      )
-      @store.find('conformance', destinationServer.get('conformance.id')).then( (conformance) =>
-        @store.unloadRecord(conformance)
-        @store.unloadRecord(destinationServer)
-      )
+      @store.unloadRecord(server)
+      @store.unloadRecord(destinationServer)
       return
 })
 

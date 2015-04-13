@@ -24,15 +24,8 @@ TestRunsShowRoute = Ember.Route.extend(DefaultRoute, {
     willTransition: (transition) ->
       server = @controllerFor('test-runs/show').get('server')
       destinationServer = @controllerFor('test-runs/show').get('destinationServer')
-      @store.find('conformance', server.get('conformance.id')).then( (conformance) =>
-        @store.unloadRecord(conformance)
-        @store.unloadRecord(server)
-      )
-      if destinationServer
-        @store.find('conformance', destinationServer.get('conformance.id')).then( (conformance) =>
-          @store.unloadRecord(conformance)
-          @store.unloadRecord(destinationServer)
-        )
+      @store.unloadRecord(server)
+      @store.unloadRecord(destinationServer) if destinationServer
       return
 
 })
