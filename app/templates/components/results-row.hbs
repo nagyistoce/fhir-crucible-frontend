@@ -1,0 +1,14 @@
+<td>
+  {{testResult.id}}
+</td>
+<td>
+  {{testResult.description}}
+</td>
+<td>
+  <span {{bind-attr class=testResult.status}}>{{testResult.status}}</span>
+</td>
+<td>
+  {{#if testResult.warnings}}
+    <i class="fa fa-exclamation-triangle warning"></i>
+  {{/if}}
+</td>
