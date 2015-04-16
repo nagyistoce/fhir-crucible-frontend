@@ -29,7 +29,7 @@ SignUpController = Ember.Controller.extend({
 
       successFn = =>
         @set('formLoading', false)
-        @transitionToRoute('users.login', { queryParams: { registered: true } })
+        @transitionToRoute('index', { queryParams: { registered: true } })
         return
       errorFn = (jqXHR) =>
         response = Ember.$.parseJSON(jqXHR.responseText)

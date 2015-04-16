@@ -1,7 +1,9 @@
 `import Ember from 'ember'`
 
 IndexController = Ember.Controller.extend({
-  multiServer: false,
+  queryParams: ['registered']
+  registered: false
+  multiServer: false
 
   actions:
     addUrl: ->
@@ -10,6 +12,10 @@ IndexController = Ember.Controller.extend({
     removeUrl: ->
       @set('multiServer', false)
       @get('model').set('server2', null)
+
+    closeRegisteredAlert: ->
+      @set('registered', false)
+      return
 })
 
 `export default IndexController`

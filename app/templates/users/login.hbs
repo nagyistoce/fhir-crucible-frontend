@@ -3,11 +3,6 @@
     <div class="col-md-2"></div>
     <div class="col-md-8">
       <div class="row auth">
-        {{#if registered}}
-          <div class="alert alert-success" role="alert">
-            Registration successful, you may now login.
-          </div>
-        {{/if}}
         {{#if loginFailed}}
           <div class="alert alert-danger" role="alert">
             Invalid email address or password.
