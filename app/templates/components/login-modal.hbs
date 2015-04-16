@@ -26,7 +26,12 @@
             <a href="">FORGOT PASSWORD</a> | <a href="/users/sign-up" {{action 'register'}}>REGISTER</a>
           </div>
           <div class="login-btn col-md-4">
-            <input class="btn" type="submit" value="Login">
+            <button class="btn" type="submit" {{bind-attr disabled=loggingIn}}>
+              {{#if loggingIn}}
+                <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"> </span>
+              {{/if}}
+              Login
+            </button>
           </div>
         </div>
       </div>

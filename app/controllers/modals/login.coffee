@@ -6,13 +6,17 @@ ModalsLoginController = Ember.Controller.extend(LoginControllerMixin, {
 
   identification: null
   password: null
+  loggingIn: false
   loginFailed: false
+  shouldCloseModal: false
 
   reset: ->
     @setProperties({
-      identification: null,
-      password: null,
+      identification: null
+      password: null
+      loggingIn: false
       loginFailed: false
+      shouldCloseModal: false
     })
 
   actions: {
@@ -24,18 +28,23 @@ ModalsLoginController = Ember.Controller.extend(LoginControllerMixin, {
 
       errorFn = (response) =>
         # log in failed, either invalid email or password
-        @set('loginFailed', true)
+        @setProperties({
+          loginFailed: true,
+          loggingIn: false
+        })
         return
 
       successFn = =>
-        @send('closeModal')
-        @reset()
+        @set('shouldCloseModal', true)
         return
 
       # wipe the failed message and make the AJAX call to log the user in
       # this._super() is defined by ember-simple-auth in
       # the LoginControllerMixin included in this controller
-      @set('loginFailed', false)
+      @setProperties({
+        loginFailed: false
+        loggingIn: true
+      })
       @_super().then(successFn, errorFn)
 
     register: ->
