@@ -2,6 +2,7 @@
 
 TestRunsShowController = Ember.Controller.extend({
   server: null
+  destinationServer: null
 
   testsExecuting: (->
     @get('model.testResults').mapBy('hasResults').contains(false)
@@ -22,7 +23,16 @@ TestRunsShowController = Ember.Controller.extend({
 
   actions:
     rerun: ->
-      @transitionToRoute('servers.show', @get('model.server'))
+      if @get('model.isMultiserver')
+        multiserver = {
+          server: @get('server')
+          destinationServer: @get('destinationServer')
+          multiserver_id: "#{@get('server.id')}-#{@get('destinationServer.id')}"
+        }
+        @transitionToRoute('multiservers.show', multiserver)
+      else
+        @transitionToRoute('servers.show', @get('model.server'))
+
 })
 
 `export default TestRunsShowController`

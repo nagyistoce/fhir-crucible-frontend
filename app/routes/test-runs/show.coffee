@@ -2,13 +2,32 @@
 `import DefaultRoute from '../../mixins/default-route'`
 
 TestRunsShowRoute = Ember.Route.extend(DefaultRoute, {
-  beforeModel: (transition)->
+  beforeModel: (transition) ->
     @store.findAll('test')
 
   afterModel: (model) ->
-    model.get('server').then((server) =>
-      @controllerFor('test-runs/show').set('server', server)
-    )
+    if model.get('isMultiserver')
+      # Retrieve both servers for multiserver test run
+      model.get('server').then( (server) =>
+        @controllerFor('test-runs/show').set('server', server)
+        model.get('destinationServer').then( (destinationServer) =>
+          @controllerFor('test-runs/show').set('destinationServer', destinationServer)
+        )
+      )
+    else
+      model.get('server').then( (server) =>
+        @controllerFor('test-runs/show').set('server', server)
+      )
+
+  actions:
+    # Clear out conformance and server models to reset conformance
+    willTransition: (transition) ->
+      server = @controllerFor('test-runs/show').get('server')
+      destinationServer = @controllerFor('test-runs/show').get('destinationServer')
+      @store.unloadRecord(server)
+      @store.unloadRecord(destinationServer) if destinationServer
+      return
+
 })
 
 `export default TestRunsShowRoute`

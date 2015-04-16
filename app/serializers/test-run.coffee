@@ -5,6 +5,7 @@ TestRunSerializer = DS.ActiveModelSerializer.extend(DS.EmbeddedRecordsMixin, {
   attrs:
     testResults: {embedded:'always'}
     conformance: {embedded:'always'}
+    destinationConformance: {embedded:'always'}
 })
 
 `export default TestRunSerializer`

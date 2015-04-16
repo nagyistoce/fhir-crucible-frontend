@@ -7,10 +7,21 @@
             <h2>Review Conformances and Select Tests</h2>
           </div>
           <div class="col-md-2">
-            <button type="submit" class="btn orange_btn" {{action "executeTests"}}>RUN</button>
+            {{#if savingTestRun}}
+              <button type="submit" disabled class="btn" ><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Preparing...</button>
+            {{else}}
+              {{#unless conformanceLoaded}}
+                <button type="submit" disabled class="btn" ><i class="fa fa-lg fa-fw fa-spinner fa-pulse"></i> Loading...</button>
+              {{else}}
+                <button type="submit" class="btn" {{bind-attr disabled="canExecuteTests"}} {{action "executeTests"}}>RUN</button>
+              {{/unless}}
+            {{/if}}
           </div>
         </div>
         <p class="helper_text">Each of the FHIR Interfaces will first generate conformance statements. Based on the conformances, a given set of recommended interoperability tests will be shown to the user.</p>
+
+        {{server-details server=server}} {{server-details server=destinationServer}}
+
         {{#if runningTestCount}}
           <div class="row">
             <div class="progress">
@@ -24,8 +35,8 @@
         <div class="row">
           <ul class="nav nav-tabs tabbed-data-container">
             <li class="tabbed-data active"><a data-toggle="tab" href="#test-data">Tests</a></li>
-            <li class="tabbed-data"><a data-toggle="tab"href="#conformance-data">Conformance</a></li>
-            <li class="tabbed-data"><a data-toggle="tab"href="#heatmap-data">Heat Map</a></li>
+            <li class="tabbed-data"><a data-toggle="tab"href="#conformance-data">{{#unless conformanceLoaded}}<i class="fa fa-lg fa-fw fa-spinner fa-pulse"></i> {{/unless}}Conformance</a></li>
+            <!-- <li class="tabbed-data"><a data-toggle="tab"href="#heatmap-data">Heat Map</a></li> -->
           </ul>
         </div>
         <div class="row">
@@ -33,24 +44,17 @@
             <!-- TEST PANEL START -->
             <div class="tab-pane active" id="test-data">
               <div class="col-md-12 tab-content-holder">
+                <div class="row server selectBox">
+                  <div class="col-sm-2">
+                    <button type="button" class="btn secondary" {{action "selectDeselectAll"}}>{{selectAllBtnText}}</button>
+                  </div>
+                  <div class="col-sm-2">
+                    <button type="button" class="btn secondary" {{action "expandCollapseAll"}}>{{expandCollapseBtnText}}</button>
+                  </div>
+                </div>
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                  {{#each tests as |test|}}
-                    <div class="toggleable panel-heading">
-                      <h4 class="panel-title">
-                        <label >
-                          {{input type="checkbox" name=test.id checked=test.active}}
-                          {{test.id}}
-                        </label>
-                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" data-target="#test{{unbound test.reference}}" aria-expanded="false" >
-                        <small>(more)</small></a>
-
-                      </h4>
-                    </div>
-                    <div id="test{{unbound test.reference}}" class="panel-collapse collapse">
-                      <div class="panel-body">
-                        {{test.description}}
-                      </div>
-                    </div>
+                  {{#each proxiedTests as |test|}}
+                    {{test-panel proxiedTest=test}}
                   {{/each}}
                 </div>
               </div>
@@ -58,13 +62,13 @@
             <!-- TEST PANEL END -->
             <!-- CONFORMANCE PANEL START -->
             <div class="tab-pane" id="conformance-data">
-              {{view 'conformance' contextBinding="conformance"}}
+              {{multiserver-conformance-view conformance=server.conformance destinationConformance=destinationServer.conformance}}
             </div>
             <!-- CONFORMANCE PANEL END -->
             <!-- HEATMAP PANEL START -->
-            <div class="tab-pane" id="heatmap-data">
+            <!-- <div class="tab-pane" id="heatmap-data">
               <div class="col-md-12 tab-content-holder">heat</div>
-            </div>
+            </div> -->
             <!-- HEATMAP PANEL END -->
           </div>
         </div>

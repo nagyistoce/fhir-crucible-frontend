@@ -3,6 +3,7 @@
 
 Result = DS.Model.extend(Tabbable, {
   code: DS.attr()
+  test_id: DS.attr("string")
   responseData: DS.attr()
   description: DS.attr()
   key: DS.attr()
