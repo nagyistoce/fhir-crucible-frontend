@@ -36,6 +36,7 @@ ModalsLoginController = Ember.Controller.extend(LoginControllerMixin, {
 
       successFn = =>
         @set('shouldCloseModal', true)
+        @transitionToRoute('users.index')
         return
 
       # wipe the failed message and make the AJAX call to log the user in
