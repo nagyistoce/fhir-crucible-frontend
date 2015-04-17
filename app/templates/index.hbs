@@ -1,3 +1,12 @@
+{{#if registered}}
+  <div class="alert alert-success alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" {{action 'closeRegisteredAlert'}}>
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>Registration successful</strong>, you may now login.
+  </div>
+{{/if}}
+
 <div class="container main">
   <div class="picture landing-page">
     <img src="/assets/images/logo_dark.png" alt="" />
