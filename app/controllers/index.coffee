@@ -37,7 +37,7 @@ IndexController = Ember.Controller.extend({
       @set('loadingServer', true)
       if (@isMultiServer())
         server = @store.createRecord('server', url: @get('server1'))
-        destinationServer = @store.createRecord('server', url: @  get('server2'))
+        destinationServer = @store.createRecord('server', url: @get('server2'))
         server.save().then(=>
           destinationServer.save().then(=>
             multiserver = {
