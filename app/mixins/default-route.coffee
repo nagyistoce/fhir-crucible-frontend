@@ -3,7 +3,6 @@
 DefaultRouteMixin = Ember.Mixin.create({
   actions:
     loading: ->
-      return if @routeName in ['servers.results', 'multiservers.results']
       loading = Ember.$('#loading-modal').modal(
         backdrop: 'static',
         keyboard: false
