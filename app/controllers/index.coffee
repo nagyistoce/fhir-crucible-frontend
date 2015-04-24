@@ -22,10 +22,12 @@ IndexController = Ember.Controller.extend({
   actions:
     addUrl: ->
       @set('multiServer', true)
+      return
 
     removeUrl: ->
       @set('multiServer', false)
-      @get('model').set('server2', null)
+      @set('server2', null)
+      return
 
     submit: ->
       # quickly exit and avoid the AJAX call if the server field is empty

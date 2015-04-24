@@ -3,7 +3,7 @@
 
 IndexRoute = Ember.Route.extend(DefaultRoute, {
   model: ->
-    {server1: null, server2: null}
+    Ember.Object.create({server1: null, server2: null})
 })
 
 `export default IndexRoute`
