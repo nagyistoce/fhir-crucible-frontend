@@ -20,6 +20,7 @@
   width: 200px;
 }
 
+// ------------------------- SERVER DETAILS -------------------------------- //
 .server-details {
   height: 60px;
   border-radius: 10px;
@@ -44,5 +45,22 @@
     .server-url {
       a{color: $brand-primary;}
     }
+  }
+}
+
+// ------------------------- FHIR SPECIFICATION STARBURST ------------------ //
+
+.server-fhir-specification {
+  .spec-starburst-chart {
+    .starburst-chart {}
+    .starburst-chart-legend{}
+  }
+
+  .spec-details {
+    .percent-supported {}
+    .spec-icon{}
+    .spec-title{}
+    .spec-bar-graph{}
+    .spec-percent-passing{}
   }
 }
