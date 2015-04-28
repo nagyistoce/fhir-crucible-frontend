@@ -1,9 +1,10 @@
 .btn {
-  height: 34px;
+  height: 35px;
   width: 100%;
   background-color: $brand-secondary;
   border-color: $brand-secondary;
   color: $brand-tertiary;
+  font-size: 14px;
   &:focus {
     background-color: $brand-secondary;
     border-color: $brand-secondary;
@@ -27,10 +28,10 @@
     }
   }
   &.secondary{
-    font-size: 12px;
+    font-size: 14px;
     height: 34px;
     background-color: white;
-    border-color: $brand-accent;
+    border: none;
     color: $brand-accent;
     &:hover{
       background-color: $brand-accent;
