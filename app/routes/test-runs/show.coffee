@@ -1,5 +1,6 @@
 `import Ember from 'ember'`
 `import DefaultRoute from '../../mixins/default-route'`
+`import fhirCategories from '../../utils/fhir-categories'`
 
 TestRunsShowRoute = Ember.Route.extend(DefaultRoute, {
   beforeModel: (transition) ->

@@ -12,33 +12,33 @@ export default {
               "children": [
                 {
                   "name": "read",
-                  "total": 761,
-                  "passed": 761,
+                  "total": 0,
+                  "passed": 0,
                   "failed": 0
                 },
                 {
                   "name": "vread",
-                  "total": 497,
-                  "passed": 256,
-                  "failed": 241
+                  "total": 0,
+                  "passed": 0,
+                  "failed": 0
                 },
                 {
                   "name": "update",
-                  "total": 212,
+                  "total": 0,
                   "passed": 0,
-                  "failed": 212
+                  "failed": 0
                 },
                 {
                   "name": "delete",
-                  "total": 156,
+                  "total": 0,
                   "passed": 0,
-                  "failed": 156
+                  "failed": 0
                 },
                 {
                   "name": "history",
-                  "total": 1209,
-                  "passed": 426,
-                  "failed": 783
+                  "total": 0,
+                  "passed": 0,
+                  "failed": 0
                 }
               ]
             },
@@ -47,9 +47,9 @@ export default {
               "children": [
                 {
                   "name": "create",
-                  "total": 228,
+                  "total": 0,
                   "passed": 0,
-                  "failed": 228
+                  "failed": 0
                 },
                 {
                   "name": "search",
@@ -59,9 +59,9 @@ export default {
                 },
                 {
                   "name": "history",
-                  "total": 1209,
-                  "passed": 426,
-                  "failed": 783
+                  "total": 0,
+                  "passed": 0,
+                  "failed": 0
                 }
               ]
             },
@@ -82,9 +82,9 @@ export default {
                 },
                 {
                   "name": "history",
-                  "total": 1209,
-                  "passed": 426,
-                  "failed": 783
+                  "total": 0,
+                  "passed": 0,
+                  "failed": 0
                 },
                 {
                   "name": "search",
@@ -361,9 +361,9 @@ export default {
               "children": [
                 {
                   "name": "patient",
-                  "total": 1203,
-                  "passed": 527,
-                  "failed": 676
+                  "total": 0,
+                  "passed": 0,
+                  "failed": 0
                 },
                 {
                   "name": "related person",
@@ -461,9 +461,9 @@ export default {
                 },
                 {
                   "name": "alert",
-                  "total": 957,
-                  "passed": 451,
-                  "failed": 506
+                  "total": 0,
+                  "passed": 0,
+                  "failed": 0
                 },
                 {
                   "name": "communication",
@@ -496,9 +496,9 @@ export default {
               "children": [
                 {
                   "name": "appointment",
-                  "total": 363,
-                  "passed": 181,
-                  "failed": 182
+                  "total": 0,
+                  "passed": 0,
+                  "failed": 0
                 },
                 {
                   "name": "appointment response",
