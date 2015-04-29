@@ -8,6 +8,7 @@
 
   thead {
     border-bottom: 1px solid $background;
+    font-size: 14px;
   }
 }
 
@@ -76,10 +77,15 @@ table > tbody > tr > td {
 }
 
 /* Bootstrap overrides for report-table */
-.table.report-table > tbody > tr > td {
-  border-top: none;
+.table.report-table{
+  font-size: 14px;
 }
 
 .table.report-table tr{
   border-bottom: none;
 }
+
+.table.report-table > tbody > tr > td {
+  border-top: none;
+}
+

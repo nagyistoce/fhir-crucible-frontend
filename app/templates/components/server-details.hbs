@@ -1,17 +1,17 @@
 <div class="row server-details">
-  <div class="col-md-3 col-md-offset-2 server-icon">
+  <div class="col-md-3 col-md-offset-1 server-icon">
     <i class="fa fa-server"></i>
   </div>
 
-  <div class="col-md-5 server-url-name">
-    <div class="server-name">
+  <div class="col-md-8 server-url-name">
+    <div class="server-name emphasize">
       {{#if editingServerName}}
         <form {{action "submit" on="submit"}}>
           <div class="row">
             <div class="col-sm-8">
               {{input type="text" value=name class="form-control" placeholder="FHIR Server name" disabled=savingServerName}}
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-2">
               <input type="submit" class="btn secondary" value="Save" {{bind-attr disabled=savingServerName}} />
             </div>
           </div>

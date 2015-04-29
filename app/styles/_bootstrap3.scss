@@ -4,6 +4,7 @@
 body {
   background-color: $background;
   font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-size: 18px;
 }
 
 header {
@@ -38,23 +39,21 @@ footer {
 }
 
 h1{
-  font-size: 30px;
-  color: $brand-primary;
-  margin-bottom: 40px;
-  margin-top: 0;
-}
-
-h2{
-  font-size: 30px;
+  font-size: 32px;
   color: $brand-primary;
   margin-top: 0;
   text-align: left;
 }
 
+h2{
+  font-size: 24px;
+  color: $brand-primary;
+}
+
 a{
   color: $brand-accent;
   &.toggle-info{
-    font-size: 15px;
+    font-size: 18px;
     &:hover{
       text-decoration: none;
     }
@@ -62,11 +61,19 @@ a{
 }
 
 .helper_text{
-  font-size: 12px;
+  font-size: 14px;
   text-align: left;
   color: $brand-primary;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.emphasize{
+  font-size: 125%;
+}
+
+p{
+  font-size: 18px;
 }
 
 .row{
