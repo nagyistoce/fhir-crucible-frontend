@@ -1,5 +1,6 @@
 `import Ember from 'ember'`
 `import DefaultRoute from '../../mixins/default-route'`
+`import fhirCategories from '../../utils/fhir-categories'`
 
 TestRunsShowRoute = Ember.Route.extend(DefaultRoute, {
   beforeModel: (transition) ->
@@ -20,6 +21,10 @@ TestRunsShowRoute = Ember.Route.extend(DefaultRoute, {
       )
 
   actions:
+    # didTransition: ->
+    #   console.log @controller.get('model')
+    #   console.log 'will compute categories!'
+    #   console.log fhirCategories(@controller.get('model'))
     # Clear out conformance and server models to reset conformance
     willTransition: (transition) ->
       server = @controllerFor('test-runs/show').get('server')

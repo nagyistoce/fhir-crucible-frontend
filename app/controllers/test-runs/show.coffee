@@ -1,4 +1,5 @@
 `import Ember from 'ember'`
+`import fhirCategories from '../../utils/fhir-categories'`
 
 TestRunsShowController = Ember.Controller.extend({
   server: null
@@ -20,6 +21,10 @@ TestRunsShowController = Ember.Controller.extend({
     progress = @get('executionProgress') || 2
     Ember.$('.execution-progressbar').css("width","#{progress}%")
   ).observes('executionProgress')
+
+  checkCategories: (->
+    fhirCategories.generate(@get('model'))
+  ).observes('model.testResults.@each.results')
 
   actions:
     rerun: ->
