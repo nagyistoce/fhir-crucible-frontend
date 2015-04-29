@@ -3,20 +3,33 @@
 
 fhirCategories = {
 
+  # call this with a fully-resolved testRun (i.e., results have been fetched)
   generate: (testRun) ->
     aggregation = _.extend({},fhirCategoriesTemplate)
     results = testRun.get('testResults').mapBy('validatedResources')
-    return unless _.chain(results).flatten().compact().value().length >=7
+
+    # Metadata is defined in the result model
+    # { resource: res.resource,
+    #   method: meth,
+    #   passed:@get('passed'),
+    #   test: @get('key'),
+    #   description: @get('description') }
     for metadata in _(results).flatten()
       fhirCategories.updateOperations(aggregation, metadata)
       fhirCategories.updateResources(aggregation, metadata)
+    # DEBUG: Uncomment below, right-click and save as Global Variable in Chrome
+    # then use JSON.stringify(<gv>, null, 2) to grab JSON
     console.log aggregation
 
   updateOperations: (categories, metadata) ->
     method = metadata.method
     status = metadata.passed
     return unless method
+
+    # FIXME: Figure out how to handle system-wide operations
     method = method.split("-")[0] if method.split("-").length
+
+    # extract operation leaves from categories
     api = categories.children
     operations = api[0].children
     restful_api = operations[0].children
@@ -27,8 +40,10 @@ fhirCategories = {
 
     extended = operations[1].children
 
+    # array containing lists of operation leaves
     aggregate_operations = [instance, type, whole, extended]
 
+    # update any operation leaves with a name matching method
     for list in aggregate_operations
       for operation in list when operation.name == method
         fhirCategories.updateStatus(operation, status)
@@ -37,6 +52,8 @@ fhirCategories = {
     resource = metadata.resource
     status = metadata.passed
     return unless resource
+
+    # extract resource leaves from categories
     api = categories.children
     resources = api[1].children
     clinical = resources[0].children
@@ -55,7 +72,7 @@ fhirCategories = {
     scheduling = administrative[3].children
 
     isupport = infrastructure[0].children
-    document = infrastructure[1].children
+    idocument = infrastructure[1].children
     exchange = infrastructure[2].children
     conformance = infrastructure[3].children
 
@@ -64,14 +81,18 @@ fhirCategories = {
     payment = financial[2].children
     other = financial[3].children
 
+    # array containing lists of resource leaves
     aggregate_resources = [general, data_col_care_plan, med_imm_nut,
       diagnostics, attribution, entities, workflow, scheduling, isupport,
-      document, exchange, conformance, fsupport, billing, payment, other]
+      idocument, exchange, conformance, fsupport, billing, payment, other]
 
+    # update any resource leaves with a name matching resource, lowercased
+    # TODO: Handle case/title mapping (e.g, CarePlan -> care plan)
     for list in aggregate_resources
       for res in list when res.name.toLowerCase() == resource.toLowerCase()
         fhirCategories.updateStatus(res, status)
 
+  # update a category leaf's counts with status information
   updateStatus: (metadata, status) ->
     metadata.total++
     switch status

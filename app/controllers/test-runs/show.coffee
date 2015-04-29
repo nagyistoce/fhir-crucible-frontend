@@ -23,6 +23,8 @@ TestRunsShowController = Ember.Controller.extend({
   ).observes('executionProgress')
 
   checkCategories: (->
+    # FIXME: Replace either this method or the observes with a listener that
+    # fires the generate method after a testRun has been fully-fetched
     fhirCategories.generate(@get('model'))
   ).observes('model.testResults.@each.results')
 
