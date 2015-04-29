@@ -3,26 +3,26 @@
 
 StarburstChartComponent = Ember.Component.extend(
   data: starburstFixtureData
-  server: null
-  width: 960
-  height: 700
+  # width: 960
+  # height: 700
+  size: 600
+  padding: 5
 
   _renderChart: (->
-    width = parseInt(@get('width'), 10)
-    height = parseInt(@get('height'), 10)
 
+    # initialize width, height, radius, x, and y
+    width = height = parseInt(@get('size'), 10) - 2 * @get('padding')
     radius = Math.min(width, height) / 3
-
     x = d3.scale.linear().range([0, 2 * Math.PI])
     y = d3.scale.sqrt().range([0, radius])
+    # color = d3.scale.category20c()
 
-    color = d3.scale.category20c()
-
+    # intitialize svg element with given dimensions
     svg = d3.select(@get('element')).append("svg")
       .attr("width", width)
       .attr("height", height)
       .append("g")
-      .attr("transform", "translate(#{width / 2},#{height / 2 + 10})")
+      .attr("transform", "translate(#{width / 2},#{height / 2 + 10})") # center in svg
 
     partition = d3.layout.partition()
       .sort(null)
