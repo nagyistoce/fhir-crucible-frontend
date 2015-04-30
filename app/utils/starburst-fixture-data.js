@@ -53,8 +53,8 @@ export default {
                 },
                 {
                   "name": "search",
-                  "total": 0,
-                  "passed": 0,
+                  "total": 234,
+                  "passed": 234,
                   "failed": 0
                 },
                 {
@@ -70,13 +70,13 @@ export default {
               "children": [
                 {
                   "name": "conformance",
-                  "total": 0,
-                  "passed": 0,
-                  "failed": 0
+                  "total": 113,
+                  "passed": 100,
+                  "failed": 13
                 },
                 {
                   "name": "transaction",
-                  "total": 0,
+                  "total": 134,
                   "passed": 0,
                   "failed": 0
                 },
@@ -88,7 +88,7 @@ export default {
                 },
                 {
                   "name": "search",
-                  "total": 0,
+                  "total": 234,
                   "passed": 0,
                   "failed": 0
                 }
@@ -101,56 +101,56 @@ export default {
           "children": [
             {
               "name": "$translate",
-              "total": 0,
-              "passed": 0,
-              "failed": 0
+              "total": 128,
+              "passed": 123,
+              "failed": 5
             },
             {
               "name": "$closure",
-              "total": 0,
-              "passed": 0,
+              "total": 197,
+              "passed": 197,
               "failed": 0
             },
             {
               "name": "$everything",
-              "total": 0,
-              "passed": 0,
+              "total": 425,
+              "passed": 425,
               "failed": 0
             },
             {
               "name": "$questionnaire",
-              "total": 0,
-              "passed": 0,
+              "total": 729,
+              "passed": 729,
               "failed": 0
             },
             {
               "name": "$populate",
-              "total": 0,
-              "passed": 0,
+              "total": 1234,
+              "passed": 1234,
               "failed": 0
             },
             {
               "name": "$expand",
-              "total": 0,
+              "total": 136,
               "passed": 0,
               "failed": 0
             },
             {
               "name": "$lookup",
-              "total": 0,
+              "total": 938,
               "passed": 0,
               "failed": 0
             },
             {
               "name": "$validate",
-              "total": 0,
-              "passed": 0,
+              "total": 123,
+              "passed": 123,
               "failed": 0
             },
             {
               "name": "$batch",
-              "total": 0,
-              "passed": 0,
+              "total": 184,
+              "passed": 184,
               "failed": 0
             }
           ]

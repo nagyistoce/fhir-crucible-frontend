@@ -1,10 +1,34 @@
 `import Ember from 'ember'`
 `import starburstFixtureData from '../utils/starburst-fixture-data'`
 
+allSuccessful = (data) ->
+  successful = true
+  for child in data
+    if child.children
+      successful &&= allSuccessful(child.children)
+    else
+      successful &&= child.failed == 0
+  successful
+
+color = (data) ->
+  success = false
+  if data.children
+    success = allSuccessful(data.children)
+  else
+    success = data.failed == 0
+
+  if success
+    '#437412'
+  else
+    '#770011'
+
+tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html((d) -> d.name)
+
 StarburstChartComponent = Ember.Component.extend(
   data: starburstFixtureData
-  # width: 960
-  # height: 700
   size: 600
   padding: 5
 
@@ -24,9 +48,11 @@ StarburstChartComponent = Ember.Component.extend(
       .append("g")
       .attr("transform", "translate(#{width / 2},#{height / 2 + 10})") # center in svg
 
+    svg.call(tip)
+
     partition = d3.layout.partition()
       .sort(null)
-      .value((d) -> 1)
+      .value((d) -> d.total)
 
     arc = d3.svg.arc()
       .startAngle((d) -> Math.max(0, Math.min(2 * Math.PI, x(d.x))))
@@ -81,13 +107,16 @@ StarburstChartComponent = Ember.Component.extend(
       .enter()
         .append("path")
         .attr("d", arc)
-        .style("fill", (d) -> color((if d.children then d else d.parent).name))
+        .style("fill", color)
+        .style("stroke", '#fff')
         .on("click", (d) ->
           node = d
           path.transition()
             .duration(1000)
             .attrTween("d", arcTweenZoom(d))
         )
+        .on('mouseover', tip.show)
+        .on('mouseout', tip.hide)
         .each(stash)
     return
   ).on('didInsertElement')
