@@ -1,6 +1,7 @@
 `import Ember from 'ember'`
 `import starburstFixtureData from '../utils/starburst-fixture-data'`
 
+# returns true if all child tests pass and false if not
 allSuccessful = (data) ->
   successful = true
   for child in data
@@ -10,6 +11,7 @@ allSuccessful = (data) ->
       successful &&= child.failed == 0
   successful
 
+# returns appropriate color of section (recursive)
 color = (data) ->
   success = false
   if data.children
@@ -17,15 +19,31 @@ color = (data) ->
   else
     success = data.failed == 0
 
-  if success
+  if data.failed == 0 && data.passed == 0
+    '#eee'
+  else if success
     '#437412'
   else
     '#770011'
 
+# returns appropriate opacity of a failed section
+opacity = (data) ->
+  if data.failed == 0
+    opacity = 1
+  else
+    opacity = data.failed / data.total
+
+
+# returns appropriate tool tip for section
 tip = d3.tip()
   .attr('class', 'd3-tip')
   .offset([-10, 0])
-  .html((d) -> d.name)
+  .html((d) -> 
+    if d.children || (d.failed == 0 && d.passed == 0)
+      d.name
+    else
+      "#{d.name}:<br>#{d.passed} / #{d.total} passed")
+
 
 StarburstChartComponent = Ember.Component.extend(
   data: starburstFixtureData
@@ -48,6 +66,7 @@ StarburstChartComponent = Ember.Component.extend(
       .append("g")
       .attr("transform", "translate(#{width / 2},#{height / 2 + 10})") # center in svg
 
+    # activate tool tip
     svg.call(tip)
 
     partition = d3.layout.partition()
@@ -109,11 +128,13 @@ StarburstChartComponent = Ember.Component.extend(
         .attr("d", arc)
         .style("fill", color)
         .style("stroke", '#fff')
+        .style("opacity", opacity)
         .on("click", (d) ->
-          node = d
-          path.transition()
-            .duration(1000)
-            .attrTween("d", arcTweenZoom(d))
+          if d.children
+            node = d
+            path.transition()
+              .duration(1000)
+              .attrTween("d", arcTweenZoom(d))
         )
         .on('mouseover', tip.show)
         .on('mouseout', tip.hide)
