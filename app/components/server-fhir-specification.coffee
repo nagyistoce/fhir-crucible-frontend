@@ -2,8 +2,14 @@
 `import starburstFixtureData from '../utils/starburst-fixture-data'`
 
 ServerFhirSpecificationComponent = Ember.Component.extend(
-  # server = null
-	# specCategories = {}
+
+  # data = starburstFixtureData
+
+  # percentPassing = (data) ->
+  #   return data.passing / data.total * 100
+
+  # for category in data.children
+  #   console.log category.name
 
 )
 

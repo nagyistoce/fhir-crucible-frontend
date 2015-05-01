@@ -19,11 +19,11 @@
       <div class="col-md-3 col-md-offset-6">% Passing</div>
     </div>
     <div class="row spec-table">
-      {{#each specCategories as |specCategory|}}
-        <div class="col-md-1 spec-icon">{{specCategory.icon}}</div>
-        <div class="col-md-2 spec-title">{{specCategory.title}}</div>
-        <div class="col-md-6 spec-bar-graph">{{specCategory.barGraph}}</div>
-        <div class="col-md-3 spec-percent-passing">{{specCategory.percentPassing}}</div>
+      {{#each data.children as |specCategory|}}
+        <div class="col-md-1 spec-icon">(icon)</div>
+        <div class="col-md-2 spec-title">{{specCategory.name}}</div>
+        <div class="col-md-6 spec-bar-graph">(bar-graph)</div>
+        <div class="col-md-3 spec-percent-passing">{{percentPassing}}</div>
       {{/each}}
     </div>
   </div>
