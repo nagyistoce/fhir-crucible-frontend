@@ -20,8 +20,8 @@ color = (data) ->
     success = data.failed == 0
 
   if data.failed == 0 && data.passed == 0
-    '#eee'
-  else if success
+    '#bbb'
+  else if data.passed > data.failed
     '#437412'
   else
     '#770011'
@@ -38,7 +38,7 @@ opacity = (data) ->
 tip = d3.tip()
   .attr('class', 'd3-tip')
   .offset([-10, 0])
-  .html((d) -> 
+  .html((d) ->
     if d.children || (d.failed == 0 && d.passed == 0)
       d.name
     else
@@ -69,9 +69,13 @@ StarburstChartComponent = Ember.Component.extend(
     # activate tool tip
     svg.call(tip)
 
+    logScale = d3.scale.log()
+    colorScale = d3.scale.linear()
+                         .domain([1,0.2,0])
+                         .range(['#437412','#D85D20','#770011'])
     partition = d3.layout.partition()
       .sort(null)
-      .value((d) -> d.total)
+      .value((d) -> logScale(d.total + 10))
 
     arc = d3.svg.arc()
       .startAngle((d) -> Math.max(0, Math.min(2 * Math.PI, x(d.x))))
@@ -126,9 +130,14 @@ StarburstChartComponent = Ember.Component.extend(
       .enter()
         .append("path")
         .attr("d", arc)
-        .style("fill", color)
+        .style("fill", (d) ->
+          if d.total > 0
+            colorScale(d.passed/d.total)
+          else
+            '#bbb'
+        )
         .style("stroke", '#fff')
-        .style("opacity", opacity)
+        # .style("opacity", opacity)
         .on("click", (d) ->
           if d.children
             node = d
