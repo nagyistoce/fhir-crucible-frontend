@@ -14,7 +14,6 @@ allSuccessful = (data) ->
 
 # returns appropriate color of section (recursive)
 color = (data, threshold) ->
-  console.log(threshold)
   success = false
   if data.children
     success = allSuccessful(data.children)
@@ -71,47 +70,42 @@ StarburstChartComponent = Ember.Component.extend(
     # activate tool tip
     svg.call(tip)
 
+    # define log scale
     logScale = d3.scale.log()
 
+    # define partition layout
     partition = d3.layout.partition()
       .sort(null)
       .value((d) -> logScale(d.total + 10))
 
+    # define arc angles and radii
     arc = d3.svg.arc()
       .startAngle((d) -> Math.max(0, Math.min(2 * Math.PI, x(d.x))))
       .endAngle((d) -> Math.max(0, Math.min(2 * Math.PI, x(d.x + d.dx))))
       .innerRadius((d) -> Math.max(0, y(d.y)))
       .outerRadius((d) -> Math.max(0, y(d.y + d.dy)))
 
+    # updates node name text element
+    updateNodeName = (nodeName) ->
+      svg.select("text").remove()
+      svg.append("text")
+        .text(nodeName)
+        .attr("x", -30)
+        .attr("y", -230)
+        .attr("text-align", "center")
+
+    # define root, initialize node to be the root, and update node name
     root = @get('data')
     node = root
+    updateNodeName(node.name)
 
-    # Setup for switching data: stash the old values for transition.
+    # setup for switching data: stash the old values for transition
     stash = (d) ->
       d.x0 = d.x
       d.dx0 = d.dx
       return
 
-    # When switching data: interpolate the arcs in data space.
-    arcTweenData = (a, i) ->
-      oi = d3.interpolate({x: a.x0, dx: a.dx0}, a)
-      tween = (t) ->
-        b = oi(t)
-        a.x0 = b.x
-        a.dx0 = b.dx
-        arc(b)
-
-      if i == 0
-       # If we are on the first arc, adjust the x domain to match the root node
-       # at the current zoom level. (We only need to do this once.)
-        xd = d3.interpolate(x.domain(), [node.x, node.x + node.dx])
-        (t) ->
-          x.domain(xd(t))
-          tween(t)
-      else
-        tween
-
-    # When zooming: interpolate the scales.
+    # when zooming: interpolate the scales
     arcTweenZoom = (d) ->
       xd = d3.interpolate(x.domain(), [d.x, d.x + d.dx])
       yd = d3.interpolate(y.domain(), [d.y, 1])
@@ -125,6 +119,7 @@ StarburstChartComponent = Ember.Component.extend(
             y.domain(yd(t)).range(yr(t))
             arc(d)
 
+    # draw the element paths
     path = svg.datum(root).selectAll("path")
       .data(partition.nodes)
       .enter()
@@ -139,6 +134,7 @@ StarburstChartComponent = Ember.Component.extend(
             path.transition()
               .duration(1000)
               .attrTween("d", arcTweenZoom(d))
+            updateNodeName(node.name)
         )
         .on('mouseover', tip.show)
         .on('mouseout', tip.hide)
