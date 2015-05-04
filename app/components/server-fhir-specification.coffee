@@ -2,15 +2,21 @@
 `import starburstFixtureData from '../utils/starburst-fixture-data'`
 
 ServerFhirSpecificationComponent = Ember.Component.extend(
+  server: null
 
-  # data = starburstFixtureData
+  # TODO: use real data from server
+  chartData: (->
+    starburstFixtureData
+  ).property('server')
 
-  # percentPassing = (data) ->
-  #   return data.passing / data.total * 100
+  percentSupported: (->
+    data = @get('chartData')
+    Math.round(data.passed / data.total * 100)
+  ).property('chartData')
 
-  # for category in data.children
-  #   console.log category.name
-
+  topLevelCategories: (->
+    @get('chartData.children')
+  ).property('chartData')
 )
 
 `export default ServerFhirSpecificationComponent`

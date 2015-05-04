@@ -21,7 +21,8 @@ color = (data) ->
 
   if data.failed == 0 && data.passed == 0
     '#bbb'
-  else if data.passed > data.failed
+  else if success
+  # else if data.passed > data.failed
     '#437412'
   else
     '#770011'
@@ -33,20 +34,22 @@ opacity = (data) ->
   else
     opacity = data.failed / data.total
 
+percentMe = (data) ->
+  if data.total == 0
+    0
+  else
+    Math.round(data.passed / data.total * 100)
 
 # returns appropriate tool tip for section
 tip = d3.tip()
   .attr('class', 'd3-tip')
   .offset([-10, 0])
-  .html((d) ->
-    if d.children || (d.failed == 0 && d.passed == 0)
-      d.name
-    else
-      "#{d.name}:<br>#{d.passed} / #{d.total} passed")
+  # .html((d) -> "#{d.name}:<br>#{d.passed} / #{d.total} passed")
+  .html((d) -> "#{d.name}:<br>#{d.passed} / #{d.total} passed (#{percentMe(d)}%)")
 
 
 StarburstChartComponent = Ember.Component.extend(
-  data: starburstFixtureData
+  data: []
   size: 600
   padding: 5
 
@@ -70,9 +73,9 @@ StarburstChartComponent = Ember.Component.extend(
     svg.call(tip)
 
     logScale = d3.scale.log()
-    colorScale = d3.scale.linear()
-                         .domain([1,0.2,0])
-                         .range(['#437412','#D85D20','#770011'])
+    # colorScale = d3.scale.linear()
+    #                      .domain([1,0.2,0])
+    #                      .range(['#437412','#D85D20','#770011'])
     partition = d3.layout.partition()
       .sort(null)
       .value((d) -> logScale(d.total + 10))
@@ -130,14 +133,15 @@ StarburstChartComponent = Ember.Component.extend(
       .enter()
         .append("path")
         .attr("d", arc)
-        .style("fill", (d) ->
-          if d.total > 0
-            colorScale(d.passed/d.total)
-          else
-            '#bbb'
-        )
+        .style("fill", color)
+        # .style("fill", (d) ->
+        #   if d.total > 0
+        #     colorScale(d.passed/d.total)
+        #   else
+        #     '#bbb'
+        # )
         .style("stroke", '#fff')
-        # .style("opacity", opacity)
+        .style("opacity", opacity)
         .on("click", (d) ->
           if d.children
             node = d

@@ -1,6 +1,6 @@
 <div class="row server-fhir-specification">
   <div class="col-md-6 spec-starburst-chart">
-    <div class="starburst-chart">{{starburst-chart}}</div>
+    <div class="starburst-chart">{{starburst-chart data=chartData}}</div>
     <div class="starburst-chart-legend"></div>
   </div>
 
@@ -19,11 +19,8 @@
       <div class="col-md-3 col-md-offset-6">% Passing</div>
     </div>
     <div class="row spec-table">
-      {{#each data.children as |specCategory|}}
-        <div class="col-md-1 spec-icon">(icon)</div>
-        <div class="col-md-2 spec-title">{{specCategory.name}}</div>
-        <div class="col-md-6 spec-bar-graph">(bar-graph)</div>
-        <div class="col-md-3 spec-percent-passing">{{percentPassing}}</div>
+      {{#each topLevelCategories as |category|}}
+        {{server-fhir-spec-category category=category}}
       {{/each}}
     </div>
   </div>
