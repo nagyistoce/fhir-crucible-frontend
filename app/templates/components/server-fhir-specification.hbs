@@ -1,6 +1,6 @@
 <div class="row server-fhir-specification">
   <div class="col-md-6 spec-starburst-chart">
-    <div class="starburst-chart">{{starburst-chart data=chartData}}</div>
+    <div class="starburst-chart">{{starburst-chart data=chartData threshold=0.65}}</div>
     <div class="starburst-chart-legend"></div>
   </div>
 
@@ -15,8 +15,8 @@
       </div>
     </div>
     <div class="row spec-headers">
-      <div class="col-md-2 col-md-offset-1">Specification</div>
-      <div class="col-md-3 col-md-offset-6">% Passing</div>
+      <div class="col-md-3 col-md-offset-1 spec-headers-specification">Specification</div>
+      <div class="col-md-3 col-md-offset-5 spec-headers-passing">% Passing</div>
     </div>
     <div class="row spec-table">
       {{#each topLevelCategories as |category|}}

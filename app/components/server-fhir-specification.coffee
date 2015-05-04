@@ -3,6 +3,7 @@
 
 ServerFhirSpecificationComponent = Ember.Component.extend(
   server: null
+  threshold: null
 
   # TODO: use real data from server
   chartData: (->

@@ -1,5 +1,6 @@
 `import Ember from 'ember'`
-`import starburstFixtureData from '../utils/starburst-fixture-data'`
+
+# -------------------------- PRIVATE FUNCTIONS ------------------------------ #
 
 # returns true if all child tests pass and false if not
 allSuccessful = (data) ->
@@ -12,7 +13,8 @@ allSuccessful = (data) ->
   successful
 
 # returns appropriate color of section (recursive)
-color = (data) ->
+color = (data, threshold) ->
+  console.log(threshold)
   success = false
   if data.children
     success = allSuccessful(data.children)
@@ -20,16 +22,17 @@ color = (data) ->
     success = data.failed == 0
 
   if data.failed == 0 && data.passed == 0
-    '#bbb'
-  else if data.passed / data.total > 0.65
-    '#437412'
+    '#bbb'      # gray
+  else if data.passed / data.total >= 0.65
+    '#417505'   # green
   else
-    '#770011'
+    '#800010'   # red
 
 # returns appropriate opacity of a failed section
 opacity = (data) ->
   Math.max(data.passed, data.failed) / data.total
 
+# returns percent passing of a section
 percentMe = (data) ->
   if data.total == 0
     0
@@ -40,14 +43,15 @@ percentMe = (data) ->
 tip = d3.tip()
   .attr('class', 'd3-tip')
   .offset([-10, 0])
-  # .html((d) -> "#{d.name}:<br>#{d.passed} / #{d.total} passed")
   .html((d) -> "#{d.name}:<br>#{d.passed} / #{d.total} passed (#{percentMe(d)}%)")
 
+# -------------------------- STARBURST COMPONENT ---------------------------- #
 
 StarburstChartComponent = Ember.Component.extend(
   data: []
   size: 600
   padding: 5
+  threshold: 0.65
 
   _renderChart: (->
 
@@ -68,9 +72,7 @@ StarburstChartComponent = Ember.Component.extend(
     svg.call(tip)
 
     logScale = d3.scale.log()
-    # colorScale = d3.scale.linear()
-    #                      .domain([1,0.2,0])
-    #                      .range(['#437412','#D85D20','#770011'])
+
     partition = d3.layout.partition()
       .sort(null)
       .value((d) -> logScale(d.total + 10))
@@ -129,12 +131,6 @@ StarburstChartComponent = Ember.Component.extend(
         .append("path")
         .attr("d", arc)
         .style("fill", color)
-        # .style("fill", (d) ->
-        #   if d.total > 0
-        #     colorScale(d.passed/d.total)
-        #   else
-        #     '#bbb'
-        # )
         .style("stroke", '#fff')
         .style("opacity", opacity)
         .on("click", (d) ->
