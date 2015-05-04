@@ -49,13 +49,15 @@
     </div>
   </form>
 
-  <div class="row">
-    <div class="col-md-12 palette">
-      {{#each serverSummaries as |serverSummary|}}
+  <div class="row palette">
+    {{#each serverSummaries as |serverSummary|}}
+      <div class="col-md-4">
+        {{starburst-chart data=serverSummary.compliance showHeader=false}}
         {{serverSummary.server.name}}
-        {{starburst-chart data=serverSummary.compliance}}
-      {{/each}}
-    </div>
+        {{serverSummary.server.percent}}
+      </div>
+    {{/each}}
+
   </div>
 
   <div class="row tri-row">

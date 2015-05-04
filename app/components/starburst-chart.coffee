@@ -29,7 +29,9 @@ color = (data, threshold) ->
 
 # returns appropriate opacity of a failed section
 opacity = (data) ->
-  Math.max(data.passed, data.failed) / data.total
+  d3.scale.linear()
+    .domain([.5,1])
+    .range([.25,1])(Math.max(data.passed, data.failed) / data.total)
 
 # returns percent passing of a section
 percentMe = (data) ->
@@ -48,24 +50,24 @@ tip = d3.tip()
 
 StarburstChartComponent = Ember.Component.extend(
   data: []
-  size: 600
+  size: 350
   padding: 5
   threshold: 0.65
+  showHeader: true
 
   _renderChart: (->
 
     # initialize width, height, radius, x, and y
-    width = height = parseInt(@get('size'), 10) - 2 * @get('padding')
-    radius = Math.min(width, height) / 3
+    width = height = @get('size') - 2 * @get('padding')
+    radius = Math.min(width, height) / 2
     x = d3.scale.linear().range([0, 2 * Math.PI])
     y = d3.scale.sqrt().range([0, radius])
 
-    title = d3.select(@get('element')).append("h2")
+    # initialize h2 element for title
+    title = d3.select(@get('element')).select("h2")
 
     # intitialize svg element with given dimensions
-    svg = d3.select(@get('element')).append("svg")
-      .attr("width", width)
-      .attr("height", height)
+    svg = d3.select(@get('element')).select("svg")
       .append("g")
       .attr("transform", "translate(#{width / 2},#{height / 2 + 10})") # center in svg
 

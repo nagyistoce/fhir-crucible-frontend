@@ -17,6 +17,7 @@ IndexController = Ember.Controller.extend({
     )
   ).property('model.summaries.[]')
 
+
   isMultiServer: ->
     @get('server1')? && @get('server2')?
 
