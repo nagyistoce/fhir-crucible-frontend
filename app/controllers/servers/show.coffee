@@ -2,7 +2,7 @@
 
 ServersShowController = Ember.Controller.extend({
   tests: []
-  proxiedTests: Ember.computed.map('tests', (test) -> Ember.Object.create(content: test, selected: false, expanded: false) )
+  proxiedTests: Ember.computed.map('tests', (test) -> Ember.Object.create(content: test, selected: false, expanded: false))
   selectedTests: Ember.computed.mapBy('proxiedSelectedTests', 'content')
   proxiedSelectedTests: Ember.computed.filterBy('proxiedTests', 'selected', true)
   proxiedExpandedTests: Ember.computed.filterBy('proxiedTests', 'expanded', true)

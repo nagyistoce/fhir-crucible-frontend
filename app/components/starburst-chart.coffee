@@ -31,7 +31,7 @@ color = (data, threshold) ->
 opacity = (data) ->
   d3.scale.linear()
     .domain([.5,1])
-    .range([.25,1])(Math.max(data.passed, data.failed) / data.total)
+    .range([.4,1])(Math.max(data.passed, data.failed) / data.total)
 
 # returns percent passing of a section
 percentMe = (data) ->
