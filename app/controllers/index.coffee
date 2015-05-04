@@ -7,7 +7,15 @@ IndexController = Ember.Controller.extend({
   server1: null
   server2: null
 
-  serverSummaries: Ember.computed.oneWay('model.summaries')
+  serverSummaries: (->
+    summaries = @get('model.summaries')
+
+    @get('model.summaries').map((summaryObj) =>
+      summary = Ember.copy(summaryObj, true)
+      summary.server = @store.getById('server', summary.server_id)
+      summary
+    )
+  ).property('model.summaries.[]')
 
   isMultiServer: ->
     @get('server1')? && @get('server2')?

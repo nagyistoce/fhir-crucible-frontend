@@ -60,6 +60,8 @@ StarburstChartComponent = Ember.Component.extend(
     x = d3.scale.linear().range([0, 2 * Math.PI])
     y = d3.scale.sqrt().range([0, radius])
 
+    title = d3.select(@get('element')).append("h2")
+
     # intitialize svg element with given dimensions
     svg = d3.select(@get('element')).append("svg")
       .attr("width", width)
@@ -86,18 +88,13 @@ StarburstChartComponent = Ember.Component.extend(
       .outerRadius((d) -> Math.max(0, y(d.y + d.dy)))
 
     # updates node name text element
-    updateNodeName = (nodeName) ->
-      svg.select("text").remove()
-      svg.append("text")
-        .text(nodeName)
-        .attr("x", -30)
-        .attr("y", -230)
-        .attr("text-align", "center")
+    updateNodeName = (d) ->
+      title.html("#{d.name}:<br/>#{d.passed} / #{d.total} passed (#{percentMe(d)}%)")
 
     # define root, initialize node to be the root, and update node name
     root = @get('data')
     node = root
-    updateNodeName(node.name)
+    updateNodeName(node)
 
     # setup for switching data: stash the old values for transition
     stash = (d) ->
@@ -134,7 +131,7 @@ StarburstChartComponent = Ember.Component.extend(
             path.transition()
               .duration(1000)
               .attrTween("d", arcTweenZoom(d))
-            updateNodeName(node.name)
+            updateNodeName(node)
         )
         .on('mouseover', tip.show)
         .on('mouseout', tip.hide)
