@@ -21,18 +21,14 @@ color = (data) ->
 
   if data.failed == 0 && data.passed == 0
     '#bbb'
-  else if success
-  # else if data.passed > data.failed
+  else if data.passed / data.total > 0.65
     '#437412'
   else
     '#770011'
 
 # returns appropriate opacity of a failed section
 opacity = (data) ->
-  if data.failed == 0
-    opacity = 1
-  else
-    opacity = data.failed / data.total
+  Math.max(data.passed, data.failed) / data.total
 
 percentMe = (data) ->
   if data.total == 0
@@ -60,7 +56,6 @@ StarburstChartComponent = Ember.Component.extend(
     radius = Math.min(width, height) / 3
     x = d3.scale.linear().range([0, 2 * Math.PI])
     y = d3.scale.sqrt().range([0, radius])
-    # color = d3.scale.category20c()
 
     # intitialize svg element with given dimensions
     svg = d3.select(@get('element')).append("svg")
