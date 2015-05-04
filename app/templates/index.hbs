@@ -49,21 +49,13 @@
     </div>
   </form>
 
-{{!--   <div class="row">
-    <div class="col-md-12">
-      <div id="animation" class="palette"></div>
+  <div class="row">
+    <div class="col-md-12 palette">
+      {{#each serverSummaries as |serverSummary|}}
+        {{starburst-chart data=serverSummary.compliance}}
+      {{/each}}
     </div>
-    <div class="col-md-10">
-      <p>Each FHIR Interface test will first generate a conformance statement. Based on a conformance, a given set of recommended tests will be shown to the user.</p>
-    </div>
-    <div class="col-md-2">
-      <p class="animation-icons"> 1/5  &nbsp;
-      <span class="glyphicon glyphicon-backward" aria-hidden="true"></span> &nbsp;
-      <span class="glyphicon glyphicon-pause" aria-hidden="true"></span> &nbsp;
-      <span class="glyphicon glyphicon-forward" aria-hidden="true"></span>
-      </p>
-    </div>
-  </div> --}}
+  </div>
 
   <div class="row tri-row">
     <div class="col-md-4">

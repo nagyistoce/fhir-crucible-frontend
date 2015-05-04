@@ -3,7 +3,12 @@
 
 IndexRoute = Ember.Route.extend(DefaultRoute, {
   model: ->
-    Ember.Object.create({server1: null, server2: null})
+    Ember.$.getJSON('/api/summary/latest')
+
+  afterModel: ->
+    @store.find('server').then((servers) =>
+      @controllerFor('index').set('servers', servers)
+    )
 })
 
 `export default IndexRoute`
