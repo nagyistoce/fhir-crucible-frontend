@@ -7,7 +7,6 @@ IndexController = Ember.Controller.extend({
   server1: null
   server2: null
 
-  # TODO: Fix me
   serverSummaries: Ember.computed.oneWay('model')
 
   isMultiServer: ->
