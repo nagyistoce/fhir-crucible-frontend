@@ -4,11 +4,11 @@
 ServerFhirSpecificationComponent = Ember.Component.extend(
   server: null
   threshold: null
-
+  chartData: null
   # TODO: use real data from server
-  chartData: (->
-    starburstFixtureData
-  ).property('server')
+  # chartData: (->
+  #   starburstFixtureData
+  # ).property('server')
 
   percentSupported: (->
     data = @get('chartData')

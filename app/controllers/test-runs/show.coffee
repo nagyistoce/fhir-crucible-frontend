@@ -32,7 +32,7 @@ TestRunsShowController = Ember.Controller.extend({
         }
         @transitionToRoute('multiservers.show', multiserver)
       else
-        @transitionToRoute('servers.show', @get('model.server'))
+        @transitionToRoute('servers.test', @get('model.server'))
 
 })
 

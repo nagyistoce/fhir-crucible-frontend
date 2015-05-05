@@ -66,7 +66,7 @@ UsersIndexController = Ember.Controller.extend({
       return
 
     runTest: (server) ->
-      @transitionToRoute('servers.show', server)
+      @transitionToRoute('servers.test', server)
       return
 })
 
