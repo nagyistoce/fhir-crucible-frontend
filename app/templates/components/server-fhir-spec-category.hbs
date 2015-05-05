@@ -1,0 +1,6 @@
+<div class="col-md-1 spec-icon">
+  <span {{bind-attr class=":fa iconClass iconColorClass :fa-fw"}}></span>
+</div>
+<div class="col-md-4 spec-title">{{title-case category.name}}</div>
+<div class="col-md-4 spec-bar-graph">{{category-bar-graph category=category}}</div>
+<div class="col-md-3 spec-percent-passing">{{percentPassing}}%</div>

@@ -20,6 +20,8 @@
   width: 200px;
 }
 
+// ------------------------- SERVER DETAILS -------------------------------- //
+
 .server-details {
   height: 60px;
   border-radius: 10px;
@@ -43,6 +45,80 @@
     }
     .server-url {
       a{color: $brand-primary;}
+    }
+  }
+}
+
+// ------------------------- FHIR SPECIFICATION STARBURST ------------------ //
+
+.server-fhir-spec-display {
+  margin-bottom: 50px;
+}
+
+.server-fhir-specification {
+  .spec-starburst-chart {
+    padding: 0 40px 0 40px;
+  }
+
+  .spec-details {
+    .percent-supported {
+      margin: 20px;
+
+      .percent-supported-value {
+        font-size: 45px;
+        line-height: 55px
+      }
+
+      .percent-supported-text {
+        text-align: left;
+        padding-left: 40px;
+        font-size: 19px;
+      }
+    }
+
+    .spec-headers {
+      margin-bottom: 15px;
+      text-align: left;
+
+      .spec-headers-specification {
+        margin-left: 32px;
+        text-decoration: underline;
+      }
+
+      .spec-headers-passing {
+        text-align: right;
+        text-decoration: underline;
+      }
+    }
+
+    .spec-icon{
+      font-size: 24px;
+      line-height: 24px;
+    }
+
+    .spec-title{
+      text-align: left;
+    }
+
+    .spec-bar-graph{}
+    .spec-percent-passing{}
+  }
+}
+
+// ------------------------- SERVER SUMMARIES ------------------------------ //
+
+.server-summaries {
+  margin: 15px;
+
+  .server-summary-details {
+    margin: 10px;
+
+    .server-name {
+
+    }
+
+    .percent-passed {
+      font-weight: bold;
     }
   }
 }

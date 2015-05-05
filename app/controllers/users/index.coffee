@@ -4,7 +4,7 @@ UsersIndexController = Ember.Controller.extend({
   servers: Ember.computed.oneWay('model.servers')
   testRuns: Ember.computed.oneWay('model.testRuns')
   proxiedServers: Ember.computed.map('servers', (server) ->
-   Ember.Object.create(content: server, selected: false))
+    Ember.Object.create(content: server, selected: false))
 
   url: null
   aggregatedTestRuns: []

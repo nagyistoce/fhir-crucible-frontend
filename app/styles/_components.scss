@@ -40,10 +40,10 @@
   text-align: center;
   margin: 40px 0;
   margin-bottom: 200px;
-  .palette{
+
+  .palette {
     padding: 20px;
     min-height: 350px;
-    margin-top: 30px;
   }
 }
 
@@ -142,6 +142,7 @@
 
 // D3 Tip Styles
 .d3-tip {
+  text-align: center;
   line-height: 1;
   font-weight: bold;
   padding: 12px;

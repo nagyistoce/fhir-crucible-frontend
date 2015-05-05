@@ -49,6 +49,27 @@
   width: 2%;
 }
 
+.progress-small {
+  @extend .progress;
+
+  margin-top: 0;
+  height: 20px;
+  background-color: #bbb;
+  border: 1px solid $brand-primary;
+
+  .progress-bar-success {
+    background-color: $result-pass;
+  }
+
+  .progress-bar-danger {
+    background-color: $result-fail;
+  }
+
+  .progress-bar-untested {
+    background-color: #bbb;
+  }
+}
+
 @mixin circle($color, $diameter){
   display: inline-block;
   border-radius: 50%;
@@ -135,4 +156,16 @@
   color: $failure;
   float: right;
   margin-right: 17px;
+}
+
+.icon-failed {
+  color: $result-fail;
+}
+
+.icon-untested {
+  color: #bbb;
+}
+
+.icon-passed {
+  color: $result-pass;
 }

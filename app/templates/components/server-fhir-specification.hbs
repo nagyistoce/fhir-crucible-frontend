@@ -1,0 +1,26 @@
+<div class="row server-fhir-specification">
+  <div class="col-md-5 spec-starburst-chart">
+    {{starburst-chart data=chartData on-zoom="updateCategories"}}
+  </div>
+
+  <div class="col-md-7 spec-details">
+    <div class="row percent-supported">
+      <div class="col-md-2 percent-supported-value">
+        {{percentSupported}}%
+      </div>
+
+      <div class="col-md-10 percent-supported-text">
+        of the FHIR Specification is currently supported by this server
+      </div>
+    </div>
+    <div class="row spec-headers">
+      <div class="col-md-3 col-md-offset-1 spec-headers-specification">Specification</div>
+      <div class="col-md-3 col-md-offset-5 spec-headers-passing">% Passing</div>
+    </div>
+    <div class="row spec-table">
+      {{#each topLevelCategories as |category|}}
+        {{server-fhir-spec-category category=category}}
+      {{/each}}
+    </div>
+  </div>
+</div>
