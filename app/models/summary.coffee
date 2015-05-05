@@ -18,6 +18,11 @@ Summary = DS.Model.extend({
     @get('compliance.passed')
   ).property('compliance.passed')
 
+  percentPassed: (->
+    return 0 if @get('compliance.total') == 0
+    Math.round(@get('compliance.passed') / @get('compliance.total') * 100)
+  ).property('compliance.passed', 'compliance.total')
+
   failed: (->
     @get('compliance.failed')
   ).property('compliance.failed')

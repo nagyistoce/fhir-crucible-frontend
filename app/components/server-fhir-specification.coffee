@@ -18,6 +18,11 @@ ServerFhirSpecificationComponent = Ember.Component.extend(
   topLevelCategories: (->
     @get('chartData.children')
   ).property('chartData')
+
+  actions: {
+    updateCategories: (rootNode) ->
+      @set('topLevelCategories', rootNode.children)
+  }
 )
 
 `export default ServerFhirSpecificationComponent`

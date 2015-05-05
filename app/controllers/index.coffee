@@ -8,7 +8,7 @@ IndexController = Ember.Controller.extend({
   server2: null
 
   # TODO: Fix me
-  serverSummaries: Ember.computed.oneWay('model.summary')
+  serverSummaries: Ember.computed.oneWay('model')
 
   isMultiServer: ->
     @get('server1')? && @get('server2')?

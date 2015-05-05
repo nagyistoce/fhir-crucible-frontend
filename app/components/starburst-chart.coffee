@@ -22,7 +22,7 @@ color = (data, threshold) ->
 
   if data.failed == 0 && data.passed == 0
     '#bbb'      # gray
-  else if data.passed / data.total >= 0.65
+  else if data.passed / data.total >= threshold
     '#417505'   # green
   else
     '#800010'   # red
@@ -105,7 +105,7 @@ StarburstChartComponent = Ember.Component.extend(
       return
 
     # when zooming: interpolate the scales
-    arcTweenZoom = (d) ->
+    arcTweenZoom = (d) =>
       xd = d3.interpolate(x.domain(), [d.x, d.x + d.dx])
       yd = d3.interpolate(y.domain(), [d.y, 1])
       yr = d3.interpolate(y.range(), [(if d.y then 20 else 0), radius])
@@ -124,16 +124,18 @@ StarburstChartComponent = Ember.Component.extend(
       .enter()
         .append("path")
         .attr("d", arc)
-        .style("fill", color)
+        .style("fill", (d) => color(d, @get('threshold')))
         .style("stroke", '#fff')
         .style("opacity", opacity)
-        .on("click", (d) ->
+        .on("click", (d) =>
           if d.children
             node = d
             path.transition()
               .duration(1000)
               .attrTween("d", arcTweenZoom(d))
             updateNodeName(node)
+            @sendAction('on-zoom', node)
+          return
         )
         .on('mouseover', tip.show)
         .on('mouseout', tip.hide)

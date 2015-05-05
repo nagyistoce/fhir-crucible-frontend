@@ -5,7 +5,7 @@ percentProperty = (dependentKey) ->
     if @get('total') == 0
       0
     else
-      Math.round(@get(dependentKey) / @get('total') * 100)
+      Math.floor(@get(dependentKey) / @get('total') * 100)
   )
 
 CategoryBarGraph = Ember.Component.extend(
