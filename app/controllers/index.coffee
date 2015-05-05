@@ -8,6 +8,7 @@ IndexController = Ember.Controller.extend({
   server2: null
 
   serverSummaries: Ember.computed.oneWay('model')
+  sortedSummaries: (->@get('serverSummaries').sortBy('percentPassed').reverse()).property('serverSummaries')
 
   isMultiServer: ->
     @get('server1')? && @get('server2')?
@@ -55,7 +56,7 @@ IndexController = Ember.Controller.extend({
         )
       else
         server = @store.createRecord('server', url: @get('server1'))
-        server.save().then(=> @transitionToRoute('servers.show', server)).then(=> @reset())
+        server.save().then(=> @transitionToRoute('servers.test', server)).then(=> @reset())
         return
 })
 

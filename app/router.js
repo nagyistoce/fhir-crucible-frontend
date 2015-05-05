@@ -8,6 +8,8 @@ var Router = Ember.Router.extend({
 Router.map(function() {
   this.resource('servers', function() {
     this.route('show', { path: ':server_id' });
+    this.route('test', { path: ':server_id/test' });
+
   });
 
   this.resource('test_runs', function() {

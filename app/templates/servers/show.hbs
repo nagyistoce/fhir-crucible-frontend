@@ -5,76 +5,17 @@
       <div class="palette report">
         <div class="row">
           <div class="col-md-10">
-            <h1>Review Conformance and Select Tests</h1>
+            <h1>
+              {{model.server.name}}<br>
+              <small>{{model.server.url}}</small>
+            </h1>
+
           </div>
           <div class="col-md-2">
-            {{#if savingTestRun}}
-              <button type="submit" disabled class="btn" ><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Preparing...</button>
-            {{else}}
-              {{#unless conformanceLoaded}}
-                <button type="submit" disabled class="btn" ><i class="fa fa-lg fa-fw fa-spinner fa-pulse"></i> Loading...</button>
-              {{else}}
-                <button type="submit" class="btn" {{bind-attr disabled="canExecuteTests"}} {{action "executeTests"}}>RUN</button>
-              {{/unless}}
-            {{/if}}
+            <button class="btn" {{action "executeTests"}}>Execute Tests</button>
           </div>
         </div>
-        <p class="helper_text">Each FHIR Interface will first generate a conformance statement. Based on the conformance, a given set of recommended tests will be shown to the user.</p>
-
-        {{server-details server=server}}
-
-        {{#if runningTestCount}}
-          <div class="row">
-            <div class="progress">
-              <div {{bind-attr class=":progress-bar :progress-bar-striped :active"}} role="progressbar" {{bind-attr aria-valuenow=executionProgress}} aria-valuemin="0" aria-valuemax="100" {{bind-attr style=progressStyle}}>
-                <span class="sr-only">{{executionProgress}}% Complete</span>
-              </div>
-            </div>
-          </div>
-        {{/if}}
-
-        <div class="row">
-          <ul class="nav nav-tabs tabbed-data-container">
-            <li class="tabbed-data active"><a data-toggle="tab" href="#test-data">Tests</a></li>
-            <li class="tabbed-data"><a data-toggle="tab"href="#conformance-data">{{#unless conformanceLoaded}}<i class="fa fa-lg fa-fw fa-spinner fa-pulse"></i> {{/unless}}Conformance</a></li>
-            {{!-- <li class="tabbed-data"><a data-toggle="tab"href="#heatmap-data">Heat Map</a></li> --}}
-          </ul>
-        </div>
-
-        <div class="row">
-          <div class="tab-content">
-
-            <!-- TEST PANEL START -->
-            <div class="tab-pane active" id="test-data">
-              <div class="col-md-12 tab-content-holder">
-                <div class="row server selectBox">
-                  <div class="col-sm-2">
-                    <button type="button" class="btn secondary" {{action "selectDeselectAll"}}><i class="fa fa-check"></i>&nbsp;{{selectAllBtnText}}</button>
-                    <button type="button" class="btn secondary" {{action "expandCollapseAll"}}><i class="fa fa-expand"></i>&nbsp;{{expandCollapseBtnText}}</button>
-                  </div>
-                </div>
-                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                  {{#each proxiedTests as |test|}}
-                    {{test-panel proxiedTest=test}}
-                  {{/each}}
-                </div>
-              </div>
-            </div>
-            <!-- TEST PANEL END -->
-
-            <!-- CONFORMANCE PANEL START -->
-            <div class="tab-pane" id="conformance-data">
-              {{conformance-view conformance=server.conformance}}
-            </div>
-            <!-- CONFORMANCE PANEL END -->
-
-            <!-- HEATMAP PANEL START -->
-{{!--             <div class="tab-pane" id="heatmap-data">
-              <div class="col-md-12 tab-content-holder">heat</div>
-            </div> --}}
-            <!-- HEATMAP PANEL END -->
-          </div>
-        </div>
+        {{server-fhir-specification data=model}}
       </div>
     </div>
   </div>

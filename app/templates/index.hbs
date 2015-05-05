@@ -51,13 +51,15 @@
   </form>
 
   <div class="row palette server-summaries">
-    {{#each serverSummaries as |serverSummary|}}
+    {{#each sortedSummaries as |serverSummary|}}
       <div class="col-md-4">
         {{starburst-chart data=serverSummary.compliance showHeader=false size=350}}
-        <div class="server-summary-details">
-          <span class="server-name">{{serverSummary.server.name}} - </span>
-          <span class="percent-passed">{{serverSummary.percentPassed}}%</span>
-        </div>
+        {{#link-to 'servers.show' serverSummary}}
+          <div class="server-summary-details">
+            <span class="server-name">{{serverSummary.server.name}} - </span>
+            <span class="percent-passed">{{serverSummary.percentPassed}}%</span>
+          </div>
+        {{/link-to}}
       </div>
     {{/each}}
   </div>
