@@ -4,10 +4,10 @@
 
 .tab-content {
   &.details {
-    background-color: $background;
+    background-color: $base;
     margin: 20px 0;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 4px;
 
     .test-run-result-id {
       text-align: center;
@@ -43,7 +43,6 @@
   }
 
   .details {
-    border-left: 2px solid $background-lighten;
     min-height: 250px;
     max-height: 500px;
     margin-top: 20px;

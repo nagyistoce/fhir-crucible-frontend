@@ -1,9 +1,13 @@
-$brand-primary: #505152;
-$brand-secondary: #D85D20;
-$brand-tertiary: #FFFFFF;
-$brand-accent: #7F9FC5;
-$background: #eeeeee;
-$background-lighten: #f5f5f5;
+$brand-primary: #505152;             // dark gray
+$brand-secondary: #D85D20;           // orange
+$brand-tertiary: #FFFFFF;            // white
+$brand-tertiary-inverse: #000000;    // black
+$brand-accent: #7F9FC5;              // washed out blue
+
+$base: #EEEEEE;                      // background shade
+$base-lighten: #F5F5F5;              // background shade
+$base-darken: #DDDDDD;               // background shade darkened, used for hover
+$structure: #DDD;                    // gray used for structural components
 
 $failure: #800010;
 $success: #417505;

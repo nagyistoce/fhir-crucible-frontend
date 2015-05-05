@@ -5,16 +5,16 @@
 .btn {
   height: 34px;
   width: 100%;
-  background-color: #D85D20;
-  border-color: #D85D20;
-  color: #FFFFFF;
+  background-color: $brand-secondary;
+  border-color: $brand-secondary;
+  color: $brand-tertiary;
 }
 
 .login {
   text-align: center;
   font-size: 60px;
   font-weight: bold;
-  color: #505152;
+  color: $brand-primary;
 }
 
 .login-footer {
@@ -35,7 +35,7 @@
 }
 
 .modal-content {
-  background-color: #F5F5F5;
+  background-color: $base-lighten;
 }
 
 .modal-body {
