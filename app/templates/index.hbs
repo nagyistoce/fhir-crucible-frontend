@@ -9,8 +9,9 @@
 
 <div class="container main">
   <div class="picture landing-page">
-    <img src="/assets/images/logo_dark.png" alt="" />
+    <img src="/assets/images/logo_dark.png" alt="Crucible">
   </div>
+
   <form>
     <div class="row form">
       <div class="col-md-10">
@@ -18,8 +19,8 @@
           {{input action="submit" value=server1 class="form-control" placeholder="FHIR Server URL"}}
         </div>
       </div>
-      <div class="col-md-2">
 
+      <div class="col-md-2">
         <button class="btn" {{action "submit"}} {{bind-attr disabled=loadingServer}}>
           {{#if loadingServer}}
             <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...
@@ -27,10 +28,9 @@
             Begin
           {{/if}}
         </button>
-
-        {{!-- <button  {{action "submit"}} class="btn">Begin</button> --}}
       </div>
     </div>
+
     <div class="row form">
       <div class="col-md-10">
         <div class="form-group">
@@ -39,6 +39,7 @@
           {{/if}}
         </div>
       </div>
+
       <div class="col-md-2">
         {{#if multiServer}}
           <a {{action 'removeUrl'}} class="toggle-info" ><i class="fa fa-minus fa-fw"></i> Remove Server</a>
@@ -49,20 +50,21 @@
     </div>
   </form>
 
-  <div class="row palette">
+  <div class="row palette server-summaries">
     {{#each serverSummaries as |serverSummary|}}
       <div class="col-md-4">
-        {{starburst-chart data=serverSummary.compliance showHeader=false}}
-        {{serverSummary.server.name}}
-        {{serverSummary.percentPassed}}%
+        {{starburst-chart data=serverSummary.compliance showHeader=false size=350}}
+        <div class="server-summary-details">
+          <span class="server-name">{{serverSummary.server.name}} - </span>
+          <span class="percent-passed">{{serverSummary.percentPassed}}%</span>
+        </div>
       </div>
     {{/each}}
-
   </div>
 
   <div class="row tri-row">
     <div class="col-md-4">
-      <div  class="palette">
+      <div class="palette">
         <i class="fa fa-medkit fa-5x"></i>
         <h2>Healthcare Data</h2>
         <p>Electronic health data exchange will yield many benefits from reduced cost to improved patient outcomes. FHIR will help enable successful exchange of computable health data.</p>

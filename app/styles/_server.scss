@@ -51,10 +51,13 @@
 
 // ------------------------- FHIR SPECIFICATION STARBURST ------------------ //
 
+.server-fhir-spec-display {
+  margin-bottom: 50px;
+}
+
 .server-fhir-specification {
   .spec-starburst-chart {
-    .starburst-chart {}
-    .starburst-chart-legend{}
+    padding: 0 40px 0 40px;
   }
 
   .spec-details {
@@ -99,5 +102,23 @@
 
     .spec-bar-graph{}
     .spec-percent-passing{}
+  }
+}
+
+// ------------------------- SERVER SUMMARIES ------------------------------ //
+
+.server-summaries {
+  margin: 15px;
+
+  .server-summary-details {
+    margin: 10px;
+
+    .server-name {
+
+    }
+
+    .percent-passed {
+      font-weight: bold;
+    }
   }
 }

@@ -3,7 +3,9 @@
 
     <div class="palette col-md-12">
       {{#each proxiedServers as |server|}}
-        {{server-fhir-specification server=server}}
+        <div class="server-fhir-spec-display">
+          {{server-fhir-specification server=server}}
+        </div>
       {{/each}}
     </div>
 
