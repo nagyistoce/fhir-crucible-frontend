@@ -141,7 +141,7 @@ StarburstChartComponent = Ember.Component.extend(
         .on('mouseout', tip.hide)
         .each(stash)
     return
-  ).on('didInsertElement')
+  ).observes('data').on('didInsertElement')
 )
 
 `export default StarburstChartComponent`

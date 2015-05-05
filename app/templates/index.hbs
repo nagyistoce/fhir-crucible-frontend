@@ -54,7 +54,7 @@
     {{#each serverSummaries as |serverSummary|}}
       <div class="col-md-4">
         {{starburst-chart data=serverSummary.compliance showHeader=false size=350}}
-        {{#link-to 'servers.show' serverSummary.server}}
+        {{#link-to 'servers.show' serverSummary}}
           <div class="server-summary-details">
             <span class="server-name">{{serverSummary.server.name}} - </span>
             <span class="percent-passed">{{serverSummary.percentPassed}}%</span>

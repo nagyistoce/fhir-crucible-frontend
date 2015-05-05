@@ -4,20 +4,20 @@
 ServerFhirSpecificationComponent = Ember.Component.extend(
   server: null
   threshold: null
-  chartData: null
+  data: null
   # TODO: use real data from server
-  # chartData: (->
-  #   starburstFixtureData
-  # ).property('server')
+  chartData: (->
+    @data.get('compliance')
+  ).property('data')
 
   percentSupported: (->
     data = @get('chartData')
     Math.round(data.passed / data.total * 100)
-  ).property('chartData')
+  ).property('data')
 
   topLevelCategories: (->
     @get('chartData.children')
-  ).property('chartData')
+  ).property('data')
 
   actions: {
     updateCategories: (rootNode) ->
