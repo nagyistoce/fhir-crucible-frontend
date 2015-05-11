@@ -15,3 +15,7 @@ nav {
     color: $brand-tertiary;
   }
 }
+
+.nav-tabs > li > a:hover {
+  background-color: $base-darken;
+}

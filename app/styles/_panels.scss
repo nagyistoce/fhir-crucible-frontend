@@ -4,14 +4,14 @@
 }
 
 .panel-group .panel{
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid $structure;
   box-shadow: none;
 }
 
 .panel-body{
   text-align: left;
   label{
-    color: #7F9FC5;
+    color: $brand-accent;
   }
 }
 
