@@ -54,12 +54,18 @@
     {{#each sortedSummaries as |serverSummary|}}
       <div class="col-md-4">
         {{starburst-chart data=serverSummary.compliance showHeader=false size=350}}
-        {{#link-to 'servers.show' serverSummary}}
+        {{#if serverSummary.server}}
+          {{#link-to 'servers.show' serverSummary}}
+            <div class="server-summary-details">
+                <span class="server-name">{{serverSummary.server.name}} - </span>
+                <span class="percent-passed">{{serverSummary.percentPassed}}%</span>
+            </div>
+          {{/link-to}}
+        {{else}}
           <div class="server-summary-details">
-            <span class="server-name">{{serverSummary.server.name}} - </span>
-            <span class="percent-passed">{{serverSummary.percentPassed}}%</span>
+            <i class="fa fa-fw fa-spinner fa-pulse"/> Loading...
           </div>
-        {{/link-to}}
+        {{/if}}
       </div>
     {{/each}}
   </div>

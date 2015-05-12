@@ -24,6 +24,8 @@ color = (data, threshold) ->
     '#bbb'      # gray
   else if data.passed / data.total >= threshold
     '#417505'   # green
+  else if !data.name # data is being fetched
+    '#eee'   # gray
   else
     '#800010'   # red
 
@@ -65,6 +67,8 @@ StarburstChartComponent = Ember.Component.extend(
 
     # initialize h2 element for title
     title = d3.select(@get('element')).select("h2")
+
+    if @get('data') then d3.select(@get('element')).select("svg").selectAll('g').remove()
 
     # intitialize svg element with given dimensions
     svg = d3.select(@get('element')).select("svg")

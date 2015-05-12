@@ -2,11 +2,10 @@
 `import DefaultRoute from '../mixins/default-route'`
 
 IndexRoute = Ember.Route.extend(DefaultRoute, {
+
   model: ->
     Ember.$.getJSON('/api/summary/latest').then((summaries) =>
-      summaries.summaries.map((summary) =>
-        @store.push('summary', @store.normalize('summary', summary))
-      )
+      @store.push('aggregate-summary', @store.normalize('summary', summaries))
     )
 
   afterModel: ->
