@@ -4,14 +4,9 @@
 IndexRoute = Ember.Route.extend(DefaultRoute, {
 
   model: ->
-    Ember.$.getJSON('/api/summary/latest').then((summaries) =>
-      @store.push('aggregate-summary', @store.normalize('summary', summaries))
+    Ember.RSVP.hash(
+      summaries: @store.find("aggregate-summary", 0)
+      servers: @store.findAll('server')
     )
-
-  afterModel: ->
-    @store.find('server').then((servers) =>
-      @controllerFor('index').set('servers', servers)
-    )
-})
-
+  })
 `export default IndexRoute`

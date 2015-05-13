@@ -8,7 +8,7 @@ IndexController = Ember.Controller.extend({
   server2: null
 
   serverSummaries: Ember.computed.oneWay('model.summaries')
-  sortedSummaries: (->@get('serverSummaries').sortBy('percentPassed').reverse()).property('serverSummaries')
+  sortedSummaries: (->@get('model').summaries.get('summaries').sortBy("percentPassed").reverse()).property('model.summaries')
 
   isMultiServer: ->
     @get('server1')? && @get('server2')?
