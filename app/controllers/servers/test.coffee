@@ -57,7 +57,7 @@ ServersTestController = Ember.Controller.extend({
       run = @store.createRecord('testRun', { server: @get('server') })
       run.set('conformance', @get('server.conformance'))
       run.get('testResults').pushObjects(@get('selectedTests').map((test) => @store.createRecord('testResult', {'test': test})))
-      Em.RSVP.all( [run.save(), @get('server.conformance')] ).then(=>
+      Em.RSVP.all( [run.save()] ).then(=>
         run.get('testResults').filterBy('id', null).invoke('deleteRecord');
         @transitionToRoute('test_runs.show', run).then( =>
           Ember.run.schedule('afterRender', @, ->
