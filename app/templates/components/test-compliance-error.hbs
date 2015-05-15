@@ -1,0 +1,18 @@
+<div class="toggleable panel-heading">
+  <h4 class="panel-title">
+    <label >
+      {{proxiedIssue.key}}
+    </label>
+    <a {{action 'expandCollapse'}} {{bind-attr class="proxiedIssue.expanded::collapsed"}} aria-expanded="false" href="#"><small>({{#if proxiedIssue.expanded}}less{{else}}more{{/if}})</small></a>
+  </h4>
+</div>
+<div class="panel-collapse collapse">
+  <div class="panel-body">
+    <ul>
+      {{#each proxiedIssue.values as |issue|}}
+        <li>{{issue.test_method}}</li>
+      {{/each}}
+    </ul>
+
+  </div>
+</div>

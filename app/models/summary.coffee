@@ -1,7 +1,7 @@
 `import DS from 'ember-data'`
 
 Summary = DS.Model.extend({
-  compliance: DS.attr()
+  compliance: DS.attr()#DS.belongsTo("compliance")
   generatedAt: DS.attr("date")
   server: DS.belongsTo("server", async: true, inverse:'summary')
   testRun: DS.belongsTo("test-run", async: true)
@@ -33,6 +33,21 @@ Summary = DS.Model.extend({
     else
       '-'
   ).property('generatedAt')
+
+  sortedIssues: (->
+    # This will collect all issues with similar messages
+    nest = d3.nest().key((d) -> d.msg)
+    issues = nest.entries(@get('compliance.issues'))
+    issues.sort((a,b) ->
+      b.values.length - a.values.length
+    )
+  ).property('compliance.issues')
+  topTenIssues: (->
+    @get('sortedIssues')[0..9]
+  ).property('sortedIssues')
+  otherIssues: (->
+    @get('sortedIssues')[10..-1]
+  ).property('sortedIssues')
 })
 
 `export default Summary`
