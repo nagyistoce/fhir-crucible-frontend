@@ -21,9 +21,30 @@ ServerFhirSpecificationComponent = Ember.Component.extend(
     @get('chartData.children')
   ).property('data')
 
+  issues: (->
+    @get('chartData').issues
+  ).property('data')
+
+  topIssuesByMessage: (->
+    nest = d3.nest().key((d) -> d.msg)
+    issues = nest.entries(@get('issues'))
+    issues.sort((a,b) ->
+      b.values.length - a.values.length
+    )[0..9]
+  ).property('issues')
+
+  topIssuesByTag: (->
+    nest = d3.nest().key((d) -> d.tag)
+    issues = nest.entries(@get('issues'))
+    issues.sort((a,b) ->
+      b.values.length - a.values.length
+    )
+  ).property('issues')
+
   actions: {
     updateCategories: (rootNode) ->
       @set('topLevelCategories', rootNode.children)
+      @set('issues', rootNode.issues)
   }
 )
 
