@@ -66,6 +66,7 @@ ServersTestController = Ember.Controller.extend({
         )
       )
       return
+
 })
 
 `export default ServersTestController`
