@@ -9,6 +9,13 @@ ConformanceViewComponent = Em.Component.extend
     @get('testResults')?.mapBy('validatedResources')
   ).property('conformance', 'testResults.@each.results')
 
+  testedResources: (->
+    # @get('conformance.rest').mapBy('resource', (fhirType) ->
+      # console.log('####')#@get('validatedResources')?.reduce(((prev, cur) -> prev.concat(cur)), []).filterBy('resource', fhirType.get('fhirType')))
+      # fhirType.set('isTested', @get('validatedResources')?.reduce(((prev, cur) -> prev.concat(cur)), []).filterBy('resource', fhirType.get('fhirType')).length > 0)
+    # )
+  ).observes('conformance', 'validatedResources')
+
   _collapseObserver: (->
     @$().on('show.bs.collapse', '.panel-collapse', ->
       Ember.$(@).closest('tr').removeClass('hidden')

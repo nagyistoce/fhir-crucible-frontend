@@ -14,6 +14,8 @@ FhirType = DS.Model.extend(TabbableMixin, {
   operation: DS.attr()
   results: DS.attr()
   testResults: DS.attr()
+  isTested: DS.attr('boolean', defaultValue: true)
+
   read: (-> @get('operation')['read']||false).property('operation')
   readStatus: (->
     # if @get('testStatus')['read']?
