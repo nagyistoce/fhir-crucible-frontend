@@ -10,11 +10,26 @@ ConformanceViewComponent = Em.Component.extend
   ).property('conformance', 'testResults.@each.results')
 
   testedResources: (->
+    testedResources = d3.nest()
+      .key((d) ->
+        d.resource
+      )
+      .entries(@get('validatedResources')?.reduce(((prev, cur) -> prev.concat(cur)), []))
+      .mapBy('key')
+
+    allResources = @get('conformance.rest').mapBy('resource').reduce(((prev, cur) -> prev.concat(cur)), [])
+    debugger
+
+    allResources.filterBy('fhirType', testedResources)
+
+
+    # window.testedResources = testedResources
+
     # @get('conformance.rest').mapBy('resource', (fhirType) ->
       # console.log('####')#@get('validatedResources')?.reduce(((prev, cur) -> prev.concat(cur)), []).filterBy('resource', fhirType.get('fhirType')))
       # fhirType.set('isTested', @get('validatedResources')?.reduce(((prev, cur) -> prev.concat(cur)), []).filterBy('resource', fhirType.get('fhirType')).length > 0)
     # )
-  ).observes('conformance', 'validatedResources')
+  ).property('conformance', 'validatedResources')
 
   _collapseObserver: (->
     @$().on('show.bs.collapse', '.panel-collapse', ->
