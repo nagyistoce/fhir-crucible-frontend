@@ -26,6 +26,13 @@ Summary = DS.Model.extend({
   failed: (->
     @get('compliance.failed')
   ).property('compliance.failed')
+
+  generatedFromNow: (->
+    if @get('testRun.date')
+      moment(@get('testRun.date')).fromNow()
+    else
+      '-'
+  ).property('testRun.date')
 })
 
 `export default Summary`
