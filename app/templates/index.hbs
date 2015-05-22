@@ -61,6 +61,9 @@
                 <span class="percent-passed">{{serverSummary.percentPassed}}%</span>
             </div>
           {{/link-to}}
+          <div class="summary-time-details">
+            <span class="server-time"><i class="fa fa-fw fa-clock-o"/> {{serverSummary.generatedFromNow}}</span>
+          </div>
         {{else}}
           <div class="server-summary-details">
             <i class="fa fa-fw fa-spinner fa-pulse"/> Loading...

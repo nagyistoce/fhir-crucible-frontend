@@ -112,6 +112,7 @@
 
   .server-summary-details {
     margin: 10px;
+    margin-bottom: 0px;
 
     .server-name {
 
@@ -119,6 +120,16 @@
 
     .percent-passed {
       font-weight: bold;
+    }
+  }
+
+  .summary-time-details {
+    margin-bottom: 10px;
+    line-height: 1em;
+
+    .server-time {
+      font-size: .6em;
+      color: $base-header-small;
     }
   }
 }
