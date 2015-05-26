@@ -50,28 +50,7 @@
     </div>
   </form>
 
-  <div class="row palette server-summaries">
-    {{#each sortedSummaries as |serverSummary|}}
-      <div class="col-md-4">
-        {{starburst-chart data=serverSummary.compliance showHeader=false size=350 updatePlot="updatePlot" selectedNode=currentNodeName}}
-        {{#if serverSummary.server}}
-          {{#link-to 'servers.show' serverSummary}}
-            <div class="server-summary-details">
-                <span class="server-name">{{serverSummary.server.name}} - </span>
-                <span class="percent-passed">{{serverSummary.percentPassed}}%</span>
-            </div>
-          {{/link-to}}
-          <div class="summary-time-details">
-            <span class="server-time"><i class="fa fa-fw fa-clock-o"/> {{serverSummary.generatedFromNow}}</span>
-          </div>
-        {{else}}
-          <div class="server-summary-details">
-            <i class="fa fa-fw fa-spinner fa-pulse"/> Loading...
-          </div>
-        {{/if}}
-      </div>
-    {{/each}}
-  </div>
+  {{server-summaries summaries=model.summaries}}
 
   <div class="row tri-row">
     <div class="col-md-4">

@@ -200,3 +200,18 @@
   top: 50%;
   left: 100%;
 }
+
+/* Carousel */
+
+.carousel-control {
+  color: $brand-primary;
+
+  &.left,
+  &.right {
+    background-image: none;
+  }
+}
+
+.carousel-inner {
+  width: inherit;
+}
