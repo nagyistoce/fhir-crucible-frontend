@@ -27,7 +27,6 @@ IndexController = Ember.Controller.extend({
 
   actions:
     updatePlot: (node)->
-      # @set("currentNodeName", node.name)
       @set('currentNodeName', node.name)
       return
 
