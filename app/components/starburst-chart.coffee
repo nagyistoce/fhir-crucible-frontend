@@ -56,6 +56,9 @@ StarburstChartComponent = Ember.Component.extend(
   padding: 5
   threshold: 0.65
   showHeader: true
+  selectedNode: "FHIR"
+
+
 
   _renderChart: (->
 
@@ -131,6 +134,7 @@ StarburstChartComponent = Ember.Component.extend(
         .style("fill", (d) => color(d, @get('threshold')))
         .style("stroke", '#fff')
         .style("opacity", opacity)
+        .attr("class", (d) -> d.name?.replace(/([\s,\&])/g, "_"))
         .on("click", (d) =>
           if d.children
             node = d
@@ -139,13 +143,24 @@ StarburstChartComponent = Ember.Component.extend(
               .attrTween("d", arcTweenZoom(d))
             updateNodeName(node)
             @sendAction('on-zoom', node)
+            @sendAction('updatePlot', d)
           return
         )
         .on('mouseover', tip.show)
         .on('mouseout', tip.hide)
         .each(stash)
+    # This allows us to force a node to be selected initially
+    for el in $(@get('element')).find(".#{@get('selectedNode')?.replace(/([\s,\&])/g, "_")}")
+      el.dispatchEvent(new MouseEvent("click"))
     return
   ).observes('data').on('didInsertElement')
+
+
+  _updatePlot: (->
+    # This allows the containing element to change what's selected
+    for el in $(@get('element')).find(".#{@get('selectedNode')?.replace(/([\s,\&])/g, "_")}")
+      el.dispatchEvent(new MouseEvent("click"))
+  ).observes('selectedNode')
 )
 
 `export default StarburstChartComponent`

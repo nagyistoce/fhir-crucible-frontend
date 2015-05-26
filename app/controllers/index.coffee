@@ -6,6 +6,7 @@ IndexController = Ember.Controller.extend({
   runServerFailed: false
   server1: null
   server2: null
+  currentNodeName: null
 
   serverSummaries: Ember.computed.oneWay('model.summaries')
   sortedSummaries: (->
@@ -25,6 +26,10 @@ IndexController = Ember.Controller.extend({
     })
 
   actions:
+    updatePlot: (node)->
+      @set('currentNodeName', node.name)
+      return
+
     addUrl: ->
       @set('multiServer', true)
       return

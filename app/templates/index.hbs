@@ -53,7 +53,7 @@
   <div class="row palette server-summaries">
     {{#each sortedSummaries as |serverSummary|}}
       <div class="col-md-4">
-        {{starburst-chart data=serverSummary.compliance showHeader=false size=350}}
+        {{starburst-chart data=serverSummary.compliance showHeader=false size=350 updatePlot="updatePlot" selectedNode=currentNodeName}}
         {{#if serverSummary.server}}
           {{#link-to 'servers.show' serverSummary}}
             <div class="server-summary-details">
