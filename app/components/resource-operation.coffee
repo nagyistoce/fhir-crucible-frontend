@@ -5,6 +5,7 @@ ResourceOperationComponent = Ember.Component.extend
   resource: null
   operation: null
   validatedResources: null
+
   # map operations into their fhirType attribute names
   operationsMap:
     historyInstance: 'history-instance'

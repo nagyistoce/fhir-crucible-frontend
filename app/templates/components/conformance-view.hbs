@@ -20,41 +20,39 @@
           </tr>
         </thead>
         <tbody>
-          {{#each conformance.rest as |r|}}
-            {{#each r.resource as |res|}}
-              <tr class="collapsed" data-toggle="collapse" aria-expanded="false" {{bind-attr data-target=res.toggleSelector}}>
-                <td data-title="Read" class="test-circle-holder">
-                  <a>{{title-case res.fhirType}}</a>
+          {{#each testedResources as |res|}}
+            <tr class="collapsed" data-toggle="collapse" aria-expanded="false" {{bind-attr data-target=res.toggleSelector}}>
+              <td data-title="Read" class="test-circle-holder">
+                <a>{{title-case res.fhirType}}</a>
+              </td>
+              {{#each operations as |operation|}}
+                <td>
+                  {{resource-operation resource=res validatedResources=validatedResources operation=operation}}
                 </td>
-                {{#each operations as |operation|}}
-                  <td>
-                    {{resource-operation resource=res validatedResources=validatedResources operation=operation}}
-                  </td>
-                {{/each}}
-              </tr>
-              <tr class="hidden">
-                <td colspan="10">
-                  <div {{bind-attr id=res.toggleId}} class="panel-collapse collapse" aria-expanded="false">
-                    Conforms to
-                    <a {{bind-attr href="{{res.profile.reference}}"}}>{{res.profile.reference}}</a>
-                    <table class="table inner-table">
+              {{/each}}
+            </tr>
+            <tr class="hidden">
+              <td colspan="10">
+                <div {{bind-attr id=res.toggleId}} class="panel-collapse collapse" aria-expanded="false">
+                  Conforms to
+                  <a {{bind-attr href="{{res.profile.reference}}"}}>{{res.profile.reference}}</a>
+                  <table class="table inner-table">
+                    <tr>
+                      <th>Search Param</th>
+                      <th>Type</th>
+                      <th>Description</th>
+                    </tr>
+                    {{#each res.searchParam as |param|}}
                       <tr>
-                        <th>Search Param</th>
-                        <th>Type</th>
-                        <th>Description</th>
+                        <td>{{param.name}}</td>
+                        <td>{{param.fhirType}}</td>
+                        <td>{{param.documentation}}</td>
                       </tr>
-                      {{#each res.searchParam as |param|}}
-                        <tr>
-                          <td>{{param.name}}</td>
-                          <td>{{param.fhirType}}</td>
-                          <td>{{param.documentation}}</td>
-                        </tr>
-                      {{/each}}
-                    </table>
-                  </div>
-                </td>
-              </tr>
-            {{/each}}
+                    {{/each}}
+                  </table>
+                </div>
+              </td>
+            </tr>
           {{/each}}
         </tbody>
       </table>
