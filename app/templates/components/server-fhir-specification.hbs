@@ -33,7 +33,7 @@
         Errors ({{issues.length}} Total)
       </h1>
       {{#each topIssuesByMessage as |issue|}}
-        {{test-compliance-error proxiedIssue=issue}}
+        ({{issue.values.length}}){{test-compliance-error proxiedIssue=issue}}
       {{/each}}
       <h2>By Tag</h2>
       {{#each topIssuesByTag as |issue|}}
