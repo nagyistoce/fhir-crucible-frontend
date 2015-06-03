@@ -7,7 +7,7 @@
           <div class="col-md-10">
             <h1>
               {{name}}<br>
-              <small>{{url}}</small>
+              <small><a {{bind-attr href="url"}} target="_blank">{{url}}</a></small>
               <div class="pull-right">
                 <small><span class="server-time"><i class="fa fa-fw fa-clock-o"/> {{summary.generatedFromNow}}</span></small>
               </div>

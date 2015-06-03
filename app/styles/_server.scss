@@ -60,6 +60,7 @@
     padding: 0 40px 0 40px;
   }
 
+
   .spec-details {
     .percent-supported {
       margin: 20px;
@@ -143,4 +144,20 @@
   button{
     margin-bottom: 5px;
   }
+}
+
+// ------------------------- ERROR MESSAGES ------------------------------ //
+
+.errors {
+  text-align: left;
+  &.badge{
+    background-color: $brand-accent;
+    &:hover{
+      background-color: $brand-accent-darken;
+    }
+  }
+}
+
+.error-report{
+  word-wrap: break-word;
 }
