@@ -120,9 +120,9 @@
     color: $brand-primary;
     border-radius: 4px;
     padding: 5px 10px;
-  }
-  &:hover{
-    background-color: $base-darken;
+    &:hover{
+      background-color: $base-darken;
+    }
   }
   .nav-pills > li.active > a{
     background-color: $base-lighten;

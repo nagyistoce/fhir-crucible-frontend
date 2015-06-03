@@ -7,6 +7,10 @@ ServersShowRoute = Ember.Route.extend({
   actions:
     executeTests: ->
       @transitionTo('servers.test', @get('currentModel'))
+
+    testRunsPage: ->
+      debugger
+      @transitionTo('test_runs.show', @get('currentModel.testRun'))
 })
 
 `export default ServersShowRoute`
