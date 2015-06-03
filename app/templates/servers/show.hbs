@@ -12,10 +12,10 @@
                 <small><span class="server-time"><i class="fa fa-fw fa-clock-o"/> {{summary.generatedFromNow}}</span></small>
               </div>
             </h1>
-
           </div>
-          <div class="col-md-2">
+          <div class="col-md-2 action-buttons">
             <button class="btn" {{action "executeTests"}}>Execute Tests</button>
+            <button class="btn" {{action "testRunsPage"}}>Test Results</button>
           </div>
         </div>
         {{server-fhir-specification data=summary}}
