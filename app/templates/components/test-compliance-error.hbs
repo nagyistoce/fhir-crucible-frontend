@@ -1,6 +1,7 @@
 <div class="toggleable panel-heading">
   <h4 class="panel-title">
     <label >
+       <span {{action 'expandCollapse'}} class="badge errors">{{proxiedIssue.values.length}}</span>
       {{proxiedIssue.key}}
     </label>
     <a {{action 'expandCollapse'}} {{bind-attr class="proxiedIssue.expanded::collapsed"}} aria-expanded="false" href="#"><small>({{#if proxiedIssue.expanded}}less{{else}}more{{/if}})</small></a>
@@ -8,11 +9,22 @@
 </div>
 <div class="panel-collapse collapse">
   <div class="panel-body">
-    <ul>
-      {{#each proxiedIssue.values as |issue|}}
-        <li>{{issue.test_method}}</li>
-      {{/each}}
-    </ul>
+    <div class="row">
 
+
+      <div class="col-md-4 error-report">
+        {{#each suiteIssues as |issue|}}
+          {{issue.key}}<br><br>
+        {{/each}}
+      </div>
+
+      <div class="col-md-8">
+        {{#each suiteIssues as |issue|}}
+          yo
+        {{/each}}
+      </div>
+
+
+    </div>
   </div>
 </div>

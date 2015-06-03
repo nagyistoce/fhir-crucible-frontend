@@ -58,6 +58,9 @@ a{
       text-decoration: none;
     }
   }
+  small{
+    color: $brand-accent;
+  }
 }
 
 .helper_text{
