@@ -5,6 +5,7 @@ ServerSummariesComponent = Ember.Component.extend({
 
   summaries: null
   _carousel: null
+  currentNodeName: null
 
   elementIdTarget: (->
     "##{@get('elementId')}"
@@ -50,6 +51,11 @@ ServerSummariesComponent = Ember.Component.extend({
 
     output
   ).property('sortedSummaries.[]')
+
+  actions:
+    updatePlot: (node)->
+      @set('currentNodeName', node.name)
+      return
 })
 
 `export default ServerSummariesComponent`

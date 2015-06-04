@@ -6,7 +6,7 @@ IndexController = Ember.Controller.extend({
   runServerFailed: false
   server1: null
   server2: null
-  currentNodeName: null
+  # currentNodeName: null
 
   isMultiServer: ->
     @get('server1')? && @get('server2')?
@@ -21,9 +21,9 @@ IndexController = Ember.Controller.extend({
     })
 
   actions:
-    updatePlot: (node)->
-      @set('currentNodeName', node.name)
-      return
+    # updatePlot: (node)->
+    #   @set('currentNodeName', node.name)
+    #   return
 
     addUrl: ->
       @set('multiServer', true)
