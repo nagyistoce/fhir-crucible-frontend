@@ -39,7 +39,6 @@
 .tri-row {
   text-align: center;
   margin: 40px 0;
-  margin-bottom: 200px;
 
   .palette {
     padding: 20px;
@@ -203,15 +202,41 @@
 
 /* Carousel */
 
-.carousel-control {
-  color: $brand-primary;
+.carousel {
+  .carousel-control {
+    color: $brand-primary;
+    width: 5%;
+    text-shadow: none;
 
-  &.left,
-  &.right {
-    background-image: none;
+    &:hover {
+      color: $brand-secondary;
+    }
+
+    &.left,
+    &.right {
+      background-image: none;
+    }
   }
-}
 
-.carousel-inner {
-  width: inherit;
+  .carousel-inner {
+    width: inherit;
+
+    .item {
+      &.active {
+        padding: 40px 0;
+      }
+    }
+
+    .row {
+      padding: 0 50px;
+    }
+  }
+
+  .carousel-indicators li {
+    background-color: $brand-primary;
+
+    &.active {
+      background-color: $brand-secondary;
+    }
+  }
 }
