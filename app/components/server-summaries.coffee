@@ -1,7 +1,7 @@
 `import Ember from 'ember'`
 
 ServerSummariesComponent = Ember.Component.extend({
-  classNames: ['carousel', 'slide']
+  classNames: ['carousel', 'slide', 'server-summaries']
 
   summaries: null
   _carousel: null
@@ -11,8 +11,9 @@ ServerSummariesComponent = Ember.Component.extend({
   ).property('elementId')
 
   sortedSummaries: (->
+    return @get('summaries').toArray() unless @get('summaries.isFulfilled')
     @get('summaries').sortBy("percentPassed").reverse()
-  ).property('summaries.@each.percentPassed')
+  ).property('summaries.@each.percentPassed', 'summaries.isFulfilled')
 
   _setupCarouselObserver: (->
     Ember.run.debounce(@, @_setupCarousel, 500)
@@ -41,9 +42,11 @@ ServerSummariesComponent = Ember.Component.extend({
 
     output = []
     for index in [0...summaries.length]
-      col = Math.floor(index / 6)
-      output[col] = { index: col, summaries: [] } if Ember.isNone(output[col])
-      output[col].summaries.push(summaries.objectAt(index))
+      groupIndex = Math.floor(index / 6)
+      columnIndex = Math.floor(index / 3)
+      output[groupIndex] = { index: groupIndex, summaries: [] } if Ember.isNone(output[groupIndex])
+      output[groupIndex].summaries[columnIndex] = [] if Ember.isNone(output[groupIndex].summaries[columnIndex])
+      output[groupIndex].summaries[columnIndex].push(summaries.objectAt(index))
 
     output
   ).property('sortedSummaries.[]')

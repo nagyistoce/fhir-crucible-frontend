@@ -109,6 +109,14 @@
 
 .server-summaries {
   margin: 15px;
+  background-color: $brand-tertiary;
+  border-radius: 10px;
+  // padding: 60px;
+  min-height: 910px;
+
+  .summary {
+    padding: 20px;
+  }
 
   .server-summary-details {
     margin: 10px;

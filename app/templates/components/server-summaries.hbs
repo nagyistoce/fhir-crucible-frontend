@@ -4,31 +4,35 @@
   {{/each}}
 </ol>
 
-<div class="carousel-inner palette server-summaries" role="listbox">
+<div class="carousel-inner" role="listbox">
   {{#each summarySegments as |segment|}}
     <div class="item">
-      <div class="row">
-        {{#each segment.summaries as |serverSummary|}}
-          <div class="col-md-4">
-            {{starburst-chart data=serverSummary.compliance showHeader=false size=350}}
-            {{#if serverSummary.server}}
-              {{#link-to 'servers.show' serverSummary}}
-                <div class="server-summary-details">
-                    <span class="server-name">{{serverSummary.server.name}} - </span>
-                    <span class="percent-passed">{{serverSummary.percentPassed}}%</span>
-                </div>
-              {{/link-to}}
-              <div class="summary-time-details">
-                <span class="server-time"><i class="fa fa-fw fa-clock-o"/> {{serverSummary.generatedFromNow}}</span>
+      {{#each segment.summaries as |serverSummaryRow|}}
+        <div class="row">
+          {{#each serverSummaryRow as |serverSummary|}}
+            <div class="col-md-4">
+              <div class="summary">
+                {{starburst-chart data=serverSummary.compliance showHeader=false size=350}}
+                {{#if serverSummary.server}}
+                  {{#link-to 'servers.show' serverSummary}}
+                    <div class="server-summary-details">
+                      <span class="server-name">{{serverSummary.server.name}} - </span>
+                      <span class="percent-passed">{{serverSummary.percentPassed}}%</span>
+                    </div>
+                  {{/link-to}}
+                  <div class="summary-time-details">
+                    <span class="server-time"><i class="fa fa-fw fa-clock-o"/> {{serverSummary.generatedFromNow}}</span>
+                  </div>
+                {{else}}
+                  <div class="server-summary-details">
+                    <i class="fa fa-fw fa-spinner fa-pulse"/> Loading...
+                  </div>
+                {{/if}}
               </div>
-            {{else}}
-              <div class="server-summary-details">
-                <i class="fa fa-fw fa-spinner fa-pulse"/> Loading...
-              </div>
-            {{/if}}
-          </div>
-        {{/each}}
-      </div>
+            </div>
+          {{/each}}
+        </div>
+      {{/each}}
     </div>
   {{/each}}
 </div>
