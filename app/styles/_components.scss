@@ -207,6 +207,7 @@
     color: $brand-primary;
     width: 5%;
     text-shadow: none;
+    opacity: 1;
 
     &:hover {
       color: $brand-secondary;
@@ -220,12 +221,6 @@
 
   .carousel-inner {
     width: inherit;
-
-    .item {
-      &.active {
-        padding: 40px 0;
-      }
-    }
 
     .row {
       padding: 0 50px;
