@@ -1,0 +1,48 @@
+<ol class="carousel-indicators">
+  {{#each summarySegments as |segment|}}
+    <li {{bind-attr data-target=elementIdTarget data-slide-to=segment.index}}></li>
+  {{/each}}
+</ol>
+
+<div class="carousel-inner" role="listbox">
+  {{#each summarySegments as |segment|}}
+    <div class="item">
+      {{#each segment.summaries as |serverSummaryRow|}}
+        <div class="row">
+          {{#each serverSummaryRow as |serverSummary|}}
+            <div class="col-md-4">
+              <div class="summary">
+                {{starburst-chart data=serverSummary.compliance showHeader=false size=350 updatePlot="updatePlot" selectedNode=currentNodeName}}
+                {{#if serverSummary.server}}
+                  {{#link-to 'servers.show' serverSummary.server}}
+                    <div class="server-summary-details">
+                      <span class="server-name">{{serverSummary.server.name}} - </span>
+                      <span class="percent-passed">{{serverSummary.percentPassed}}%</span>
+                    </div>
+                  {{/link-to}}
+                  <div class="summary-time-details">
+                    <span class="server-time"><i class="fa fa-fw fa-clock-o"/> {{serverSummary.generatedFromNow}}</span>
+                  </div>
+                {{else}}
+                  <div class="server-summary-details">
+                    <i class="fa fa-fw fa-spinner fa-pulse"/> Loading...
+                  </div>
+                {{/if}}
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      {{/each}}
+    </div>
+  {{/each}}
+</div>
+
+<a class="left carousel-control" {{bind-attr href=elementIdTarget}} role="button" data-slide="prev">
+  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+  <span class="sr-only">Previous</span>
+</a>
+
+<a class="right carousel-control" {{bind-attr href=elementIdTarget}} role="button" data-slide="next">
+  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+  <span class="sr-only">Next</span>
+</a>

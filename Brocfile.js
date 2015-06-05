@@ -20,6 +20,7 @@ var app = new EmberApp();
 // Imported files get inserted into dist/assets/vendor.js
 
 app.import(app.bowerDirectory + '/bootstrap-sass-official/assets/javascripts/bootstrap.js');
+app.import('vendor/bootstrap-carousel-destory.js');
 app.import(app.bowerDirectory + '/d3/d3.js');
 app.import(app.bowerDirectory + '/Case/dist/Case.js');
 app.import(app.bowerDirectory + '/moment/moment.js');
