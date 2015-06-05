@@ -61,6 +61,8 @@ StarburstChartComponent = Ember.Component.extend(
 
 
   _renderChart: (->
+    unless @get('data')
+      return
 
     # initialize width, height, radius, x, and y
     width = height = @get('size') - 2 * @get('padding')
