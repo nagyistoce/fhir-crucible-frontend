@@ -1,3 +1,5 @@
 <td>
-  {{errorResult.key}}
+  <label >
+    <span {{action 'expandCollapse'}} class="badge errors">{{errorResult.values.length}}</span>{{errorResult.key}}
+  </label>
 </td>

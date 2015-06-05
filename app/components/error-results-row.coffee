@@ -4,17 +4,18 @@ ErrorResultsRowComponent = Ember.Component.extend({
   tagName: 'tr'
   classNameBindings: ['active']
 
-  errorResult: null
+  suiteIssues: null
   selectedIssue: null
 
   active: (->
     return false unless @get('selectedIssue')?
-    @get('errorResult') == @get('selectedIssue')
-  ).property('errorResult', 'selectedIssue')
+    @get('suiteIssues') == @get('selectedIssue')
+  ).property('suiteIssues', 'selectedIssue')
 
   click: ->
-    @set('selectedIssue', @get('errorResult'))
+    @set('selectedIssue', @get('suiteIssues'))
     return
 })
 
 `export default ErrorResultsRowComponent`
+
