@@ -9,29 +9,22 @@
     </h4>
   </div>
 
-  </div> -->
-
   <div class="panel-collapse collapse">
     <div class="row">
-      <div class="col-md-7">
+      <div class="col-md-5">
         <table class="table table-hover report-table nav nav-stacked">
           <tbody>
-
-
             {{#each suiteIssues as |test|}}
               {{error-results-row errorResult=test}}
             {{/each}}
-
           </tbody>
         </table>
       </div>
 
-      <div class="col-md-5 tab-content details">
-        {{#if selectedErrorResult}}
+      <div class="col-md-7 tab-content details">
+        {{#if selectedIssue}}
           <div class="media">
-
-            <h4 class="test-run-result-id">{{selectedErrorResult}}</h4>
-
+            <h4 class="test-run-result-id">{{selectedIssue}}</h4>
             {{#if selectedErrorResult}}
               <div class="media test-message">
                 <div class="media-body">
@@ -40,12 +33,8 @@
                 </div>
               </div>
             {{/if}}
-
-
           </div>
         {{/if}}
-
-
       </div>
     </div>
   </div>
