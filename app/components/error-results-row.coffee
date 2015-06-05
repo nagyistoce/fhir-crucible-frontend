@@ -1,6 +1,6 @@
 `import Ember from 'ember'`
 
-ErrorResultsRowComponent = Ember.Component.extend(
+ErrorResultsRowComponent = Ember.Component.extend({
   tagName: 'tr'
   classNameBindings: ['active']
 
@@ -15,6 +15,6 @@ ErrorResultsRowComponent = Ember.Component.extend(
   click: ->
     @set('selectedErrorResult', @get('errorResult'))
     return
-)
+})
 
 `export default ErrorResultsRowComponent`

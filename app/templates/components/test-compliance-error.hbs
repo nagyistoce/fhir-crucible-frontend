@@ -1,30 +1,53 @@
-<div class="toggleable panel-heading">
-  <h4 class="panel-title">
-    <label >
-       <span {{action 'expandCollapse'}} class="badge errors">{{proxiedIssue.values.length}}</span>
-      {{proxiedIssue.key}}
-    </label>
-    <a {{action 'expandCollapse'}} {{bind-attr class="proxiedIssue.expanded::collapsed"}} aria-expanded="false" href="#"><small>({{#if proxiedIssue.expanded}}less{{else}}more{{/if}})</small></a>
-  </h4>
-</div>
-<div class="panel-collapse collapse">
-  <div class="panel-body">
+<div class="test-compliance-error">
+  <div class="toggleable panel-heading">
+    <h4 class="panel-title">
+      <label >
+         <span {{action 'expandCollapse'}} class="badge errors">{{proxiedIssue.values.length}}</span>
+        {{proxiedIssue.key}}
+      </label>
+      <a {{action 'expandCollapse'}} {{bind-attr class="proxiedIssue.expanded::collapsed"}} aria-expanded="false" href="#"><small>({{#if proxiedIssue.expanded}}less{{else}}more{{/if}})</small></a>
+    </h4>
+  </div>
+
+  </div> -->
+
+  <div class="panel-collapse collapse">
     <div class="row">
+      <div class="col-md-7">
+        <table class="table table-hover report-table nav nav-stacked">
+          <tbody>
 
 
-      <div class="col-md-4 error-report">
-        {{#each suiteIssues as |issue|}}
-          {{issue.key}}<br><br>
-        {{/each}}
+            {{#each suiteIssues as |test|}}
+              {{error-results-row errorResult=test}}
+            {{/each}}
+
+          </tbody>
+        </table>
       </div>
 
-      <div class="col-md-8">
-        {{#each suiteIssues as |issue|}}
-          yo
-        {{/each}}
+      <div class="col-md-5 tab-content details">
+        {{#if selectedErrorResult}}
+          <div class="media">
+
+            <h4 class="test-run-result-id">{{selectedErrorResult}}</h4>
+
+            {{#if selectedErrorResult}}
+              <div class="media test-message">
+                <div class="media-body">
+                  <h4 class="media-heading">Message</h4>
+                  {{selectedErrorResult}}
+                </div>
+              </div>
+            {{/if}}
+
+
+          </div>
+        {{/if}}
+
+
       </div>
-
-
     </div>
   </div>
+
 </div>

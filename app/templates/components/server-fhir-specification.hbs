@@ -31,13 +31,18 @@
       <h1>
         Errors ({{issues.length}} Total)
       </h1>
-      {{#each topIssuesByMessage as |issue|}}
-        {{test-compliance-error proxiedIssue=issue}}
+
+      <!-- for each error you have, this will generate the panel  -->
+      {{#each topIssuesByMessage as |error|}}
+        {{test-compliance-error proxiedIssue=error}}
       {{/each}}
       <h2>By Tag</h2>
-      {{#each topIssuesByTag as |issue|}}
-        {{test-compliance-error proxiedIssue=issue}}
+
+      <!-- for each error you have, this will generate the panel  -->
+      {{#each topIssuesByTag as |error|}}
+        {{test-compliance-error proxiedIssue=error}}
       {{/each}}
+      
     {{else}}
       <h1>No Errors</h1>
     {{/if}}
