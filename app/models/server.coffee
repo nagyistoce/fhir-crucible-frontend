@@ -6,6 +6,7 @@ Server = DS.Model.extend({
   conformance: DS.belongsTo('conformance', {async: 'true'})
   unsortedTests: DS.attr()
   selected: DS.attr("boolean")
+  summary: DS.belongsTo('summary',{async:true, inverse: 'server'})
 
   activeTestCount: (->
     @get('tests').filterBy('active', true).getEach('tests').getEach('length').reduce(((s,t) -> s + t),0)

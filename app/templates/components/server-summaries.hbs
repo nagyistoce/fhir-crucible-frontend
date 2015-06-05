@@ -14,7 +14,7 @@
               <div class="summary">
                 {{starburst-chart data=serverSummary.compliance showHeader=false size=350 updatePlot="updatePlot" selectedNode=currentNodeName}}
                 {{#if serverSummary.server}}
-                  {{#link-to 'servers.show' serverSummary}}
+                  {{#link-to 'servers.show' serverSummary.server}}
                     <div class="server-summary-details">
                       <span class="server-name">{{serverSummary.server.name}} - </span>
                       <span class="percent-passed">{{serverSummary.percentPassed}}%</span>

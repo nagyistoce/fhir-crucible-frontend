@@ -6,10 +6,10 @@
         <div class="row">
           <div class="col-md-10">
             <h1>
-              {{model.server.name}}<br>
-              <small>{{model.server.url}}</small>
+              {{name}}<br>
+              <small>{{url}}</small>
               <div class="pull-right">
-                <small><span class="server-time"><i class="fa fa-fw fa-clock-o"/> {{model.generatedFromNow}}</span></small>
+                <small><span class="server-time"><i class="fa fa-fw fa-clock-o"/> {{summary.generatedFromNow}}</span></small>
               </div>
             </h1>
 
@@ -18,7 +18,7 @@
             <button class="btn" {{action "executeTests"}}>Execute Tests</button>
           </div>
         </div>
-        {{server-fhir-specification data=model}}
+        {{server-fhir-specification data=summary}}
       </div>
     </div>
   </div>
