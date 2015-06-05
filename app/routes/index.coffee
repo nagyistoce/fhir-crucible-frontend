@@ -3,6 +3,8 @@
 
 IndexRoute = Ember.Route.extend(DefaultRoute, {
 
+  beforeModel: -> @store.findAll('server')
+
   model: ->
     @store.find("aggregate-summary", 0)
     # Ember.RSVP.hash(
