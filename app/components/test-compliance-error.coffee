@@ -9,6 +9,11 @@ TestComplianceError = Ember.Component.extend({
         .key((d) -> d.suite_id)
         .entries(@get('proxiedIssue.values'))
 
+  selectedIssue: ((key, value) ->
+    return value if arguments.length > 1
+    @get('suiteIssues.firstObject')
+  ).property('suiteIssues.[]')
+
   _expandedObserver: (->
     @$('div.panel-collapse').collapse(if @get('proxiedIssue.expanded') then 'show' else 'hide')
     return
