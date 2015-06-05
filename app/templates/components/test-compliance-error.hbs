@@ -11,7 +11,7 @@
 
   <div class="panel-collapse collapse">
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-4">
         <table class="table table-hover report-table nav nav-stacked">
           <tbody>
             {{#each suiteIssues as |test|}}
@@ -21,18 +21,10 @@
         </table>
       </div>
 
-      <div class="col-md-7 tab-content details">
+      <div class="col-md-8 tab-content details">
         {{#if selectedIssue}}
           <div class="media">
-            <h4 class="test-run-result-id">{{selectedIssue}}</h4>
-            {{#if selectedErrorResult}}
-              <div class="media test-message">
-                <div class="media-body">
-                  <h4 class="media-heading">Message</h4>
-                  {{selectedErrorResult}}
-                </div>
-              </div>
-            {{/if}}
+            <h4>{{selectedIssue}}</h4>
           </div>
         {{/if}}
       </div>
