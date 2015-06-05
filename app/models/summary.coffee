@@ -3,7 +3,7 @@
 Summary = DS.Model.extend({
   compliance: DS.attr()
   generatedAt: DS.attr("date")
-  server: DS.belongsTo("server", async: true)
+  server: DS.belongsTo("server", async: true, inverse:'summary')
   testRun: DS.belongsTo("test-run", async: true)
 
   serverName: (->
