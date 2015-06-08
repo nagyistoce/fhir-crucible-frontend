@@ -1,6 +1,8 @@
 <div class="row server-details">
   <div class="col-md-3 col-md-offset-2 server-icon">
-    <i class="fa fa-server"></i>
+    {{#link-to 'servers.show' server}}
+      <i class="fa fa-server"></i>
+    {{/link-to}}
   </div>
 
   <div class="col-md-7 server-url-name">
