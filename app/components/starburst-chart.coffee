@@ -57,6 +57,8 @@ StarburstChartComponent = Ember.Component.extend(
   threshold: 0.65
   showHeader: true
   selectedNode: "FHIR"
+  minSize: 10
+  animationTransition: 1000
 
 
 
@@ -89,7 +91,7 @@ StarburstChartComponent = Ember.Component.extend(
     # define partition layout
     partition = d3.layout.partition()
       .sort(null)
-      .value((d) -> logScale(d.total + 10))
+      .value((d) => logScale(Math.max(d.total ,@get('minSize'))))
 
     # define arc angles and radii
     arc = d3.svg.arc()
@@ -141,7 +143,7 @@ StarburstChartComponent = Ember.Component.extend(
           if d.children
             node = d
             path.transition()
-              .duration(1000)
+              .duration(@get('animationTransition'))
               .attrTween("d", arcTweenZoom(d))
             updateNodeName(node)
             @sendAction('on-zoom', node)
