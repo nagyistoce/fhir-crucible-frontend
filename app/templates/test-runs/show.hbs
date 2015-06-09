@@ -18,6 +18,8 @@
 
         {{server-details server=server}} {{#if model.isMultiserver}}{{server-details server=destinationServer}}{{/if}}
 
+        {{server-fhir-specification data=model.server.summary}}
+
         {{#if testsExecuting}}
           <div class="row">
             <div class="progress">
@@ -36,6 +38,7 @@
         </div>
         <div class="row">
           <div class="tab-content">
+
             <!-- TEST PANEL START -->
             <div class="tab-pane active test-results" id="test-data">
               <div class="col-md-12 tab-content-holder">
@@ -46,7 +49,7 @@
                 </div>
               </div>
             </div>
-            <!-- TEST PANEL END -->
+
             <!-- CONFORMANCE PANEL START -->
             <div class="tab-pane" id="conformance-data">
               {{#if model.isMultiserver}}
@@ -55,8 +58,6 @@
                 {{conformance-view conformance=content.conformance testResults=content.testResults}}
               {{/if}}
             </div>
-            <!-- CONFORMANCE PANEL END -->
-
           </div>
         </div>
       </div>

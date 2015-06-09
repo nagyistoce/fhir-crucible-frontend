@@ -1,29 +1,28 @@
 `import Ember from 'ember'`
-`import starburstFixtureData from '../utils/starburst-fixture-data'`
 
 ServerFhirSpecificationComponent = Ember.Component.extend(
   server: null
   threshold: null
   data: null
-  # TODO: use real data from server
-  chartData: (->
-    @data.get('compliance')
-  ).property('data')
+
+  hasData: Ember.computed.gt('chartData.total', 0)
+
+  chartData: Ember.computed.oneWay('data.compliance')
 
   percentSupported: (->
     data = @get('chartData')
-    if data? then return Math.round(data.passed / data.total * 100)
+    return Math.round(data.passed / data.total * 100) if data?
     return "-"
-
-  ).property('data')
+  ).property('chartData.passed', 'chartData.total')
 
   topLevelCategories: (->
     @get('chartData.children')
-  ).property('data')
+  ).property('chartData')
 
   actions: {
     updateCategories: (rootNode) ->
       @set('topLevelCategories', rootNode.children)
+      return
   }
 )
 
