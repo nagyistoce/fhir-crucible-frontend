@@ -12,6 +12,7 @@ Conformance = DS.Model.extend({
   implicitRules: DS.attr()
   language: DS.attr()
   messaging: DS.attr()
+  mode: DS.attr("string")
   modifier_id: DS.attr()
   name: DS.attr("string")
   profile: DS.attr()

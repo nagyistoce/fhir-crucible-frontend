@@ -1,8 +1,7 @@
 <div class="col-md-12 tab-content-holder">
-  <!-- BEGIN RESOURCE CHART -->
+
+  <!-- RESOURCE CHART -->
   <div class="row conformance">
-    {{!-- <div id="resource-chart" class="col-md-12"> --}}
-    {{!-- {{#each conformance.rest as |r|}} --}}
     <div id="resource-chart" class="table-responsive">
       <table class="col-md-12 table table-mega-striped table-condensed">
         <thead>
@@ -70,10 +69,9 @@
         </div>
       </div>
     </div>
-
   </div>
-  <!-- END RESOURCE CHART -->
-  <!-- START METADATA CONTAINER -->
+
+  <!-- METADATA CONTAINER -->
   <div class="row conformance metadata">
     <div class="metadata-selector col-md-3">
       <ul class="nav nav-pills nav-stacked metadata">
@@ -82,11 +80,12 @@
         <li><a data-toggle="tab" href="#document-metadata">Document Metadata</a></li>
         <li><a data-toggle="tab" href="#messaging-metadata">Messaging Metadata</a></li>
       </ul>
-
     </div>
-    <!-- START METADATA EXPAND CONTAINER -->
+
+    <!-- METADATA EXPAND CONTAINER -->
     <div class="metadata-expand-container col-md-9 tab-content">
-      <!-- START CONFORMANCE METADATA  -->
+
+      <!-- CONFORMANCE METADATA  -->
       <div id="conformance-metadata" class="tab-pane active">
         <div class="panel-body">
           {{conformance-metadata title="NAME" value=conformance.name}}
@@ -112,75 +111,32 @@
           {{conformance-metadata title="ADDITIONAL PROFILES SUPPORTED" value=profile.length}}
         </div>
       </div>
-      <!-- END CONFORMANCE METADATA  -->
-      <!-- START REST METADATA  -->
+
+      <!-- REST METADATA  -->
       <div id="rest-metadata" class="tab-pane">
         <div class="panel-body">
-          <div class="row">
-            <div class="col-md-4">
-              <div><label>REST:</label></div>
-            </div>
-            <div class="col-md-8">
-              <div>FHIR Server 1 Conformance Statement #1</div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4">
-              <div><label>IDENTIFIER:</label></div>
-            </div>
-            <div class="col-md-8">
-              <div>HHE489GN00-09</div>
-            </div>
-          </div>
+          {{conformance-metadata title="REST MODE" value=conformance.rest.canonicalState.0.mode}}
+          {{conformance-metadate title="REST DOCUMENTATION" value=conformance.rest.canonicalState.0.documentation}}
+          {{conformance-metadata title="IDENTIFIER" value=conformance.identifier}}
         </div>
       </div>
-      <!-- END REST METADATA  -->
-      <!-- START DOCUMENT METADATA  -->
+
+      <!-- DOCUMENT METADATA  -->
       <div id="document-metadata" class="tab-pane">
         <div class="panel-body">
-          <div class="row">
-            <div class="col-md-4">
-              <div><label>DOC:</label></div>
-            </div>
-            <div class="col-md-8">
-              <div>FHIR Server 1 Conformance Statement #1</div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4">
-              <div><label>IDENTIFIER:</label></div>
-            </div>
-            <div class="col-md-8">
-              <div>HHE489GN00-09</div>
-            </div>
-          </div>
+          {{!-- {{conformance-metadata title="MODE" value=conformance.mode}} --}}
+          {{conformance-metadata title="PROFILE" value=conformance.profile}}
+          {{conformance-metadata title="DESCRIPTION" value=conformance.description}}
         </div>
       </div>
-      <!-- END DOCUMENT METADATA  -->
-      <!-- START MESSAGING METADATA  -->
+
+      <!-- MESSAGING METADATA  -->
       <div id="messaging-metadata" class="tab-pane">
         <div class="panel-body">
-          <div class="row">
-            <div class="col-md-4">
-              <div><label>MSG:</label></div>
-            </div>
-            <div class="col-md-8">
-              <div>FHIR Server 1 Conformance Statement #1</div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4">
-              <div><label>IDENTIFIER:</label></div>
-            </div>
-            <div class="col-md-8">
-              <div>HHE489GN00-09</div>
-            </div>
-          </div>
+          {{conformance-metadata title="MESSAGING" value=conformance.messaging}}
+          {{conformance-metadata title="IDENTIFIER" value=conformance.identifier}}
         </div>
       </div>
-      <!-- END MESSAGING METADATA -->
     </div>
-    <!-- END METADATA EXPAND CONTAINER -->
   </div>
-  <!-- END METADATA CONTAINER -->
 </div>
