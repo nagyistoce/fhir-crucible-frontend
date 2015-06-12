@@ -5,6 +5,7 @@ Conformance = DS.Model.extend({
   contained: DS.attr()
   date: DS.attr("date")
   description: DS.attr("string")
+  document: DS.attr()
   experimental: DS.attr("boolean")
   fhirVersion: DS.attr("string")
   format: DS.attr()

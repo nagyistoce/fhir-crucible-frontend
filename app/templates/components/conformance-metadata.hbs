@@ -2,6 +2,38 @@
   <div class="col-md-4">
     <div><label>{{title}}:</label></div>
   </div>
-  <div class="col-md-4 word-wrap">{{#if boolean}}{{#if value}}Yes{{else}}No{{/if}}{{else}}{{value}}{{/if}}</div>
-  {{#if isMultiple}}<div class="col-md-4 word-wrap">{{#if boolean}}{{#if value2}}Yes{{else}}No{{/if}}{{else}}{{value2}}{{/if}}</div>{{/if}}
+
+  <div class="col-md-4 word-wrap">
+    {{#if boolean}}
+      {{#if value}}
+        Yes
+      {{else}}
+        No
+      {{/if}}
+    {{else}}
+      {{#if value}}
+        {{value}}
+      {{else}}
+        --
+      {{/if}}
+    {{/if}}
+  </div>
+
+  {{#if isMultiple}}
+    <div class="col-md-4 word-wrap">
+      {{#if boolean}}
+        {{#if value2}}
+          Yes
+        {{else}}
+          No
+        {{/if}}
+      {{else}}
+        {{#if value2}}
+          {{value2}}
+        {{else}}
+          --
+        {{/if}}
+      {{/if}}
+    </div>
+  {{/if}}
 </div>
