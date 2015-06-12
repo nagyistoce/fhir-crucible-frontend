@@ -11,7 +11,11 @@
         No
       {{/if}}
     {{else}}
-      {{value}}
+      {{#if value}}
+        {{value}}
+      {{else}}
+        --
+      {{/if}}
     {{/if}}
   </div>
 
@@ -24,7 +28,11 @@
           No
         {{/if}}
       {{else}}
-        {{value2}}
+        {{#if value2}}
+          {{value2}}
+        {{else}}
+          --
+        {{/if}}
       {{/if}}
     </div>
   {{/if}}

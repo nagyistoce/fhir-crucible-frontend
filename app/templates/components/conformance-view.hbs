@@ -115,26 +115,27 @@
       <!-- REST METADATA  -->
       <div id="rest-metadata" class="tab-pane">
         <div class="panel-body">
-          {{conformance-metadata title="REST MODE" value=conformance.rest.canonicalState.0.mode}}
-          {{conformance-metadata title="REST DOCUMENTATION" value=conformance.rest.canonicalState.0.documentation}}
+          {{conformance-metadata title="MODE" value=conformance.rest.canonicalState.0.mode}}
           {{conformance-metadata title="IDENTIFIER" value=conformance.identifier}}
+          {{conformance-metadata title="DOCUMENTATION" value=conformance.rest.canonicalState.0.documentation}}
         </div>
       </div>
 
       <!-- DOCUMENT METADATA  -->
       <div id="document-metadata" class="tab-pane">
         <div class="panel-body">
-          {{!-- {{conformance-metadata title="MODE" value=conformance.mode}} --}}
-          {{conformance-metadata title="PROFILE" value=conformance.profile}}
-          {{conformance-metadata title="DESCRIPTION" value=conformance.description}}
+          {{conformance-metadata title="MODE" value=conformance.document.0.mode}}
+          {{conformance-metadata title="PROFILE" value=conformance.document.0.profile.reference}}
+          {{conformance-metadata title="DOCUMENTATION" value=conformance.document.0.documentation}}
         </div>
       </div>
 
       <!-- MESSAGING METADATA  -->
       <div id="messaging-metadata" class="tab-pane">
         <div class="panel-body">
-          {{conformance-metadata title="MESSAGING" value=conformance.messaging}}
-          {{conformance-metadata title="IDENTIFIER" value=conformance.identifier}}
+          {{conformance-metadata title="ENDPOINT" value=conformance.messaging.0.endpoint}}
+          {{conformance-metadata title="RELIABLE CACHE" value=conformance.messaging.0.reliableCache}}
+          {{conformance-metadata title="DOCUMENTATION" value=conformance.messaging.0.documentation}}
         </div>
       </div>
     </div>
