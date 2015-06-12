@@ -23,7 +23,7 @@
       <div class="col-md-2">
         <button class="btn" {{action "submit"}} {{bind-attr disabled=loadingServer}}>
           {{#if loadingServer}}
-            <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...
+            <span class="fa fa-lg fa-fw fa-spinner fa-pulse"></span> Loading...
           {{else}}
             Begin
           {{/if}}

@@ -1,12 +1,6 @@
-
-/*spinning loading icon*/
-.glyphicon-refresh-animate {
-    -animation: spin .7s infinite linear;
-    -webkit-animation: spin2 .7s infinite linear;
-    &.tests {
-      float: right;
-      margin-right: 17px;
-    }
+.tests {
+  float: right;
+  margin-right: 10px;
 }
 
 @-webkit-keyframes spin2 {

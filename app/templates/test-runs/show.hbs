@@ -3,12 +3,12 @@
     <div class="col-md-12">
       <div class="palette report">
         <div class="row">
-          <div class="col-md-10">
+          <div class="col-md-9">
             <h1>Review Test Results</h1>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-3">
             {{#if testsExecuting}}
-              <button class="btn" disabled><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Executing...</button>
+              <button class="btn" disabled><span class="fa fa-lg fa-fw fa-spinner fa-pulse"></span> Executing...</button>
             {{else}}
               <button class="btn" {{action "rerun"}}>Rerun</button>
             {{/if}}
