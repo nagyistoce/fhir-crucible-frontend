@@ -41,6 +41,13 @@
   text-align: right;
 }
 
+.spec-table{
+  tr > div{
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+}
+
 // ------------------------- SERVER DETAILS -------------------------------- //
 
 .server-details {
@@ -118,7 +125,11 @@
       text-align: left;
     }
 
-    .spec-bar-graph{}
+    .spec-bar-graph{
+      & .progress-small{
+        margin-bottom: 0;
+      }
+    }
     .spec-percent-passing{}
   }
 }
