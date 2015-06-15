@@ -20,6 +20,11 @@
   width: 200px;
 }
 
+.section-data{
+  border-bottom: solid $structure 1px;
+  padding-bottom: 10px;
+}
+
 // ------------------------- SERVER DETAILS -------------------------------- //
 
 .server-details {
@@ -58,6 +63,7 @@
 .server-fhir-specification {
   .spec-starburst-chart {
     padding: 0 40px 0 40px;
+    text-align: left;
   }
 
 
