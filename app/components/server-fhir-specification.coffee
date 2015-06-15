@@ -10,11 +10,14 @@ ServerFhirSpecificationComponent = Ember.Component.extend(
     @data.get('compliance')
   ).property('data')
 
+  lastUpdate: (->
+    @data.get('server.summary.generatedFromNow')
+  ).property('data')
+
   percentSupported: (->
     data = @get('chartData')
     if data? then return Math.round(data.passed / data.total * 100)
     return "-"
-
   ).property('data')
 
   topLevelCategories: (->

@@ -1,17 +1,18 @@
-
 <div class="container main">
   <div class="row content">
     <div class="col-md-12">
       <div class="palette report">
-        <div class="row section-data">
-          <div class="col-md-10">
-            <h1>
-              {{name}}<br>
-              <p class="helper_text url"><a {{bind-attr href="url"}} target="_blank">{{url}}</a></p>
-              <div class="pull-right">
-                <small><span class="server-time"><i class="fa fa-fw fa-clock-o"/> {{summary.generatedFromNow}}</span></small>
-              </div>
-            </h1>
+        <div class="row">
+          <div class="col-md-1 server-icon">
+            {{#link-to 'servers.show' server}}
+              <i class="fa fa-server"></i>
+            {{/link-to}}
+          </div>
+          <div class="col-md-9 server-header">  
+            <h1>{{name}}</h1>
+            <p class="helper_text">
+              <a {{bind-attr href="url"}} target="_blank">{{url}}</a>
+            </p>
           </div>
           <div class="col-md-2 action-buttons">
             <button class="btn" {{action "executeTests"}}>Execute Tests</button>
@@ -23,3 +24,5 @@
     </div>
   </div>
 </div>
+
+

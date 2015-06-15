@@ -102,7 +102,7 @@ StarburstChartComponent = Ember.Component.extend(
 
     # updates node name text element
     updateNodeName = (d) ->
-      title.html("#{d.name}:<br/>#{d.passed} / #{d.total} passed (#{percentMe(d)}%)")
+      title.html("#{d.name}: <p> #{d.passed} / #{d.total} passed (#{percentMe(d)}%)</p>")
 
     # define root, initialize node to be the root, and update node name
     root = @get('data')

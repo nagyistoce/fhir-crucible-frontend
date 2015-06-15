@@ -21,8 +21,24 @@
 }
 
 .section-data{
-  border-bottom: solid $structure 1px;
+  border-top: solid $structure 1px;
   padding-bottom: 10px;
+}
+
+.server-header{
+  h1{
+    margin: 0;
+  }
+  & .helper_text{
+    margin: 0;
+  }
+}
+
+.server-icon {
+  font-size: 55px;
+  line-height: 60px;
+  color: $brand-accent;
+  text-align: right;
 }
 
 // ------------------------- SERVER DETAILS -------------------------------- //
@@ -60,29 +76,24 @@
   margin-bottom: 50px;
 }
 
+.percent-supported {
+  text-align: left;
+  .percent-supported-value {
+    font-size: 30px;
+  }
+  .percent-supported-text {
+    font-size: 16px;
+  }
+}
+
 .server-fhir-specification {
   .spec-starburst-chart {
     padding: 0 40px 0 40px;
     text-align: left;
   }
 
-
   .spec-details {
-    .percent-supported {
-      margin: 20px;
-
-      .percent-supported-value {
-        font-size: 45px;
-        line-height: 55px
-      }
-
-      .percent-supported-text {
-        text-align: left;
-        padding-left: 40px;
-        font-size: 19px;
-      }
-    }
-
+    padding-top: 40px;
     .spec-headers {
       margin-bottom: 15px;
       text-align: left;
