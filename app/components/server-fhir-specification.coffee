@@ -4,6 +4,8 @@ ServerFhirSpecificationComponent = Ember.Component.extend(
   server: null
   threshold: null
   data: null
+  suites: null
+  errors: false
 
   hasData: Ember.computed.gt('chartData.total', 0)
 
@@ -20,8 +22,8 @@ ServerFhirSpecificationComponent = Ember.Component.extend(
   ).property('chartData')
 
   issues: (->
-    @get('chartData').issues
-  ).property('data')
+    @get('chartData.issues')
+  ).property('chartData')
 
   topIssuesByMessage: (->
     nest = d3.nest().key((d) -> d.msg)

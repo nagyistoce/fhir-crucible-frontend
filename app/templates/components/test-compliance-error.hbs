@@ -14,8 +14,8 @@
       <div class="col-md-4">
         <table class="table table-hover report-table nav nav-stacked">
           <tbody>
-            {{#each suiteIssues as |test|}}
-              {{error-results-row errorResult=test}}
+            {{#each suiteIssues as |issue|}}
+              {{error-results-row errorResult=issue selectedIssue=selectedIssue suites=suites}}
             {{/each}}
           </tbody>
         </table>
@@ -24,7 +24,9 @@
       <div class="col-md-8 tab-content details">
         {{#if selectedIssue}}
           <div class="media">
-            <h4>{{selectedIssue}}</h4>
+            {{#each selectedIssue.values as |issue|}}
+              <h4>{{issue.test_id}}: {{issue.test_method}}, <strong>{{issue.tag}}</strong></h4>
+            {{/each}}
           </div>
         {{/if}}
       </div>
