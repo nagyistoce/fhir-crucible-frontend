@@ -3,6 +3,10 @@
 ServerFhirSpecCategory = Ember.Component.extend(
   classNames: ['row']
   category: null
+  tagName: 'tr'
+  classNameBindings: ['active']
+  level: null
+  selectedLevel: null
 
   percentPassing: (->
     category = @get('category')
@@ -20,6 +24,15 @@ ServerFhirSpecCategory = Ember.Component.extend(
     else
       'fa-check-circle-o'
   ).property('hasFailingTests', 'untested')
+
+  active: (->
+    return false unless @get('selectedLevel')?
+    @get('level') == @get('selectedLevel')
+  ).property('level', 'selectedLevel')
+
+  click: ->
+    @set('selectedLevel', @get('level'))
+    return
 
   iconColorClass: (->
     if @get('hasFailingTests')

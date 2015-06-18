@@ -1,28 +1,58 @@
-<div class="row server-fhir-specification">
-  {{#if hasData}}
+{{#if hasData}}
+  <div class="percent-supported">
+    <span class="percent-supported-value">
+      {{percentSupported}}%
+    </span>
+    <span class="percent-supported-text">
+      of the FHIR Specification is currently supported by this server
+    </span>
+    <p class="helper_text url"> <span class="server-time"><i class="fa fa-fw fa-clock-o"/> {{lastUpdate}}</span></p>
+  </div>
+  <div class="row server-fhir-specification section-data">
     <div class="col-md-5 spec-starburst-chart">
       {{starburst-chart data=chartData on-zoom="updateCategories" selectedNode=currentNodeName}}
     </div>
 
     <div class="col-md-7 spec-details">
-      <div class="row percent-supported">
-        <div class="col-md-2 percent-supported-value">
-          {{percentSupported}}%
-        </div>
-
-        <div class="col-md-10 percent-supported-text">
-          of the FHIR Specification is currently supported by this server
-        </div>
-      </div>
       <div class="row spec-headers">
         <div class="col-md-3 col-md-offset-1 spec-headers-specification">Specification</div>
         <div class="col-md-3 col-md-offset-5 spec-headers-passing">% Passing</div>
       </div>
-      <div class="row spec-table">
-        {{#each topLevelCategories as |category|}}
-          {{server-fhir-spec-category category=category}}
-        {{/each}}
+      <div class="row">
+      <table class="table spec-table table-hover nav nav-stacked">
+        <tbody>
+          {{#each topLevelCategories as |category|}}
+            {{server-fhir-spec-category category=category}}
+          {{/each}}
+        </tbody>
+      </table>
       </div>
     </div>
-  {{/if}}
-</div>
+  </div>
+{{/if}}
+
+{{#if errors}}
+  <div class="row errors">
+    <div class="col-md-12">
+      {{#if issues.length}}
+        <h1>
+          Errors ({{issues.length}} Total)
+        </h1>
+
+        <!-- for each error you have, this will generate the panel  -->
+        {{#each topIssuesByMessage as |error|}}
+          {{test-compliance-error proxiedIssue=error suites=suites}}
+        {{/each}}
+        <h2>By Tag</h2>
+
+        <!-- for each error you have, this will generate the panel  -->
+        {{#each topIssuesByTag as |error|}}
+          {{test-compliance-error proxiedIssue=error suites=suites}}
+        {{/each}}
+
+      {{else}}
+        <h1>No Errors</h1>
+      {{/if}}
+    </div>
+  </div>
+{{/if}}
