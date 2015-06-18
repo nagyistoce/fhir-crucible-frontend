@@ -1,14 +1,14 @@
-<div class="percent-supported">
-  <span class="percent-supported-value">
-    {{percentSupported}}%
-  </span>
-  <span class="percent-supported-text">
-    of the FHIR Specification is currently supported by this server
-  </span>
-  <p class="helper_text url"> <span class="server-time"><i class="fa fa-fw fa-clock-o"/> {{lastUpdate}}</span></p>
-</div>
-<div class="row server-fhir-specification section-data">
-  {{#if hasData}}
+{{#if hasData}}
+  <div class="percent-supported">
+    <span class="percent-supported-value">
+      {{percentSupported}}%
+    </span>
+    <span class="percent-supported-text">
+      of the FHIR Specification is currently supported by this server
+    </span>
+    <p class="helper_text url"> <span class="server-time"><i class="fa fa-fw fa-clock-o"/> {{lastUpdate}}</span></p>
+  </div>
+  <div class="row server-fhir-specification section-data">
     <div class="col-md-5 spec-starburst-chart">
       {{starburst-chart data=chartData on-zoom="updateCategories" selectedNode=currentNodeName}}
     </div>
@@ -28,8 +28,8 @@
       </table>
       </div>
     </div>
-  {{/if}}
-</div>
+  </div>
+{{/if}}
 
 {{#if errors}}
   <div class="row errors">
