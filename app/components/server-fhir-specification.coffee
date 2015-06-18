@@ -11,6 +11,10 @@ ServerFhirSpecificationComponent = Ember.Component.extend(
 
   chartData: Ember.computed.oneWay('data.compliance')
 
+  lastUpdate: (->
+    @data.get('server.summary.generatedFromNow')
+  ).property('data')
+
   percentSupported: (->
     data = @get('chartData')
     return Math.round(data.passed / data.total * 100) if data?

@@ -69,6 +69,10 @@ a{
   color: $brand-primary;
   margin-top: 10px;
   margin-bottom: 10px;
+  &.url{
+    display: inline;
+    margin-top: 5px;
+  }
 }
 
 .emphasize{
@@ -109,6 +113,3 @@ p{
     }
   }
 }
-
-
-
