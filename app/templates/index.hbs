@@ -13,10 +13,13 @@
   </div>
 
   <form>
-    <div class="row form">
+    <div class="row form index">
       <div class="col-md-10">
         <div>
           {{input action="submit" value=server1 class="form-control" placeholder="FHIR Server URL"}}
+          {{#if runServerFailed}}
+            <p class="helper_text error_message"><i class="fa fa-close"></i> Bad URL, please try again</p>
+          {{/if}}
         </div>
       </div>
 

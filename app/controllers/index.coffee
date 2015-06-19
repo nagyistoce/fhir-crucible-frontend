@@ -52,9 +52,19 @@ IndexController = Ember.Controller.extend({
           )
         )
       else
+
+        # if ***CHECK FOR BAD URL ***
+        #   @set('runServerFailed', true)
+        #   return
+        # else
+        #   server = @store.createRecord('server', url: @get('server1'))
+        #   server.save().then(=> @transitionToRoute('servers.test', server)).then(=> @reset())
+        #   return
+
         server = @store.createRecord('server', url: @get('server1'))
         server.save().then(=> @transitionToRoute('servers.test', server)).then(=> @reset())
         return
+
 })
 
 `export default IndexController`
