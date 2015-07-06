@@ -1,9 +1,14 @@
 `import Ember from 'ember'`
 
+isValidURI = (uri) ->
+  /^https?:\/\/[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?$/gi.test(uri)
+
 IndexController = Ember.Controller.extend({
   multiServer: false
   loadingServer: false
   runServerFailed: false
+  badURI: false
+  server2BadURI: false
   server1: null
   server2: null
 
@@ -15,9 +20,20 @@ IndexController = Ember.Controller.extend({
       multiServer: false
       loadingServer: false
       runServerFailed: false
+      badURI: false
+      server2BadURI: false
       server1: null
       server2: null
     })
+
+  _updateNotifications: (->
+    @notifications.clearAll()
+    if @get('badURI') || @get('server2BadURI')
+      @notifications.addNotification(
+        message: 'URL not valid. Please enter a valid URL.',
+        type: 'error'
+      )
+  ).observes("badURI", "server2BadURI")
 
   actions:
     addUrl: ->
@@ -30,9 +46,20 @@ IndexController = Ember.Controller.extend({
       return
 
     submit: ->
+      @set('badURI', false)
+      @set('server2BadURI', false)
+
       # quickly exit and avoid the AJAX call if the server field is empty
       if Ember.isEmpty(@get('server1'))
         @set('runServerFailed', true)
+        return
+
+      # check if bad URI
+      if !isValidURI(@get('server1'))
+        @set('badURI', true)
+        return
+      else if !Ember.isEmpty(@get('server2')) && !isValidURI(@get('server2'))
+        @set('server2BadURI', true)
         return
 
       # load server

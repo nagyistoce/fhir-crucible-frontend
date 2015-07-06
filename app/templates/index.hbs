@@ -12,6 +12,12 @@
     <img src="/assets/images/logo_dark.png" alt="Crucible">
   </div>
 
+  <div class="c-notification__container">
+    {{#each notifications as |notification|}}
+      {{notification-message notification=notification}}
+    {{/each}}
+  </div>
+
   <form>
     <div class="row form">
       <div class="col-md-10">
