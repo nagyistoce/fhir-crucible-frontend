@@ -1,4 +1,5 @@
 `import Ember from 'ember'`
+`import trueNullProperty from '../../utils/true-null-property'`
 
 MultiserversShowController = Ember.Controller.extend({
   tests: []
@@ -33,10 +34,7 @@ MultiserversShowController = Ember.Controller.extend({
     !(@get('selectedTests.length') > 0)
   ).property('selectedTests.length')
 
-  executeTestsBtnDisabled: (->
-    return true if @get('canExecuteTests')
-    null
-  ).property('canExecuteTests')
+  executeTestsBtnDisabled: trueNullProperty('canExecuteTests')
 
   # Boolean property for determining if the server's conformance has loaded
   conformanceLoaded: (->

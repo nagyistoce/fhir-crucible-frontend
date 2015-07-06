@@ -1,4 +1,5 @@
 `import Ember from 'ember'`
+`import trueNullProperty from '../utils/true-null-property'`
 
 isValidURI = (uri) ->
   /^https?:\/\/[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?$/gi.test(uri)
@@ -12,10 +13,7 @@ IndexController = Ember.Controller.extend({
   server1: null
   server2: null
 
-  submitBtnDisabled: (->
-    return true if @get('loadingServer')
-    null
-  ).property('loadingServer')
+  submitBtnDisabled: trueNullProperty('loadingServer')
 
   isMultiServer: ->
     @get('server1')? && @get('server2')?

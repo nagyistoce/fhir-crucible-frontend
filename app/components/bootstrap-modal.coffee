@@ -1,4 +1,5 @@
 `import Ember from 'ember'`
+`import trueNullProperty from '../utils/true-null-property'`
 
 BootstrapModalComponent = Ember.Component.extend({
   classNames: ['modal']
@@ -12,10 +13,7 @@ BootstrapModalComponent = Ember.Component.extend({
   submitBtnClass: 'btn-primary'
   disableSubmitBtn: false
 
-  submitBtnDisabled: (->
-    return true if @get('disableSubmitBtn')
-    null
-  ).property('disableSubmitBtn')
+  submitBtnDisabled: trueNullProperty('disableSubmitBtn')
 
   displaySubmitBtn: Ember.computed.notEmpty('submitBtnTitle')
   displayCloseBtn: Ember.computed.notEmpty('okBtnTitle')
