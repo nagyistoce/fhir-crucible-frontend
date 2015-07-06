@@ -12,6 +12,11 @@ IndexController = Ember.Controller.extend({
   server1: null
   server2: null
 
+  submitBtnDisabled: (->
+    return true if @get('loadingServer')
+    null
+  ).property('loadingServer')
+
   isMultiServer: ->
     @get('server1')? && @get('server2')?
 

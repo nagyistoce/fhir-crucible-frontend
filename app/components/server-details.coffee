@@ -7,6 +7,11 @@ ServerDetailsComponent = Ember.Component.extend(
   editingServerName: false
   savingServerName: false
 
+  submitBtnDisabled: (->
+    return true if @get('savingServerName')
+    null
+  ).property('savingServerName')
+
   actions:
     editServerName: ->
       @setProperties(name: @get('server.name'), editingServerName: true)

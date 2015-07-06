@@ -35,7 +35,7 @@
                 {{#link-to 'users.login'}}Click to login{{/link-to}} | {{#link-to 'index'}}Return to Crucible{{/link-to}}
               </div>
               <div class="login-btn col-md-4">
-                <input type="submit" value="Register" class="btn" {{bind-attr disabled=formLoading}}>
+                <input type="submit" value="Register" class="btn" disabled={{submitBtnDisabled}}>
               </div>
             </div>
           </form>

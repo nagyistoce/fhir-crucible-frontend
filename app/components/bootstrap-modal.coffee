@@ -12,6 +12,11 @@ BootstrapModalComponent = Ember.Component.extend({
   submitBtnClass: 'btn-primary'
   disableSubmitBtn: false
 
+  submitBtnDisabled: (->
+    return true if @get('disableSubmitBtn')
+    null
+  ).property('disableSubmitBtn')
+
   displaySubmitBtn: Ember.computed.notEmpty('submitBtnTitle')
   displayCloseBtn: Ember.computed.notEmpty('okBtnTitle')
 

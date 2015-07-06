@@ -20,7 +20,7 @@
         </thead>
         <tbody>
           {{#each testedResources as |res|}}
-            <tr class="collapsed" data-toggle="collapse" aria-expanded="false" {{bind-attr data-target=res.toggleSelector}}>
+            <tr class="collapsed" data-toggle="collapse" aria-expanded="false" data-target={{res.toggleSelector}}>
               <td data-title="Read" class="test-circle-holder">
                 <a>{{title-case res.fhirType}}</a>
               </td>
@@ -32,9 +32,9 @@
             </tr>
             <tr class="hidden">
               <td colspan="10">
-                <div {{bind-attr id=res.toggleId}} class="panel-collapse collapse" aria-expanded="false">
+                <div id={{res.toggleId}} class="panel-collapse collapse" aria-expanded="false">
                   Conforms to
-                  <a {{bind-attr href="{{res.profile.reference}}"}}>{{res.profile.reference}}</a>
+                  <a href={{res.profile.reference}}>{{res.profile.reference}}</a>
                   <table class="table inner-table">
                     <tr>
                       <th>Search Param</th>
@@ -63,9 +63,9 @@
           <span class="table-cell">{{r.mode}}</span>
         </div>
         <div class="col-md-9">
-          <div class="col-md-1"><i {{bind-attr class=":glyphicon :test-circle r.operation.transaction:filled :conformance-test-badge r.results.transaction.status"}}>{{#if r.results.transaction.status}}{{#bootstrap-popover title="'''''" tagName="span"}}{{render 'partials/_conformancePopover' r.results.transaction}}{{/bootstrap-popover}}{{/if}}</i></div><div class="col-md-3">Transaction</div>
-          <div class="col-md-1"><i {{bind-attr class=":glyphicon :test-circle r.operation.history-system:filled :conformance-test-badge r.results.history-system.status"}}>{{#if r.results.history-system.status}}{{#bootstrap-popover title="'''''" tagName="span"}}{{render 'partials/_conformancePopover' r.results.history-system}}{{/bootstrap-popover}}{{/if}}</i></div><div class="col-md-3">System-History</div>
-          <div class="col-md-1"><i {{bind-attr class=":glyphicon :test-circle r.operation.search-system:filled :conformance-test-badge r.results.search-system.status"}}>{{#if r.results.search-system.status}}{{#bootstrap-popover title="'''''" tagName="span"}}{{render 'partials/_conformancePopover' r.results.search-system}}{{/bootstrap-popover}}{{/if}}</i></div><div class="col-md-3">System-Search</div>
+          <div class="col-md-1"><i class="glyphicon test-circle {{if r.operation.transaction 'filled'}} conformance-test-badge {{r.results.transaction.status}}">{{#if r.results.transaction.status}}{{#bootstrap-popover title="'''''" tagName="span"}}{{render 'partials/_conformancePopover' r.results.transaction}}{{/bootstrap-popover}}{{/if}}</i></div><div class="col-md-3">Transaction</div>
+          <div class="col-md-1"><i class="glyphicon test-circle {{if r.operation.history-system 'filled'}} conformance-test-badge {{r.results.history-system.status}}">{{#if r.results.history-system.status}}{{#bootstrap-popover title="'''''" tagName="span"}}{{render 'partials/_conformancePopover' r.results.history-system}}{{/bootstrap-popover}}{{/if}}</i></div><div class="col-md-3">System-History</div>
+          <div class="col-md-1"><i class="glyphicon test-circle {{if r.operation.search-system 'filled'}} conformance-test-badge {{r.results.search-system.status}}">{{#if r.results.search-system.status}}{{#bootstrap-popover title="'''''" tagName="span"}}{{render 'partials/_conformancePopover' r.results.search-system}}{{/bootstrap-popover}}{{/if}}</i></div><div class="col-md-3">System-Search</div>
         </div>
       </div>
     </div>

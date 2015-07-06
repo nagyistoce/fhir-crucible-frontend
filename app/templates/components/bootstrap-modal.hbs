@@ -1,6 +1,6 @@
 <div class="modal-dialog modal-center">
   <div class="modal-content">
-    <form {{bind-attr class="formClass"}} {{action 'submit' on='submit'}}>
+    <form class={{formClass}} {{action 'submit' on='submit'}}>
       <div class="modal-header">
         <button class="close" type="button" data-dismiss="modal">
           <span aria-hidden="true">
@@ -24,7 +24,7 @@
           </button>
         {{/if}}
         {{#if displaySubmitBtn}}
-          <button {{bind-attr class=":btn submitBtnClass" disabled="disableSubmitBtn"}} type="submit">
+          <button class="btn {{submitBtnClass}}" disabled={{disableSubmitBtn}} type="submit">
             {{submitBtnTitle}}
           </button>
         {{/if}}

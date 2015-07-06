@@ -31,6 +31,11 @@ ServersTestController = Ember.Controller.extend({
     !(@get('selectedTests.length') > 0)
   ).property('selectedTests.length')
 
+  executeTestsBtnDisabled: (->
+    return true if @get('canExecuteTests')
+    null
+  ).property('canExecuteTests')
+
   # Boolean property for determining if the server's conformance has loaded
   conformanceLoaded: (->
     @get('server.conformance.isLoaded') || false

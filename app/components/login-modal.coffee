@@ -7,6 +7,11 @@ LoginModal = BootstrapModal.extend({
   loginFailed: false
   shouldCloseModal: false
 
+  submitBtnDisabled: (->
+    return true if @get('loggingIn')
+    null
+  ).property('loggingIn')
+
   _closeObserver: (->
     @send('close') if @get('shouldCloseModal')
     return

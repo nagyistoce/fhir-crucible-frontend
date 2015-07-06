@@ -22,12 +22,12 @@
     <div class="row form">
       <div class="col-md-10">
         <div>
-          {{input action="submit" value=server1 class="form-control" placeholder="FHIR Server URL"}}
+          {{input enter="submit" value=server1 class="form-control" placeholder="FHIR Server URL"}}
         </div>
       </div>
 
       <div class="col-md-2">
-        <button class="btn" {{action "submit"}} {{bind-attr disabled=loadingServer}}>
+        <button class="btn" {{action "submit"}} disabled={{submitBtnDisabled}}>
           {{#if loadingServer}}
             <span class="fa fa-lg fa-fw fa-spinner fa-pulse"></span> Loading...
           {{else}}

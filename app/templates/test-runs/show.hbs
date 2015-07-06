@@ -23,7 +23,7 @@
         {{#if testsExecuting}}
           <div class="row">
             <div class="progress">
-              <div {{bind-attr class=":progress-bar :progress-bar-striped :active :execution-progressbar"}} role="progressbar" {{bind-attr aria-valuenow=executionProgress}} aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar progress-bar-striped active execution-progressbar" role="progressbar" aria-valuenow={{executionProgress}} aria-valuemin="0" aria-valuemax="100">
                 <span class="sr-only">{{executionProgress}}% Complete</span>
               </div>
             </div>

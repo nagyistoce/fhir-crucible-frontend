@@ -8,6 +8,11 @@ SignUpController = Ember.Controller.extend({
 
   formLoading: false
 
+  submitBtnDisabled: (->
+    return true if @get('formLoading')
+    null
+  ).property('formLoading')
+
   hasErrors: Ember.computed.gt('errors.length', 0)
 
   _parseErrors: (errors) ->

@@ -8,12 +8,12 @@
           </div>
           <div class="col-md-2">
             {{#if savingTestRun}}
-              <button type="submit" disabled class="btn" ><span class="fa fa-lg fa-fw fa-spinner fa-pulse"></span> Preparing...</button>
+              <button type="submit" disabled class="btn"><span class="fa fa-lg fa-fw fa-spinner fa-pulse"></span> Preparing...</button>
             {{else}}
               {{#unless conformanceLoaded}}
                 <button type="submit" disabled class="btn" ><i class="fa fa-lg fa-fw fa-spinner fa-pulse"></i> Loading...</button>
               {{else}}
-                <button type="submit" class="btn" {{bind-attr disabled="canExecuteTests"}} {{action "executeTests"}}>RUN</button>
+                <button type="submit" class="btn" disabled={{executeTestsBtnDisabled}} {{action "executeTests"}}>RUN</button>
               {{/unless}}
             {{/if}}
           </div>
@@ -25,7 +25,7 @@
         {{#if runningTestCount}}
           <div class="row">
             <div class="progress">
-              <div {{bind-attr class=":progress-bar :progress-bar-striped :active"}} role="progressbar" {{bind-attr aria-valuenow=executionProgress}} aria-valuemin="0" aria-valuemax="100" {{bind-attr style=progressStyle}}>
+              <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow={{executionProgress}} aria-valuemin="0" aria-valuemax="100" style={{progressStyle}}>
                 <span class="sr-only">{{executionProgress}}% Complete</span>
               </div>
             </div>
