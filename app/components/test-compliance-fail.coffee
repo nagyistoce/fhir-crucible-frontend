@@ -1,6 +1,6 @@
 `import Ember from 'ember'`
 
-TestComplianceError = Ember.Component.extend({
+TestComplianceFail = Ember.Component.extend({
   proxiedIssue: null
   suites: null
   issue: Ember.computed.oneWay('proxiedIssue.content')
@@ -26,4 +26,4 @@ TestComplianceError = Ember.Component.extend({
       return
 })
 
-`export default TestComplianceError`
+`export default TestComplianceFail`

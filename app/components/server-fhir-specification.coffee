@@ -5,7 +5,7 @@ ServerFhirSpecificationComponent = Ember.Component.extend(
   threshold: null
   data: null
   suites: null
-  errors: false
+  hasFailures: false
 
   hasData: Ember.computed.gt('chartData.total', 0)
 

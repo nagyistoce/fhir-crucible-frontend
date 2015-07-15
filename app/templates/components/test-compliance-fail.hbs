@@ -1,8 +1,8 @@
-<div class="test-compliance-error">
+<div class="test-compliance-fail">
   <div class="toggleable panel-heading">
     <h4 class="panel-title">
       <label >
-         <span {{action 'expandCollapse'}} class="badge errors">{{proxiedIssue.values.length}}</span>
+         <span {{action 'expandCollapse'}} class="badge fails">{{proxiedIssue.values.length}}</span>
         {{proxiedIssue.key}}
       </label>
       <a {{action 'expandCollapse'}} class="{{if proxiedIssue.expanded '' 'collapsed'}}" aria-expanded="false" href="#"><small>({{#if proxiedIssue.expanded}}less{{else}}more{{/if}})</small></a>
@@ -15,7 +15,7 @@
         <table class="table table-hover report-table nav nav-stacked">
           <tbody>
             {{#each suiteIssues as |issue|}}
-              {{error-results-row errorResult=issue selectedIssue=selectedIssue suites=suites}}
+              {{fail-results-row failResult=issue selectedIssue=selectedIssue suites=suites}}
             {{/each}}
           </tbody>
         </table>
@@ -32,5 +32,4 @@
       </div>
     </div>
   </div>
-
 </div>

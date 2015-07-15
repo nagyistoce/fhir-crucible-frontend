@@ -31,27 +31,27 @@
   </div>
 {{/if}}
 
-{{#if errors}}
-  <div class="row errors">
+{{#if hasFailures}}
+  <div class="row fails">
     <div class="col-md-12">
       {{#if issues.length}}
         <h1>
-          Errors ({{issues.length}} Total)
+          Failures ({{issues.length}} Total)
         </h1>
 
-        <!-- for each error you have, this will generate the panel  -->
-        {{#each topIssuesByMessage as |error|}}
-          {{test-compliance-error proxiedIssue=error suites=suites}}
+        <!-- for each fail you have, this will generate the panel  -->
+        {{#each topIssuesByMessage as |fail|}}
+          {{test-compliance-fail proxiedIssue=fail suites=suites}}
         {{/each}}
         <h2>By Tag</h2>
 
-        <!-- for each error you have, this will generate the panel  -->
-        {{#each topIssuesByTag as |error|}}
-          {{test-compliance-error proxiedIssue=error suites=suites}}
+        <!-- for each fail you have, this will generate the panel  -->
+        {{#each topIssuesByTag as |fail|}}
+          {{test-compliance-fail proxiedIssue=fail suites=suites}}
         {{/each}}
 
       {{else}}
-        <h1>No Errors</h1>
+        <h1>No Failures</h1>
       {{/if}}
     </div>
   </div>
