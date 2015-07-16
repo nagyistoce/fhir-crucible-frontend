@@ -3,6 +3,7 @@
 
 ServerDetailsComponent = Ember.Component.extend(
   server: null
+  position: 'center'
 
   name: null
   editingServerName: false

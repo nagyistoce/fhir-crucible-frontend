@@ -1,26 +1,14 @@
 <div class="container main">
-  <div class="row content">
-    <div class="col-md-12">
-      <div class="palette report">
-        <div class="row">
-          <div class="col-md-1 server-icon">
-            {{#link-to 'servers.show' server}}
-            <i class="fa fa-server"></i>
-            {{/link-to}}
-          </div>
-          <div class="col-md-9 server-header">
-            <h1>{{name}}</h1>
-            <p class="helper_text">
-              <a href={{url}} target="_blank">{{url}}</a>
-            </p>
-          </div>
-          <div class="col-md-2 action-buttons">
-            <button class="btn" {{action "executeTests"}}>Execute Tests</button>
-            <button class="btn" {{action "testRunsPage"}}>Test Results</button>
-          </div>
-        </div>
-        {{server-fhir-specification data=summary suites=suites hasFailures=true}}
-      </div>
+  <div class="palette row">
+    <div class="col-md-10 server-show-details">
+      {{server-details server=server}}
+    </div>
+    <div class="col-md-2 action-buttons">
+      <button class="btn" {{action "executeTests"}}>Execute Tests</button>
+      <button class="btn" {{action "testRunsPage"}}>Test Results</button>
+    </div>
+    <div class="col-md-12 server-fhir-spec-display">
+      {{server-fhir-specification data=server.summary suites=suites hasFailures=true}}
     </div>
   </div>
 </div>

@@ -53,13 +53,13 @@
 .server-details {
   height: 60px;
   border-radius: 10px;
-  margin: 50px 0;
+  margin: 10px 0;
 
   .server-icon {
+    margin-right: 20px;
     font-size: 55px;
     line-height: 60px;
     color: $brand-accent;
-    text-align: right;
   }
 
   .server-url-name {
@@ -68,7 +68,6 @@
     padding: 5px 0 0 0;
 
     .server-name {
-      font-size: 18px;
       color: $brand-primary;
     }
     .server-url {
@@ -77,10 +76,14 @@
   }
 }
 
+.server-show-details {
+  margin: 0 0 20px -10px;
+}
+
 // ------------------------- FHIR SPECIFICATION STARBURST ------------------ //
 
 .server-fhir-spec-display {
-  margin-bottom: 50px;
+  margin: 20px 0 50px 0;
 }
 
 .percent-supported {
