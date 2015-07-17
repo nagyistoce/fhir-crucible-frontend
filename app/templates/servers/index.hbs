@@ -4,6 +4,7 @@
       <h1>My Servers</h1>
 
       <div class="row server-list">
+        <div class="col-md-12"><hr></div>
         {{#each model as |server|}}
           <div class="col-md-8">
             {{server-details server=server}}
@@ -20,6 +21,8 @@
               <button class="btn btn-primary">Test</button>
             {{/link-to}}
           </div>
+
+          <div class="col-md-12"><hr></div>
         {{/each}}
       </div>
     </div>
