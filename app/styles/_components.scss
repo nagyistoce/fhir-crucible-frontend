@@ -1,4 +1,4 @@
-.container.main{
+.container.main {
   margin-top: 50px;
 }
 
@@ -16,21 +16,21 @@
     padding-bottom: 50px;
   }
 
-  &.user{
+  &.user {
     text-align: left;
 
-    &.analytics{
-      #addServerInput{
+    &.analytics {
+      #addServerInput {
         display:none;
       }
       min-height: 200px;
     }
 
-    &.header{
+    &.header {
       min-height: 200px;
     }
 
-    &.dash{
+    &.dash {
       min-height: 500px;
     }
   }
@@ -46,92 +46,88 @@
   }
 }
 
-/*TABBED DATA*/
-/* START: 3 tabs for tests, conformance, heat map */
-.tabbed-data{
+// ------------------------- TABBED DATA ----------------------------------- //
+
+.tabbed-data {
   font-size: 24px;
   font-weight: 50;
   display: inline-block;
   width:33%;
 }
 
-.tabbed-data-container{
-  /*margin-top: 40px;*/
-}
-
-.nav-tabs > li > a{
+.nav-tabs > li > a {
   color: $brand-primary;
 }
-/*END*/
 
-.picture{
+.picture {
   text-align: center;
   margin-bottom: 40px;
-  img{
+  img {
     padding: 20px;
   }
 }
 
-.word-wrap{
+.word-wrap {
   overflow:hidden;
   word-wrap:break-word;
 }
 
 
-.add_server_button{
+.add_server_button {
   float:right;
   &:hover{
     font-size: 20px;
   }
 }
 
-#serverList{
+#serverList {
   font-size: 16px;
   color: $brand-primary;
-  & .btn{
+  & .btn {
     width: 100px;
     height: 25px;
     padding: 0px;
     display: none;
   }
-  & .clickable-list-item{
-    &:hover{
+  & .clickable-list-item {
+    &:hover {
       font-weight: bold;
       font-size: 20px;
-      & .btn{
+      & .btn {
         display: inline-block;
       }
     }
-    &.active{
+    &.active {
       font-weight: bold;
       font-size: 20px;
     }
   }
 }
 
-// D3 Visualization Styles
+// ------------------------- D3 VISUALIZATION ------------------------------ //
+
 .axis text {
   font: 10px sans-serif;
   font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 }
 
-.metadata-selector{
-  .nav-pills > li > a{
+.metadata-selector {
+  .nav-pills > li > a {
     color: $brand-primary;
     border-radius: 4px;
     padding: 5px 10px;
-    &:hover{
+    &:hover {
       background-color: $base-darken;
     }
   }
-  .nav-pills > li.active > a{
+  .nav-pills > li.active > a {
     background-color: $base-lighten;
     color: $brand-primary;
     border-radius: 4px;
-    &:focus{
+    &:focus {
       background-color: $base-lighten;
     }
-    &:hover{
+    &:hover {
       background-color: $base-lighten;
     }
   }
@@ -142,7 +138,8 @@
   font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 }
 
-// D3 Tip Styles
+// ------------------------- D3 TIPS --------------------------------------- //
+
 .d3-tip {
   text-align: center;
   line-height: 1;
@@ -200,7 +197,7 @@
   left: 100%;
 }
 
-/* Carousel */
+// ------------------------- CAROUSEL -------------------------------------- //
 
 .carousel {
   .carousel-control {

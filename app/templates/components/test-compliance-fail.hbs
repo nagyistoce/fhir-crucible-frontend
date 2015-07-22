@@ -1,15 +1,34 @@
-<div class="test-compliance-fail">
-  <div class="toggleable panel-heading">
+<div data-spy="scroll" class="test-compliance-fail">
+  <div class="failures-nav">
+    <ul class="nav nav-pills" role="tablist">
+      <li class="failure-message-level-one">
+        <div class="col-md-1 failure-message-level-one-count">
+          {{proxiedIssue.values.length}}
+        </div>
+
+        <div class="col-md-4 failure-message-level-one-text">
+          {{proxiedIssue.key}}
+        </div>
+      </li>
+    </ul>
+  </div>
+
+
+
+
+  {{!-- <div class="toggleable panel-heading">
     <h4 class="panel-title">
-      <label >
-         <span {{action 'expandCollapse'}} class="badge fails">{{proxiedIssue.values.length}}</span>
+      <label>
+        <span {{action 'expandCollapse'}} class="failure-count-badge failures">
+          {{proxiedIssue.values.length}}
+        </span>
         {{proxiedIssue.key}}
       </label>
       <a {{action 'expandCollapse'}} class="{{if proxiedIssue.expanded '' 'collapsed'}}" aria-expanded="false" href="#"><small>({{#if proxiedIssue.expanded}}less{{else}}more{{/if}})</small></a>
     </h4>
-  </div>
+  </div> --}}
 
-  <div class="panel-collapse collapse">
+{{!--   <div class="panel-collapse collapse">
     <div class="row">
       <div class="col-md-4">
         <table class="table table-hover report-table nav nav-stacked">
@@ -31,5 +50,5 @@
         {{/if}}
       </div>
     </div>
-  </div>
+  </div> --}}
 </div>

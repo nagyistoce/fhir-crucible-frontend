@@ -3,7 +3,7 @@
   cursor: default;
 }
 
-.server.selectBox{
+.server.selectBox {
   margin-bottom: 30px;
   text-align: left;
   color: $brand-accent;
@@ -16,16 +16,11 @@
   }
 }
 
-.popover-js{
+.popover-js {
   width: 200px;
 }
 
-.section-data{
-  border-top: solid $structure 1px;
-  padding-bottom: 10px;
-}
-
-.spec-table{
+.spec-table {
   tr > div{
     margin-top: 5px;
     margin-bottom: 5px;
@@ -53,8 +48,16 @@
     .server-name {
       color: $brand-primary;
     }
+
+    .edit-server-name {
+      font-size: 16px;
+      margin-left: 10px;
+    }
+
     .server-url {
-      a{color: $brand-primary;}
+      a {
+        color: $brand-primary;
+      }
     }
   }
 }
@@ -72,6 +75,8 @@
 
 .percent-supported {
   text-align: left;
+  border-bottom: 1px solid $structure;
+
   .percent-supported-value {
     font-size: 30px;
   }
@@ -90,6 +95,7 @@
 
   .spec-details {
     padding-top: 40px;
+
     .spec-headers {
       margin-bottom: 15px;
       text-align: left;
@@ -123,6 +129,11 @@
   }
 }
 
+.starburst-header {
+  text-align: center;
+  margin-top: 20px;
+}
+
 // ------------------------- SERVER SUMMARIES ------------------------------ //
 
 .server-summaries {
@@ -149,11 +160,6 @@
   .summary-time-details {
     margin-bottom: 10px;
     line-height: 1em;
-
-    .server-time {
-      font-size: .6em;
-      color: $base-header-small;
-    }
   }
 }
 
@@ -163,18 +169,69 @@
   }
 }
 
-// ------------------------- ERROR MESSAGES ------------------------------ //
+// ------------------------- FAILURES -------------------------------------- //
 
-.fails {
-  text-align: left;
-  &.badge{
-    background-color: $brand-accent;
-    &:hover{
-      background-color: $brand-accent-darken;
+.failures {
+  .failures-title {
+    text-align: left;
+    font-size: 30px;
+    border-bottom: 1px solid $structure;
+
+    .failures-count {
+      color: $brand-accent;
+    }
+  }
+
+  .failures-search {
+    margin: 20px 0 20px -15px;
+  }
+
+  .failure-messages {
+    .failures-nav {
+      margin-left: 2px;
+
+      .failure-message-level-one {
+        position: relative;
+        min-height: 65px;
+
+        .failure-message-level-one-count {
+          position: absolute;
+          height: 50px;
+          width: 50px;
+          padding: 5px;
+          top: 10px;
+
+          border-radius: 50%;
+          border: 3px solid $brand-accent;
+          color: $brand-accent;
+          font-size: 1.2em;
+
+          &:hover {
+            background-color: $brand-accent-darken;
+          }
+        }
+
+        .failure-message-level-one-text {
+          margin: 10px 0 10px 50px;
+          text-align: left;
+          font-size: 0.9em;
+        }
+      }
     }
   }
 }
 
 .error-report{
   word-wrap: break-word;
+}
+
+// ------------------------- SERVER TIME ----------------------------------- //
+
+.server-time {
+  font-size: 0.7em;
+  color: $base-header-small;
+}
+
+.servers-show-time {
+  margin-left: 10px;
 }

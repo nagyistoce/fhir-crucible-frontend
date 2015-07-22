@@ -60,8 +60,6 @@ StarburstChartComponent = Ember.Component.extend(
   minSize: 10
   animationTransition: 1000
 
-
-
   _renderChart: (->
     unless @get('data')
       return
@@ -72,8 +70,8 @@ StarburstChartComponent = Ember.Component.extend(
     x = d3.scale.linear().range([0, 2 * Math.PI])
     y = d3.scale.sqrt().range([0, radius])
 
-    # initialize h2 element for title
-    title = d3.select(@get('element')).select("h2")
+    # initialize div element for title
+    title = d3.select(@get('element')).select("div")
 
     if @get('data') then d3.select(@get('element')).select("svg").selectAll('g').remove()
 
