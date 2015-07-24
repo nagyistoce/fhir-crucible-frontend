@@ -192,7 +192,7 @@
 
       .failure-message-level-one {
         position: relative;
-        min-height: 65px;
+        min-height: 70px;
 
         .failure-message-level-one-count {
           position: absolute;
@@ -208,13 +208,19 @@
 
           &:hover {
             background-color: $brand-accent-darken;
+            color: $brand-tertiary;
           }
         }
 
         .failure-message-level-one-text {
-          margin: 10px 0 10px 50px;
+          margin: 10px 0 10px 60px;
           text-align: left;
           font-size: 0.9em;
+
+          &:hover {
+            background-color: $base-darken;
+            border-radius: 5px;
+          }
         }
       }
     }

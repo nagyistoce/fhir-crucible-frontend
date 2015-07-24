@@ -1,22 +1,28 @@
-<div data-spy="scroll" class="test-compliance-fail">
-  <div class="failures-nav">
-    <ul class="nav nav-pills" role="tablist">
+<div class="row test-compliance-fail">
+
+  <div class="col-md-6 failures-nav">
+    <ul class="nav" role="tablist">
       <li class="failure-message-level-one">
-        <div class="col-md-1 failure-message-level-one-count">
+        <div class="col-md-2 failure-message-level-one-count">
           {{proxiedIssue.values.length}}
         </div>
 
-        <div class="col-md-4 failure-message-level-one-text">
+        <div class="col-md-10 failure-message-level-one-text">
           {{proxiedIssue.key}}
         </div>
       </li>
     </ul>
   </div>
 
+{{!--   <div class="col-md-6">
+    {{#each suiteIssues as |issue|}}lo
+      {{fail-results-row failResult=issue selectedIssue=selectedIssue suites=suites}}
+    {{/each}}
+  </div> --}}
 
+{{!-- OLD CODE: --}}
 
-
-  {{!-- <div class="toggleable panel-heading">
+{{!--   <div class="toggleable panel-heading">
     <h4 class="panel-title">
       <label>
         <span {{action 'expandCollapse'}} class="failure-count-badge failures">
