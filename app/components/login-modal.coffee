@@ -1,4 +1,5 @@
 `import BootstrapModal from './bootstrap-modal'`
+`import trueNullProperty from '../utils/true-null-property'`
 
 LoginModal = BootstrapModal.extend({
   identification: null
@@ -6,6 +7,8 @@ LoginModal = BootstrapModal.extend({
   loggingIn: false
   loginFailed: false
   shouldCloseModal: false
+
+  submitBtnDisabled: trueNullProperty('loggingIn')
 
   _closeObserver: (->
     @send('close') if @get('shouldCloseModal')

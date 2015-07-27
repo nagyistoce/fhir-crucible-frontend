@@ -1,6 +1,6 @@
 <div class="modal-dialog modal-center">
   <div class="modal-content">
-    <form {{bind-attr class="formClass"}} {{action 'submit' on='submit'}}>
+    <form class={{formClass}} {{action 'submit' on='submit'}}>
       <div class="modal-body">
         <h4 class="login">
           <div>CRUCIBLE</div>
@@ -26,7 +26,7 @@
             <a href="">FORGOT PASSWORD</a> | <a href="/users/sign-up" {{action 'register'}}>REGISTER</a>
           </div>
           <div class="login-btn col-md-4">
-            <button class="btn" type="submit" {{bind-attr disabled=loggingIn}}>
+            <button class="btn" type="submit" disabled={{submitBtnDisabled}}>
               {{#if loggingIn}}
                 <span class="fa fa-lg fa-fw fa-spinner fa-pulse"> </span>
               {{/if}}

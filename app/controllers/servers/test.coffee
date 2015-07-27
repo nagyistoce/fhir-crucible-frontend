@@ -1,4 +1,5 @@
 `import Ember from 'ember'`
+`import trueNullProperty from '../../utils/true-null-property'`
 
 ServersTestController = Ember.Controller.extend({
   tests: []
@@ -30,6 +31,8 @@ ServersTestController = Ember.Controller.extend({
   canExecuteTests: (->
     !(@get('selectedTests.length') > 0)
   ).property('selectedTests.length')
+
+  executeTestsBtnDisabled: trueNullProperty('canExecuteTests')
 
   # Boolean property for determining if the server's conformance has loaded
   conformanceLoaded: (->

@@ -1,4 +1,8 @@
 `import Ember from 'ember'`
+`import trueNullProperty from '../utils/true-null-property'`
+
+isValidURI = (uri) ->
+  /^https?:\/\/[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?$/gi.test(uri)
 
 IndexController = Ember.Controller.extend({
   multiServer: false
@@ -6,6 +10,8 @@ IndexController = Ember.Controller.extend({
   runServerFailed: false
   server1: null
   server2: null
+
+  submitBtnDisabled: trueNullProperty('loadingServer')
 
   isMultiServer: ->
     @get('server1')? && @get('server2')?
@@ -19,6 +25,12 @@ IndexController = Ember.Controller.extend({
       server2: null
     })
 
+  triggerBadUriNotification: ->
+    @notifications.addNotification(
+      message: 'URL not valid. Please enter a valid URL.',
+      type: 'error'
+    )
+
   actions:
     addUrl: ->
       @set('multiServer', true)
@@ -30,9 +42,16 @@ IndexController = Ember.Controller.extend({
       return
 
     submit: ->
+      @notifications.clearAll()
+
       # quickly exit and avoid the AJAX call if the server field is empty
       if Ember.isEmpty(@get('server1'))
         @set('runServerFailed', true)
+        return
+
+      # check if bad URI
+      if !isValidURI(@get('server1')) || (!Ember.isEmpty(@get('server2')) && !isValidURI(@get('server2')))
+        @triggerBadUriNotification()
         return
 
       # load server

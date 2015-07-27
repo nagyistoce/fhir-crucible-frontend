@@ -1,4 +1,5 @@
 `import Ember from 'ember'`
+`import trueNullProperty from '../../utils/true-null-property'`
 
 SignUpController = Ember.Controller.extend({
   identification: null
@@ -7,6 +8,8 @@ SignUpController = Ember.Controller.extend({
   errors: []
 
   formLoading: false
+
+  submitBtnDisabled: trueNullProperty('formLoading')
 
   hasErrors: Ember.computed.gt('errors.length', 0)
 

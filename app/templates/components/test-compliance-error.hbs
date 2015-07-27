@@ -5,7 +5,7 @@
          <span {{action 'expandCollapse'}} class="badge errors">{{proxiedIssue.values.length}}</span>
         {{proxiedIssue.key}}
       </label>
-      <a {{action 'expandCollapse'}} {{bind-attr class="proxiedIssue.expanded::collapsed"}} aria-expanded="false" href="#"><small>({{#if proxiedIssue.expanded}}less{{else}}more{{/if}})</small></a>
+      <a {{action 'expandCollapse'}} class="{{if proxiedIssue.expanded '' 'collapsed'}}" aria-expanded="false" href="#"><small>({{#if proxiedIssue.expanded}}less{{else}}more{{/if}})</small></a>
     </h4>
   </div>
 

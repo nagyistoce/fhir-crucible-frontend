@@ -14,7 +14,7 @@
               {{input type="text" value=name class="form-control" placeholder="FHIR Server name" disabled=savingServerName}}
             </div>
             <div class="col-sm-2">
-              <input type="submit" class="btn secondary" value="Save" {{bind-attr disabled=savingServerName}} />
+              <input type="submit" class="btn secondary" value="Save" disabled={{submitBtnDisabled}} />
             </div>
           </div>
         </form>
@@ -24,7 +24,7 @@
     </div>
 
     <div class="server-url">
-      <a {{bind-attr href="server.url"}} target="_blank">{{server.url}}</a>
+      <a href={{server.url}} target="_blank">{{server.url}}</a>
     </div>
   </div>
 </div>

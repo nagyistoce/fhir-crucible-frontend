@@ -1,4 +1,5 @@
 `import Ember from 'ember'`
+`import trueNullProperty from '../utils/true-null-property'`
 
 ServerDetailsComponent = Ember.Component.extend(
   server: null
@@ -6,6 +7,8 @@ ServerDetailsComponent = Ember.Component.extend(
   name: null
   editingServerName: false
   savingServerName: false
+
+  submitBtnDisabled: trueNullProperty('savingServerName')
 
   actions:
     editServerName: ->
