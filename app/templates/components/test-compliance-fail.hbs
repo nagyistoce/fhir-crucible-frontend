@@ -1,60 +1,18 @@
-<div class="row test-compliance-fail">
-
-  <div class="col-md-6 failures-nav">
-    <ul class="nav" role="tablist">
-      <li class="failure-message-level-one">
-        <div class="col-md-2 failure-message-level-one-count">
-          {{proxiedIssue.values.length}}
-        </div>
-
-        <div class="col-md-10 failure-message-level-one-text">
-          {{proxiedIssue.key}}
-        </div>
-      </li>
-    </ul>
-  </div>
-
-{{!--   <div class="col-md-6">
-    {{#each suiteIssues as |issue|}}lo
-      {{fail-results-row failResult=issue selectedIssue=selectedIssue suites=suites}}
-    {{/each}}
-  </div> --}}
-
-{{!-- OLD CODE: --}}
-
-{{!--   <div class="toggleable panel-heading">
-    <h4 class="panel-title">
-      <label>
-        <span {{action 'expandCollapse'}} class="failure-count-badge failures">
-          {{proxiedIssue.values.length}}
-        </span>
-        {{proxiedIssue.key}}
-      </label>
-      <a {{action 'expandCollapse'}} class="{{if proxiedIssue.expanded '' 'collapsed'}}" aria-expanded="false" href="#"><small>({{#if proxiedIssue.expanded}}less{{else}}more{{/if}})</small></a>
-    </h4>
-  </div> --}}
-
-{{!--   <div class="panel-collapse collapse">
-    <div class="row">
-      <div class="col-md-4">
-        <table class="table table-hover report-table nav nav-stacked">
-          <tbody>
-            {{#each suiteIssues as |issue|}}
-              {{fail-results-row failResult=issue selectedIssue=selectedIssue suites=suites}}
-            {{/each}}
-          </tbody>
-        </table>
+<div class="test-compliance-fail">
+  <div class="failures-nav">
+    <div class="metadata">
+      <div class="failure-message-level-one-count">
+        {{proxiedIssue.values.length}}
       </div>
-
-      <div class="col-md-8 tab-content details">
-        {{#if selectedIssue}}
-          <div class="media">
-            {{#each selectedIssue.values as |issue|}}
-              <h4>{{issue.test_id}}: {{issue.test_method}}, <strong>{{issue.tag}}</strong></h4>
-            {{/each}}
-          </div>
-        {{/if}}
+      <div class="failure-message-level-one-text">
+        {{proxiedIssue.key}}
       </div>
     </div>
-  </div> --}}
+
+    <div class="failed-tests">
+      {{#each proxiedIssue.values as |issue|}}
+        {{failed-test testId=issue.test_id testMethod=issue.test_method tag=issue.tag}}
+      {{/each}}
+    </div>
+  </div>
 </div>

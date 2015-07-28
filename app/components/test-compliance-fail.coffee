@@ -1,6 +1,20 @@
 `import Ember from 'ember'`
+`import InViewportMixin from 'ember-in-viewport'`
 
-TestComplianceFail = Ember.Component.extend({
+TestComplianceFail = Ember.Component.extend(InViewportMixin, {
+  classNameBindings: ['isSelected:active-test-failure']
+
+  currentIssue: null
+
+  isSelected: Ember.computed('currentIssue', 'proxiedIssue', ->
+    @get('currentIssue') == @get('proxiedIssue')
+  )
+
+  viewportOptionsOverride: Ember.on('didInsertElement', ->
+    Ember.setProperties(this, { viewportSpy: true, viewportTolerance: { top: 80, bottom: 80 } })
+    return
+  ),
+
   proxiedIssue: null
   suites: null
   issue: Ember.computed.oneWay('proxiedIssue.content')
@@ -10,20 +24,14 @@ TestComplianceFail = Ember.Component.extend({
       .key((d) -> d.suite_id)
       .entries(@get('proxiedIssue.values'))
 
-  selectedIssue: ((key, value) ->
-    return value if arguments.length > 1
-    @get('suiteIssues.firstObject')
-  ).property('suiteIssues.[]')
-
-  _expandedObserver: (->
-    @$('div.panel-collapse').collapse(if @get('proxiedIssue.expanded') then 'show' else 'hide')
+  didEnterViewport: ->
+    @sendAction('enteredViewport', @get('proxiedIssue'))
     return
-  ).observes('proxiedIssue.expanded')
 
-  actions:
-    expandCollapse: ->
-      @toggleProperty('proxiedIssue.expanded')
-      return
+  didExitViewport: ->
+    console.log('left')
+    @sendAction('exitedViewport', @get('proxiedIssue'))
+    return
 })
 
 `export default TestComplianceFail`

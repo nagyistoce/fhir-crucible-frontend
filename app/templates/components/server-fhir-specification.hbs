@@ -38,37 +38,25 @@
   {{/if}}
 
   {{#if hasFailures}}
-    <div class="row failures">
+    <div class="failures">
       {{#if issues.length}}
         <div class="failures-title">
           Failures
           <span class="failures-count">({{issues.length}})</span>
         </div>
 
-        <form class="failures-search">
-          <div class="row form">
-            <div class="col-md-5">
-              <div>
-                {{input action="submit" value=failureSearch class="form-control" placeholder="Search by name, keyword, etc"}}
-              </div>
-            </div>
+        <div class="failure-messages row">
+          <div class="col-md-8">
+            {{!-- for each fail you have, this will generate the panel --}}
+            {{#each topIssuesByMessage as |fail|}}
+              {{test-compliance-fail proxiedIssue=fail currentIssue=currentIssue suites=suites enteredViewport="entered" exitedViewport="exited"}}
+            {{/each}}
           </div>
-        </form>
 
-        <div class="failure-messages">
-          <!-- for each fail you have, this will generate the panel  -->
-          {{#each topIssuesByMessage as |fail|}}
-            {{test-compliance-fail proxiedIssue=fail suites=suites}}
-          {{/each}}
+          <div class="col-md-4">
+            {{failure-inspector issue=currentIssue data=data}}
+          </div>
         </div>
-
-{{!--         <h2>By Tag</h2>
-
-        <!-- for each fail you have, this will generate the panel  -->
-        {{#each topIssuesByTag as |fail|}}
-          {{test-compliance-fail proxiedIssue=fail suites=suites}}
-        {{/each}} --}}
-
       {{else}}
         <h1>No Failures</h1>
       {{/if}}

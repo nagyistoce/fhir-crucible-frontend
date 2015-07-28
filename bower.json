@@ -17,6 +17,7 @@
     "font-awesome": "4.3.0",
     "jquery": "1.11.2",
     "jquery-placeholder": "2.1.1",
+    "jquery-sticky": "7136048f53d11bd2f483fb912e40fda68d99c44a",
     "loader.js": "ember-cli/loader.js#3.2.0",
     "moment": "~2.9.0",
     "qunit": "1.17.1",

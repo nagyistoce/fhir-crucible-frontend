@@ -34,7 +34,7 @@ ServerFhirSpecificationComponent = Ember.Component.extend(
     issues = nest.entries(@get('issues'))
     issues.sort((a,b) ->
       b.values.length - a.values.length
-    )[0..9]
+    )
   ).property('issues')
 
   topIssuesByTag: (->
@@ -45,10 +45,40 @@ ServerFhirSpecificationComponent = Ember.Component.extend(
     )
   ).property('issues')
 
+  currentIssue: Ember.computed('issuesInView.[]', 'topIssuesByMessage.firstObject', ->
+    topIssuesByMessage = @get('topIssuesByMessage')
+    issuesInView = @get('issuesInView')
+
+    return topIssuesByMessage[0] if issuesInView.length == 0
+
+    for issue in topIssuesByMessage
+      return issue if issuesInView.contains(issue)
+
+    topIssuesByMessage[0]
+  )
+
+  issuesInView: Ember.computed(-> [])
+  issuesToRemove: Ember.computed(-> [])
+
   actions: {
     updateCategories: (rootNode) ->
       @set('topLevelCategories', rootNode.children)
       @set('issues', rootNode.issues)
+      return
+
+    entered: (proxiedIssue) ->
+      @get('issuesInView').addObject(proxiedIssue)
+      if @get('issuesToRemove.length') > 0
+        for issue in @get('issuesToRemove')
+          @get('issuesInView').removeObject(issue)
+        @get('issuesToRemove').clear()
+      return
+
+    exited: (proxiedIssue) ->
+      @get('issuesInView').removeObject(proxiedIssue)
+      if @get('issuesInView.length') == 0
+        @get('issuesToRemove').addObject(proxiedIssue)
+        @get('issuesInView').addObject(proxiedIssue)
       return
   }
 )

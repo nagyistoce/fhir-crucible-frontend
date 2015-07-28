@@ -176,6 +176,7 @@
     text-align: left;
     font-size: 30px;
     border-bottom: 1px solid $structure;
+    margin-bottom: 15px;
 
     .failures-count {
       color: $brand-accent;
@@ -187,10 +188,26 @@
   }
 
   .failure-messages {
-    .failures-nav {
-      margin-left: 2px;
+    position: relative;
+    text-align: left;
 
-      .failure-message-level-one {
+    .active-test-failure {
+      .failures-nav {
+        .metadata {
+          .failure-message-level-one-count {
+            background-color: $brand-accent-darken;
+            color: $brand-tertiary;
+          }
+
+          .failure-message-level-one-text {
+            background-color: $base-darken;
+          }
+        }
+      }
+    }
+
+    .failures-nav {
+      .metadata {
         position: relative;
         min-height: 70px;
 
@@ -199,31 +216,63 @@
           height: 50px;
           width: 50px;
           padding: 5px;
-          top: 10px;
+          top: 0;
+          left: 0;
 
           border-radius: 50%;
           border: 3px solid $brand-accent;
           color: $brand-accent;
           font-size: 1.2em;
-
-          &:hover {
-            background-color: $brand-accent-darken;
-            color: $brand-tertiary;
-          }
+          text-align: center;
         }
 
         .failure-message-level-one-text {
-          margin: 10px 0 10px 60px;
-          text-align: left;
+          margin: 10px 0 10px 65px;
+          padding: 10px;
           font-size: 0.9em;
+          border-radius: 5px;
+        }
 
-          &:hover {
+        &:hover {
+          .failure-message-level-one-count {
+            background-color: $brand-accent-darken;
+            color: $brand-tertiary;
+          }
+
+          .failure-message-level-one-text {
             background-color: $base-darken;
-            border-radius: 5px;
           }
         }
       }
+
+      .failed-tests {
+        margin-left: 100px;
+
+        .tag {
+          background-color: $brand-accent;
+          color: $brand-tertiary;
+          border-radius: 5px;
+          font-size: 0.8em;
+          padding: 5px;
+          margin-left: 10px;
+        }
+
+        .test-id {
+          font-weight: bold;
+        }
+
+        .test-stats {
+          margin-top: 15px;
+        }
+      }
     }
+  }
+}
+
+.failure-inspector {
+  .failure-inspector-starburst {
+    width: 250px;
+    margin: 0 auto;
   }
 }
 
