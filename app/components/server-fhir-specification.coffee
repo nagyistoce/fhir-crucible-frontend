@@ -11,6 +11,8 @@ ServerFhirSpecificationComponent = Ember.Component.extend(
 
   chartData: Ember.computed.oneWay('data.compliance')
 
+  tagFilters: Ember.computed(-> [])
+
   lastUpdate: (->
     @data.get('server.summary.generatedFromNow')
   ).property('data')
@@ -29,21 +31,20 @@ ServerFhirSpecificationComponent = Ember.Component.extend(
     @get('chartData.issues')
   ).property('chartData')
 
+  filteredIssues: Ember.computed('issues', 'tagFilters.[]', ->
+    issues = @get('issues')
+    filters = @get('tagFilters')
+    issues = issues.filter((issue) -> filters.contains(Ember.get(issue, 'tag'))) if filters.length > 0
+    issues
+  )
+
   topIssuesByMessage: (->
     nest = d3.nest().key((d) -> d.msg)
-    issues = nest.entries(@get('issues'))
+    issues = nest.entries(@get('filteredIssues'))
     issues.sort((a,b) ->
       b.values.length - a.values.length
     )
-  ).property('issues')
-
-  topIssuesByTag: (->
-    nest = d3.nest().key((d) -> d.tag)
-    issues = nest.entries(@get('issues'))
-    issues.sort((a,b) ->
-      b.values.length - a.values.length
-    )
-  ).property('issues')
+  ).property('filteredIssues.[]')
 
   currentIssue: Ember.computed('issueInView', 'topIssuesByMessage.firstObject', ->
     issueInView = @get('issueInView')
@@ -61,6 +62,14 @@ ServerFhirSpecificationComponent = Ember.Component.extend(
 
     updateCurrentIssue: (proxiedIssue) ->
       @set('issueInView', proxiedIssue)
+      return
+
+    addTagToFilter: (tag) ->
+      @get('tagFilters').addObject(tag)
+      return
+
+    removeTagFromFilter: (tag) ->
+      @get('tagFilters').removeObject(tag)
       return
   }
 )

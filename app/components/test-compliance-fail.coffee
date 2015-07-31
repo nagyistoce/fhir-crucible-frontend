@@ -83,6 +83,10 @@ TestComplianceFail = Ember.Component.extend(InViewportMixin, {
     selectIssue: ->
       @sendAction('selectIssue', @get('proxiedIssue'))
       return
+
+    addTagToFilter: (tag) ->
+      @sendAction('addTagToFilter', tag)
+      return
   }
 })
 

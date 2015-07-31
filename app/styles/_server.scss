@@ -187,6 +187,24 @@
     margin: 20px 0 20px -15px;
   }
 
+  .tag {
+    background-color: $brand-accent;
+    color: $brand-tertiary;
+    border-radius: 5px;
+    font-size: 0.8em;
+    padding: 5px;
+    margin-left: 10px;
+  }
+
+  .tag-list {
+    display: inline-block;
+
+    a {
+      color: $brand-tertiary;
+      text-decoration: none;
+    }
+  }
+
   .failure-messages {
     position: relative;
     text-align: left;
@@ -248,15 +266,6 @@
 
       .failed-tests {
         margin-left: 100px;
-
-        .tag {
-          background-color: $brand-accent;
-          color: $brand-tertiary;
-          border-radius: 5px;
-          font-size: 0.8em;
-          padding: 5px;
-          margin-left: 10px;
-        }
 
         .test-id {
           font-weight: bold;

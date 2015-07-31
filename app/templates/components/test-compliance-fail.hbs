@@ -11,7 +11,7 @@
 
     <div class="failed-tests">
       {{#each proxiedIssue.values as |issue|}}
-        {{failed-test testId=issue.test_id testMethod=issue.test_method tag=issue.tag}}
+        {{failed-test testId=issue.test_id testMethod=issue.test_method tag=issue.tag addTagToFilter="addTagToFilter"}}
       {{/each}}
     </div>
   </div>

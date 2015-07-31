@@ -42,14 +42,15 @@
       {{#if issues.length}}
         <div class="failures-title">
           Failures
-          <span class="failures-count">({{issues.length}})</span>
+          <span class="failures-count">({{filteredIssues.length}})</span>
+          {{tag-filter-list tags=tagFilters removeTagFromFilter="removeTagFromFilter"}}
         </div>
 
         <div class="failure-messages row">
           <div class="col-md-8">
             {{!-- for each fail you have, this will generate the panel --}}
             {{#each topIssuesByMessage as |fail|}}
-              {{test-compliance-fail proxiedIssue=fail currentIssue=currentIssue suites=suites enteredViewport="updateCurrentIssue" selectIssue="updateCurrentIssue"}}
+              {{test-compliance-fail proxiedIssue=fail currentIssue=currentIssue suites=suites enteredViewport="updateCurrentIssue" selectIssue="updateCurrentIssue" addTagToFilter="addTagToFilter"}}
             {{/each}}
           </div>
 
