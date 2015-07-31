@@ -18,6 +18,8 @@ TestComplianceFail = Ember.Component.extend(InViewportMixin, {
   ),
 
   _setViewportEntered: (context) ->
+    return if @isDestroyed || @isDestroying
+
     element = @get('element')
     elementBounds = element.getBoundingClientRect()
 
