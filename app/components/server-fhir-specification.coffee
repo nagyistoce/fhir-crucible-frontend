@@ -31,7 +31,11 @@ ServerFhirSpecificationComponent = Ember.Component.extend(
     @get('chartData.issues')
   ).property('chartData')
 
-  filteredIssues: Ember.computed('issues', 'tagFilters.[]', ->
+  allTags: Ember.computed('issues.[]', ->
+    @get('issues').mapBy('tag').uniq().sort()
+  )
+
+  filteredIssues: Ember.computed('issues.[]', 'tagFilters.[]', ->
     issues = @get('issues')
     filters = @get('tagFilters')
     issues = issues.filter((issue) -> filters.contains(Ember.get(issue, 'tag'))) if filters.length > 0
@@ -70,6 +74,14 @@ ServerFhirSpecificationComponent = Ember.Component.extend(
 
     removeTagFromFilter: (tag) ->
       @get('tagFilters').removeObject(tag)
+      return
+
+    toggleTag: (tag) ->
+      tagFilters = @get('tagFilters')
+      if tagFilters.contains(tag)
+        tagFilters.removeObject(tag)
+      else
+        tagFilters.addObject(tag)
       return
   }
 )

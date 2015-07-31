@@ -41,6 +41,7 @@
     <div class="failures">
       {{#if issues.length}}
         <div class="failures-title">
+          {{tag-selector tags=allTags selectedTags=tagFilters toggleTag="toggleTag"}}
           Failures
           <span class="failures-count">({{filteredIssues.length}})</span>
           {{tag-filter-list tags=tagFilters removeTagFromFilter="removeTagFromFilter"}}
