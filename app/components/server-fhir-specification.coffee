@@ -60,7 +60,6 @@ ServerFhirSpecificationComponent = Ember.Component.extend(
       return
 
     updateCurrentIssue: (proxiedIssue) ->
-      console.debug(proxiedIssue.key, ' is now in view')
       @set('issueInView', proxiedIssue)
       return
   }
