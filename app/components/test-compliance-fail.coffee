@@ -1,6 +1,8 @@
 `import Ember from 'ember'`
 `import InViewportMixin from 'ember-in-viewport'`
 
+rAFIDS = {}
+
 TestComplianceFail = Ember.Component.extend(InViewportMixin, {
   classNameBindings: ['isSelected:active-test-failure']
 
@@ -11,9 +13,58 @@ TestComplianceFail = Ember.Component.extend(InViewportMixin, {
   )
 
   viewportOptionsOverride: Ember.on('didInsertElement', ->
-    Ember.setProperties(this, { viewportSpy: true, viewportTolerance: { top: 80, bottom: 80 } })
+    Ember.setProperties(this, { viewportSpy: true, viewportTolerance: { top: 0 } })
     return
   ),
+
+  _setViewportEntered: (context) ->
+    element = @get('element')
+    elementBounds = element.getBoundingClientRect()
+
+    viewportTop = $(context).scrollTop()
+    viewportHeight = $(context).height()
+    viewportBottom = viewportTop + viewportHeight
+
+    elementTop = elementBounds.top + document.body.scrollTop
+    elementBottom = elementBounds.bottom + document.body.scrollTop
+
+    elementLargerThanViewport = elementBounds.height > viewportHeight
+
+    inView = false
+
+    if elementLargerThanViewport && elementTop < viewportTop && elementBottom > viewportBottom
+      # element is larger than the viewport, and is inside the viewport
+      inView = true
+    else if elementTop >= viewportTop && elementBottom <= viewportBottom
+      # element is fully in view
+      inView = true
+    else
+      deltaTop = Math.min(1, (elementBottom - viewportTop) / elementBounds.height)
+      deltaBottom = Math.min(1, (viewportBottom - elementTop) / elementBounds.height)
+
+      inView = (deltaTop * deltaBottom) >= 0.9
+
+    this._triggerDidAccessViewport(inView)
+
+    if elementBounds && @get('viewportUseRAF')
+      rAFIDS[@get('elementId')] = window.requestAnimationFrame(
+        Ember.run.bind(@, @_setViewportEntered, context)
+      )
+
+    return
+
+  _unbindListeners: ->
+    @_super.apply(@, arguments)
+
+    elementId = @get('elementId')
+    if @get('viewportUseRAF')
+      Ember.run.next(@, ->
+        window.cancelAnimationFrame(rAFIDS[elementId])
+        delete rAFIDS[elementId]
+        return
+      )
+
+    return
 
   proxiedIssue: null
   suites: null
@@ -28,10 +79,11 @@ TestComplianceFail = Ember.Component.extend(InViewportMixin, {
     @sendAction('enteredViewport', @get('proxiedIssue'))
     return
 
-  didExitViewport: ->
-    console.log('left')
-    @sendAction('exitedViewport', @get('proxiedIssue'))
-    return
+  actions: {
+    selectIssue: ->
+      @sendAction('selectIssue', @get('proxiedIssue'))
+      return
+  }
 })
 
 `export default TestComplianceFail`

@@ -45,20 +45,13 @@ ServerFhirSpecificationComponent = Ember.Component.extend(
     )
   ).property('issues')
 
-  currentIssue: Ember.computed('issuesInView.[]', 'topIssuesByMessage.firstObject', ->
-    topIssuesByMessage = @get('topIssuesByMessage')
-    issuesInView = @get('issuesInView')
-
-    return topIssuesByMessage[0] if issuesInView.length == 0
-
-    for issue in topIssuesByMessage
-      return issue if issuesInView.contains(issue)
-
-    topIssuesByMessage[0]
+  currentIssue: Ember.computed('issueInView', 'topIssuesByMessage.firstObject', ->
+    issueInView = @get('issueInView')
+    return issueInView if issueInView?
+    @get('topIssuesByMessage.firstObject')
   )
 
-  issuesInView: Ember.computed(-> [])
-  issuesToRemove: Ember.computed(-> [])
+  issueInView: null
 
   actions: {
     updateCategories: (rootNode) ->
@@ -66,19 +59,9 @@ ServerFhirSpecificationComponent = Ember.Component.extend(
       @set('issues', rootNode.issues)
       return
 
-    entered: (proxiedIssue) ->
-      @get('issuesInView').addObject(proxiedIssue)
-      if @get('issuesToRemove.length') > 0
-        for issue in @get('issuesToRemove')
-          @get('issuesInView').removeObject(issue)
-        @get('issuesToRemove').clear()
-      return
-
-    exited: (proxiedIssue) ->
-      @get('issuesInView').removeObject(proxiedIssue)
-      if @get('issuesInView.length') == 0
-        @get('issuesToRemove').addObject(proxiedIssue)
-        @get('issuesInView').addObject(proxiedIssue)
+    updateCurrentIssue: (proxiedIssue) ->
+      console.debug(proxiedIssue.key, ' is now in view')
+      @set('issueInView', proxiedIssue)
       return
   }
 )

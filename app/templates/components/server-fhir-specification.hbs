@@ -49,7 +49,7 @@
           <div class="col-md-8">
             {{!-- for each fail you have, this will generate the panel --}}
             {{#each topIssuesByMessage as |fail|}}
-              {{test-compliance-fail proxiedIssue=fail currentIssue=currentIssue suites=suites enteredViewport="entered" exitedViewport="exited"}}
+              {{test-compliance-fail proxiedIssue=fail currentIssue=currentIssue suites=suites enteredViewport="updateCurrentIssue" selectIssue="updateCurrentIssue"}}
             {{/each}}
           </div>
 
