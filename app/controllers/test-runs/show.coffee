@@ -4,6 +4,7 @@
 TestRunsShowController = Ember.Controller.extend({
   server: null
   destinationServer: null
+  groupBySuite: false
 
   testsExecuting: (->
     @get('model.testResults').mapBy('hasResults').contains(false)
@@ -33,6 +34,14 @@ TestRunsShowController = Ember.Controller.extend({
         @transitionToRoute('multiservers.show', multiserver)
       else
         @transitionToRoute('servers.test', @get('model.server'))
+
+    groupByIndividualTests: ->
+      @set('groupBySuite', false)
+      return
+
+    groupByTestSuites: ->
+      @set('groupBySuite', true)
+      return
 
 })
 
