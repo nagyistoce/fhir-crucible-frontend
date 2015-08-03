@@ -12,10 +12,9 @@
     </h4>
   </div>
   <div id={{result.toggleId}} class="panel-collapse collapse">
-    {{result.test.description}}
-    <br>
-    <div class="row">
-      <div class="col-md-7">
+    <p class="helper_text">{{result.test.description}}</p>
+    <div class="row details">
+      <div class="col-md-5">
         <table class="table table-hover report-table nav nav-stacked">
           <tbody>
             {{#each testRunResults as |test|}}
@@ -25,11 +24,11 @@
         </table>
       </div>
 
-      <div class="col-md-5 tab-content">
+      <div class="col-md-7 tab-content test-results">
         {{#if selectedTestResult}}
           <div class="media">
 
-            <h4 class="test-run-result-id">{{selectedTestResult.test_id}}</h4>
+            <h4 class="test-run-result-id">{{selectedTestResult.test_id}}: {{selectedTestResult.description}}</h4>
 
             {{#if selectedTestResult.message}}
               <div class="media test-message">
