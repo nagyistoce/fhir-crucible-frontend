@@ -11,7 +11,6 @@ TestRunsShowController = Ember.Controller.extend({
     @get('model.testResults.firstObject.results.firstObject')
   ).property('model.testResults.[]')
 
-
   testsExecuting: (->
     @get('model.testResults').mapBy('hasResults').contains(false)
   ).property('model.testResults.@each.hasResults')

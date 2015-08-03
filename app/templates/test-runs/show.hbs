@@ -51,7 +51,6 @@
                     <button type="button" {{bind-attr class=":btn :secondary :col-md-6 groupBySuite::selected"}} {{action "groupByIndividualTests"}}>Show Individual Tests</button>
                     <button type="button" {{bind-attr class=":btn :secondary :col-md-6 groupBySuite:selected"}}{{action "groupByTestSuites"}}>Group By Crucible Test Suites</button>
                 </div>
-
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                   {{#if groupBySuite}}
                     {{#each model.testResults as |result|}}
