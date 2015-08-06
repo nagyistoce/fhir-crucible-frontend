@@ -1,7 +1,7 @@
 `import DS from 'ember-data'`
 
 Summary = DS.Model.extend({
-  compliance: DS.attr()
+  compliance: DS.belongsTo("compliance")
   generatedAt: DS.attr("date")
   server: DS.belongsTo("server", async: true, inverse:'summary')
   testRun: DS.belongsTo("test-run", async: true)

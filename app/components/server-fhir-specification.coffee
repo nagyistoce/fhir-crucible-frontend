@@ -19,7 +19,7 @@ ServerFhirSpecificationComponent = Ember.Component.extend(
 
   percentSupported: (->
     data = @get('chartData')
-    return Math.round(data.passed / data.total * 100) if data?
+    return Math.round(data.get('passed') / data.get('total') * 100) if data?
     return "-"
   ).property('chartData.passed', 'chartData.total')
 

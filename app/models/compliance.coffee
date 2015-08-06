@@ -1,3 +1,4 @@
+`import Ember from 'ember'`
 `import DS from 'ember-data'`
 
 Compliance = DS.Model.extend({
@@ -7,7 +8,10 @@ Compliance = DS.Model.extend({
   skipped: DS.attr("number")
   errors: DS.attr("number")
   children: DS.hasMany('compliance')
-  issues: DS.attr()
+  issues: DS.hasMany('issue')
+  name: Ember.computed('id', -> @get('id'))
+  percentPassing: Ember.computed('total', 'passed', ->
+    ((@get('passed')||0)/(@get('total')||1))*100)
   sortedIssues: (->
     # This will collect all issues with similar messages
     nest = d3.nest().key((d) -> d.msg)
