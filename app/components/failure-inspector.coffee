@@ -6,8 +6,18 @@ FailureInspectorComponent = Ember.Component.extend(AffixableMixin, {
 
   issue: null
   data: null
+  selectedNode: null
 
   chartData: Ember.computed.oneWay('data.compliance')
+
+  actions:
+    updatePlot: (node) ->
+      @sendAction('updatePlot', node)
+      return
+
+    updateCategories: (rootNode) ->
+      @sendAction('updateCategories', rootNode)
+      return
 })
 
 `export default FailureInspectorComponent`

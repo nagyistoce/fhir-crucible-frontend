@@ -1,6 +1,6 @@
 <div class="failure-inspector">
   <div class="failure-inspector-starburst">
-    {{starburst-chart data=chartData showHeader=false}}
+    {{starburst-chart data=chartData showHeader=false on-zoom="updateCategories" updatePlot="updatePlot" selectedNode=selectedNode}}
   </div>
 
   <div class="failure-inspector-message">

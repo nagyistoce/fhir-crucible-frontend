@@ -6,6 +6,7 @@ ServerFhirSpecificationComponent = Ember.Component.extend(
   data: null
   suites: null
   hasFailures: false
+  currentNodeName: null
 
   hasData: Ember.computed.gt('chartData.total', 0)
 
@@ -62,6 +63,10 @@ ServerFhirSpecificationComponent = Ember.Component.extend(
     updateCategories: (rootNode) ->
       @set('topLevelCategories', rootNode.children)
       @set('issues', rootNode.issues)
+      return
+
+    updatePlot: (node)->
+      @set('currentNodeName', node.name)
       return
 
     updateCurrentIssue: (proxiedIssue) ->

@@ -16,7 +16,7 @@
 
     <div class="row server-fhir-specification section-data">
       <div class="col-md-5 spec-starburst-chart">
-        {{starburst-chart data=chartData on-zoom="updateCategories" selectedNode=currentNodeName}}
+        {{starburst-chart data=chartData on-zoom="updateCategories" updatePlot="updatePlot" selectedNode=currentNodeName}}
       </div>
 
       <div class="col-md-7 spec-details">
@@ -56,7 +56,7 @@
           </div>
 
           <div class="col-md-4">
-            {{failure-inspector issue=currentIssue data=data}}
+            {{failure-inspector issue=currentIssue data=data selectedNode=currentNodeName updatePlot="updatePlot" updateCategories="updateCategories"}}
           </div>
         </div>
       {{else}}
