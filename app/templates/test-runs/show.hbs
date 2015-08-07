@@ -45,14 +45,25 @@
                 {{input enter="filter" value=filterParam class="form-control" placeholder="Enter Search"}}
               </div>
               <div class="col-md-9 tab-content-holder">
+
+                <!-- grouping option selectors -->
                 <div class="row grouping-options">
                     <button type="button" {{bind-attr class=":btn :secondary :col-md-6 groupBySuite::selected"}} {{action "groupByIndividualTests"}}>Show Individual Tests</button>
                     <button type="button" {{bind-attr class=":btn :secondary :col-md-6 groupBySuite:selected"}}{{action "groupByTestSuites"}}>Group By Crucible Test Suites</button>
                 </div>
+
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                  {{#each model.testResults as |result|}}
-                    {{test-run-result result=result}}
-                  {{/each}}
+                  {{#if groupBySuite}}
+                    {{#each model.testResults as |result|}}
+                      {{test-run-result result=result}}
+                    {{/each}}
+                  {{else}}
+                    {{#each model.testResults as |result|}}
+                      {{#each result.results as |res|}}
+                        {{individual-test-result-panel individual_result=res}}
+                      {{/each}}
+                    {{/each}}
+                  {{/if}}
                 </div>
               </div>
             </div>
