@@ -5,6 +5,11 @@ TestRunsShowController = Ember.Controller.extend({
   server: null
   destinationServer: null
   groupBySuite: false
+  selectedTestResult: ((key, value) ->
+    return value if arguments.length > 1
+    @get('model.testResults.firstObject.results.firstObject')
+  ).property('model.testResults.[]')
+
 
   testsExecuting: (->
     @get('model.testResults').mapBy('hasResults').contains(false)
@@ -23,6 +28,7 @@ TestRunsShowController = Ember.Controller.extend({
     Ember.$('.execution-progressbar').css("width","#{progress}%")
   ).observes('executionProgress')
   
+
   actions:
     rerun: ->
       if @get('model.isMultiserver')
