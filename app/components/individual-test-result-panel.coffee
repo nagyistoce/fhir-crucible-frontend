@@ -10,7 +10,6 @@ IndividualTestResultPanel = Ember.Component.extend({
       return true
     return false
   ).property('filterValue')
-  
 })
 
 `export default IndividualTestResultPanel`
