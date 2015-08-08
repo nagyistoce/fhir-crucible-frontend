@@ -6,9 +6,9 @@ IndividualTestResultPanel = Ember.Component.extend({
   filteredOut: (->
     IR_content = @get('individual_result.description')
     filtVal = @get('filterValue')
-    if filtVal && IR_content.indexOf(filtVal)
+    if filtVal && (IR_content.indexOf(filtVal) == -1) 
       return true
-    false
+    return false
   ).property('filterValue')
 
 })
