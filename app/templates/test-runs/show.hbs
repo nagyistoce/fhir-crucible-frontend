@@ -42,7 +42,7 @@
             <!-- TEST PANEL START -->
             <div class="tab-pane active test-results" id="test-data">
               <div class="col-md-3 filter">
-                {{input enter="filter" value=filterParam class="form-control" placeholder="Enter Search"}}
+                {{input enter="filter" value=filterValue class="form-control" placeholder="Enter Search"}}
               </div>
               <div class="col-md-9 tab-content-holder">
 
@@ -60,7 +60,7 @@
                   {{else}}
                     {{#each model.testResults as |result|}}
                       {{#each result.results as |res|}}
-                        {{individual-test-result-panel individual_result=res}}
+                        {{individual-test-result-panel individual_result=res filterValue=filterValue}}
                       {{/each}}
                     {{/each}}
                   {{/if}}

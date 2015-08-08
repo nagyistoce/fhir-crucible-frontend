@@ -5,6 +5,7 @@ TestRunsShowController = Ember.Controller.extend({
   server: null
   destinationServer: null
   groupBySuite: false
+  filterValue: null
   selectedTestResult: ((key, value) ->
     return value if arguments.length > 1
     @get('model.testResults.firstObject.results.firstObject')
@@ -48,6 +49,9 @@ TestRunsShowController = Ember.Controller.extend({
     groupByTestSuites: ->
       @set('groupBySuite', true)
       return
+
+    filter: (val) ->
+      @set('filterValue', val)
 
 })
 
