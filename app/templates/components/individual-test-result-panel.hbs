@@ -1,4 +1,4 @@
-
+<div class="individual-test-result-panel {{if filteredOut 'filteredOut'}}">
   <div class="toggleable panel-heading">
     <h4 class="panel-title">
       <label>
@@ -20,8 +20,8 @@
     </h4>
   </div>
   <div id={{individual_result.toggleId}} class="panel-collapse collapse">
-    <div class="row details">
-      <div class="col-md-12 tab-content test-results">
+    <div class="row">
+      <div class="col-md-12 tab-content">
         <div class="media">
           <h4 class="test-run-result-id">{{individual_result.test_id}}: {{individual_result.description}}</h4>
 
@@ -90,4 +90,4 @@
       </div>
     </div>
   </div>
-
+</div>
