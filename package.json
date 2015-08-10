@@ -40,6 +40,7 @@
     "ember-cli-uglify": "1.2.0",
     "ember-data": "1.0.0-beta.15",
     "ember-export-application-global": "1.0.2",
+    "ember-in-viewport": "1.2.5",
     "glob": "5.0.2",
     "http-proxy": "1.9.0",
     "morgan": "1.5.1"

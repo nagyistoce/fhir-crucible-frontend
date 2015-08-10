@@ -4,9 +4,10 @@ ServersShowRoute = Ember.Route.extend({
   model: (params) ->
     @store.find('server', params.server_id)
 
-  setupController: (controller, model) ->
-    controller.set('model', model)
-    controller.set('suites', @store.findAll('test'))
+  afterModel: (model) ->
+    @store.findAll('test').then((tests) =>
+      @controllerFor('servers.show').set('suites', tests)
+    )
 
   actions:
     executeTests: ->

@@ -1,0 +1,9 @@
+<button class="btn secondary" {{action "openModal"}}><i class="fa fa-cog"></i> Tag Filters</button>
+
+{{#if showModal}}
+  {{#bootstrap-modal title="Tag Filters" okBtnTitle="Done" close="hideModal" fade=true}}
+    {{#each proxiedTags as |tag|}}
+      <span class="tag {{if tag.selected 'selected-tag'}}" {{action "toggleTag" tag.tagName}}>{{tag.tagName}}</span>
+    {{/each}}
+  {{/bootstrap-modal}}
+{{/if}}

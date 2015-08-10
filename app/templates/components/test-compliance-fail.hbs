@@ -1,0 +1,18 @@
+<div class="test-compliance-fail">
+  <div class="failures-nav">
+    <div class="metadata" {{action "selectIssue"}}>
+      <div class="failure-message-level-one-count">
+        {{proxiedIssue.values.length}}
+      </div>
+      <div class="failure-message-level-one-text">
+        {{proxiedIssue.key}}
+      </div>
+    </div>
+
+    <div class="failed-tests">
+      {{#each proxiedIssue.values as |issue|}}
+        {{failed-test testId=issue.test_id testMethod=issue.test_method tag=issue.tag addTagToFilter="addTagToFilter"}}
+      {{/each}}
+    </div>
+  </div>
+</div>

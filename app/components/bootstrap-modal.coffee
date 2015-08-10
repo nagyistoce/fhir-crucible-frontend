@@ -18,12 +18,13 @@ BootstrapModalComponent = Ember.Component.extend({
   displaySubmitBtn: Ember.computed.notEmpty('submitBtnTitle')
   displayCloseBtn: Ember.computed.notEmpty('okBtnTitle')
 
-  willInsertElement: ->
+  _setup: Ember.on('didInsertElement', ->
     @$().modal().one('hidden.bs.modal', =>
       @sendAction('close')
       return
     )
     return
+  )
 
   actions: {
     close: ->

@@ -1,11 +1,11 @@
-<div class="row server-details">
-  <div class="col-md-3 col-md-offset-2 server-icon">
+<div class="server-details">
+  <div class="server-icon pull-left">
     {{#link-to 'servers.show' server}}
       <i class="fa fa-server"></i>
     {{/link-to}}
   </div>
 
-  <div class="col-md-7 server-url-name">
+  <div class="server-url-name">
     <div class="server-name emphasize">
       {{#if editingServerName}}
         <form {{action "submit" on="submit"}}>
@@ -19,7 +19,7 @@
           </div>
         </form>
       {{else}}
-        {{server.name}} <a href="#" {{action "editServerName"}}><i class="fa fa-pencil-square-o"></i></a>
+        {{server.name}} <a href="#" {{action "editServerName"}}><i class="fa fa-pencil-square-o edit-server-name"></i></a>
       {{/if}}
     </div>
 
