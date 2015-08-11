@@ -43,11 +43,14 @@ ServerFhirSpecificationComponent = Ember.Component.extend(
   )
 
   topIssuesByMessage: (->
-    nest = d3.nest().key((d) -> d.msg)
-    issues = nest.entries(@get('filteredIssues'))
+    nest = d3.nest().key((d) ->
+      d?.get("msg")
+    )
+    issues = nest.entries(@get('filteredIssues').toArray())
     issues.sort((a,b) ->
       b.values.length - a.values.length
     )
+
   ).property('filteredIssues.[]')
 
   currentIssue: Ember.computed('issueInView', 'topIssuesByMessage.firstObject', ->

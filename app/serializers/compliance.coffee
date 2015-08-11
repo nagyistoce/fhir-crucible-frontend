@@ -5,7 +5,7 @@ ComplianceSerializer = DS.ActiveModelSerializer.extend(DS.EmbeddedRecordsMixin,{
 
   normalize: (prop, hash, type) ->
     hash.issues = hash.issues?.map((el) ->
-      el.id = Ember.generateGuid({}, type)
+      el.id ||= Ember.generateGuid({}, type)
       el
       )
     @_super(prop, hash,type)

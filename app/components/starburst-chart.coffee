@@ -5,26 +5,26 @@
 # returns true if all child tests pass and false if not
 allSuccessful = (data) ->
   successful = true
-  for child in data
-    if child.children
-      successful &&= allSuccessful(child.children)
-    else
-      successful &&= child.failed == 0
+  # for child in data
+  #   if child.children
+  #     successful &&= allSuccessful(child.children)
+  #   else
+  #     successful &&= child.failed == 0
   successful
 
 # returns appropriate color of section (recursive)
 color = (data, threshold) ->
   success = false
-  if data.children
-    success = allSuccessful(data.children)
+  if data.get('children')
+    success = allSuccessful(data.get('children'))
   else
-    success = data.failed == 0
+    success = data.get('failed') == 0
 
-  if data.failed == 0 && data.passed == 0
+  if data.get('failed') == 0 && data.get('passed') == 0
     '#bbb'      # gray
-  else if data.passed / data.total >= threshold
+  else if data.get('passed') / data.get('total') >= threshold
     '#417505'   # green
-  else if !data.name # data is being fetched
+  else if !data.get('name') # data is being fetched
     '#eee'   # gray
   else
     '#800010'   # red
@@ -33,20 +33,20 @@ color = (data, threshold) ->
 opacity = (data) ->
   d3.scale.linear()
     .domain([.5,1])
-    .range([.4,1])(Math.max(data.passed, data.failed) / data.total)
+    .range([.4,1])(Math.max(data.get('passed'), data.get('failed')) / data.get('total'))
 
 # returns percent passing of a section
 percentMe = (data) ->
-  if data.total == 0
+  if data.get('total') == 0
     0
   else
-    Math.round(data.passed / data.total * 100)
+    Math.round(data.get('passed') / data.get('total') * 100)
 
 # returns appropriate tool tip for section
 tip = d3.tip()
   .attr('class', 'd3-tip')
   .offset([-10, 0])
-  .html((d) -> "#{d.name}:<br>#{d.passed} / #{d.total} passed (#{percentMe(d)}%)")
+  .html((d) -> "#{d.get('name')}:<br>#{d.get('passed')} / #{d.get('total')} passed (#{percentMe(d)}%)")
 
 # -------------------------- STARBURST COMPONENT ---------------------------- #
 
@@ -89,7 +89,7 @@ StarburstChartComponent = Ember.Component.extend(
     # define partition layout
     partition = d3.layout.partition()
       .sort(null)
-      .value((d) => logScale(Math.max(d.total ,@get('minSize'))))
+      .value((d) => logScale(Math.max(d.get('total') ,@get('minSize'))))
 
     # define arc angles and radii
     arc = d3.svg.arc()
@@ -100,13 +100,12 @@ StarburstChartComponent = Ember.Component.extend(
 
     # updates node name text element
     updateNodeName = (d) ->
-      title.html("#{d.name}:<p>#{d.passed} / #{d.total} passed (#{percentMe(d)}%)</p>")
+      title.html("#{d.get('name')}:<p>#{d.get('passed')} / #{d.get('total')} passed (#{percentMe(d)}%)</p>")
 
     # define root, initialize node to be the root, and update node name
     root = @get('data')
     node = root
     updateNodeName(node)
-
     # setup for switching data: stash the old values for transition
     stash = (d) ->
       d.x0 = d.x
@@ -136,9 +135,9 @@ StarburstChartComponent = Ember.Component.extend(
         .style("fill", (d) => color(d, @get('threshold')))
         .style("stroke", '#fff')
         .style("opacity", opacity)
-        .attr("class", (d) -> d.name?.replace(/([\s,\&])/g, "_"))
+        .attr("class", (d) -> d.get('name')?.replace(/([\s,\&])/g, "_"))
         .on("click", (d) =>
-          if d.children
+          if d.get('children')
             node = d
             path.transition()
               .duration(@get('animationTransition'))
