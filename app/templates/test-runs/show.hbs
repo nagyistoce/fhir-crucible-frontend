@@ -15,8 +15,11 @@
           </div>
         </div>
         <p class="helper_text">Each of the run tests provide details on the results of the test along with information about how the test relates to the specification and the server's conformance document.</p>
-
-        {{server-details server=server}} {{#if model.isMultiserver}}{{server-details server=destinationServer}}{{/if}}
+        <div class="row">
+          <div class="col-md-7 col-md-offset-4 server-test-details">
+          {{server-details server=server}} {{#if model.isMultiserver}}{{server-details server=destinationServer}}{{/if}}
+          </div>
+        </div>
 
         {{server-fhir-specification data=model.server.summary}}
 
@@ -41,15 +44,15 @@
 
             <!-- TEST PANEL START -->
             <div class="tab-pane active test-results" id="test-data">
-              <div class="col-md-3 filter">
-                {{input enter="filter" value=filterValue class="form-control" placeholder="Enter Search"}}
+              <div class="col-md-3 filter {{if testsExecuting 'disabled'}}">
+                {{input enter="filter" value=filterValue class="form-control" placeholder="Enter Search" disabled=testsExecuting}}
               </div>
               <div class="col-md-9 tab-content-holder">
 
                 <!-- grouping option selectors -->
                 <div class="row grouping-options">
-                    <button type="button" {{bind-attr class=":btn :secondary :col-md-6 groupBySuite::selected"}} {{action "groupByIndividualTests"}}>Show Individual Tests</button>
                     <button type="button" {{bind-attr class=":btn :secondary :col-md-6 groupBySuite:selected"}}{{action "groupByTestSuites"}}>Group By Crucible Test Suites</button>
+                    <button type="button" {{bind-attr class=":btn :secondary :col-md-6 groupBySuite::selected"}} {{action "groupByIndividualTests"}}>Show Individual Tests</button>
                 </div>
 
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
