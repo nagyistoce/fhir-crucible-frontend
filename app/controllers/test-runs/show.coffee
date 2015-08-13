@@ -4,7 +4,7 @@
 TestRunsShowController = Ember.Controller.extend({
   server: null
   destinationServer: null
-  groupBySuite: false
+  groupBySuite: true
   filterValue: null
   selectedTestResult: ((key, value) ->
     return value if arguments.length > 1
