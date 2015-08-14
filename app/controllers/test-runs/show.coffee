@@ -29,7 +29,6 @@ TestRunsShowController = Ember.Controller.extend({
     progress = @get('executionProgress') || 2
     Ember.$('.execution-progressbar').css("width","#{progress}%")
   ).observes('executionProgress')
-
   savingTestRun: false
 
   selectAllBtnText: (->
