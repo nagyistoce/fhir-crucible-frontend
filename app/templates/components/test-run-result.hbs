@@ -1,8 +1,10 @@
 <div class="test-run-result">
   <div class="toggleable panel-heading">
     <h4 class="panel-title">
+      {{input type="checkbox" name=result.test.id checked=proxiedResult.selected}}
       <a class="collapsed" data-toggle="collapse" data-target={{result.toggleSelector}} aria-expanded="false">
-        <label>{{title-case result.test.name}}</label>
+        <label>
+          {{title-case result.test.name}}</label>
       </a>
       {{#if result.hasResults}}
         <i class="glyphicon {{if result.passed 'glyphicon-ok-circle' 'glyphicon-remove-circle'}} {{if result.passed 'passed' 'failed'}}"></i>

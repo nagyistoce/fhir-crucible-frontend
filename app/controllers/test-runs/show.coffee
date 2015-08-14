@@ -3,14 +3,15 @@
 
 TestRunsShowController = Ember.Controller.extend({
   server: null
+  results: Ember.computed.oneWay('model.testResults')
+  proxiedTestResults: Ember.computed.map('results', (test) -> Ember.Object.create(content: test, selected: false, expanded: false) )
+  selectedTests: Ember.computed.mapBy('proxiedSelectedTests', 'content')
+  proxiedSelectedTests: Ember.computed.filterBy('proxiedTestResults', 'selected', true)
+  proxiedExpandedTests: Ember.computed.filterBy('proxiedTestResults', 'expanded', true)
+  
   destinationServer: null
   groupBySuite: true
   filterValue: null
-  selectedTestResult: ((key, value) ->
-    return value if arguments.length > 1
-    @get('model.testResults.firstObject.results.firstObject')
-  ).property('model.testResults.[]')
-
 
   testsExecuting: (->
     @get('model.testResults').mapBy('hasResults').contains(false)
@@ -28,7 +29,24 @@ TestRunsShowController = Ember.Controller.extend({
     progress = @get('executionProgress') || 2
     Ember.$('.execution-progressbar').css("width","#{progress}%")
   ).observes('executionProgress')
-  
+
+  savingTestRun: false
+
+  selectAllBtnText: (->
+    selectedCount = @get('selectedTests.length')
+    if selectedCount == @get('results.length')
+      'Deselect All'
+    else
+      'Select All'
+  ).property('selectedTests.length', 'results.length')
+
+  expandCollapseBtnText: (->
+    expandedCount = @get('proxiedExpandedTests.length')
+    if expandedCount == @get('results.length')
+      'Collapse All'
+    else
+      'Expand All'
+  ).property('proxiedExpandedTests.length', 'results.length')
 
   actions:
     rerun: ->
@@ -52,6 +70,18 @@ TestRunsShowController = Ember.Controller.extend({
 
     filter: (val) ->
       @set('filterValue', val)
+
+    selectDeselectAll: ->
+      selected = @get('selectedTests')
+      prop = selected.length < @get('results.length')
+      @get('proxiedTestResults').setEach('selected', prop)
+      return
+
+    expandCollapseAll: ->
+      expanded = @get('proxiedExpandedTests')
+      prop = expanded.length < @get('results.length')
+      @get('proxiedTestResults').setEach('expanded', prop)
+      return
 
 })
 

@@ -44,9 +44,17 @@
 
             <!-- TEST PANEL START -->
             <div class="tab-pane active test-results" id="test-data">
+
+              <!-- START: Left side, with filters -->
               <div class="col-md-3 filter {{if testsExecuting 'disabled'}}">
                 {{input enter="filter" value=filterValue class="form-control" placeholder="Enter Search" disabled=testsExecuting}}
-              </div>
+                <div class="button-holder">
+                  <button type="button" class="btn secondary" {{action "selectDeselectAll"}}><i class="fa fa-check"></i>&nbsp;{{selectAllBtnText}}</button>
+                  <button type="button" class="btn secondary" {{action "expandCollapseAll"}}><i class="fa fa-expand"></i>&nbsp;{{expandCollapseBtnText}}</button>
+                </div>
+              </div> 
+              <!-- END: Left side, with filters -->
+
               <div class="col-md-9 tab-content-holder">
 
                 <!-- grouping option selectors -->
@@ -54,11 +62,10 @@
                     <button type="button" {{bind-attr class=":btn :secondary :col-md-6 groupBySuite:selected"}}{{action "groupByTestSuites"}}>Group By Crucible Test Suites</button>
                     <button type="button" {{bind-attr class=":btn :secondary :col-md-6 groupBySuite::selected"}} {{action "groupByIndividualTests"}}>Show Individual Tests</button>
                 </div>
-
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                   {{#if groupBySuite}}
-                    {{#each model.testResults as |result|}}
-                      {{test-run-result result=result}}
+                    {{#each proxiedTestResults as |result|}}
+                      {{test-run-result proxiedResult=result}}
                     {{/each}}
                   {{else}}
                     {{#each model.testResults as |result|}}
