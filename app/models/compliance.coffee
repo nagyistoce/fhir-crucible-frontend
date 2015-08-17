@@ -2,6 +2,7 @@
 `import DS from 'ember-data'`
 
 Compliance = DS.Model.extend({
+  name: DS.attr('string')
   total: DS.attr("number")
   passed: DS.attr("number")
   failed: DS.attr("number")
@@ -9,7 +10,7 @@ Compliance = DS.Model.extend({
   errors: DS.attr("number")
   children: DS.hasMany('compliance')
   issues: DS.hasMany('issue')
-  name: Ember.computed('id', -> @get('id'))
+
   percentPassing: Ember.computed('total', 'passed', ->
     ((@get('passed')||0)/(@get('total')||1))*100)
   sortedIssues: (->
@@ -20,6 +21,14 @@ Compliance = DS.Model.extend({
       b.values.length - a.values.length
     )
   ).property('issues')
+
+  starburstJSON2: Ember.computed('name', 'children.[]', ->
+    {
+      name: @get('name'),
+      content: @,
+      children: @get('children').map((child) -> child.get('starburstJSON2'))
+    }
+  )
 })
 
 `export default Compliance`

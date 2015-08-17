@@ -9,7 +9,7 @@ ServerFhirSpecificationComponent = Ember.Component.extend(
 
   hasData: Ember.computed.gt('chartData.total', 0)
 
-  chartData: Ember.computed.oneWay('data.compliance')
+  chartData: Ember.computed.oneWay('data.compliance.starburstJSON')
 
   tagFilters: Ember.computed(-> [])
 

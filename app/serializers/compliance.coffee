@@ -1,13 +1,16 @@
 `import DS from 'ember-data'`
 
 ComplianceSerializer = DS.ActiveModelSerializer.extend(DS.EmbeddedRecordsMixin,{
-  primaryKey: 'name'
+  # primaryKey: 'name'
 
   normalize: (prop, hash, type) ->
+    hash.id ||= Ember.generateGuid({}, 'compliance')
+
     hash.issues = hash.issues?.map((el) ->
       el.id ||= Ember.generateGuid({}, type)
       el
-      )
+    )
+
     @_super(prop, hash,type)
 
   attrs:

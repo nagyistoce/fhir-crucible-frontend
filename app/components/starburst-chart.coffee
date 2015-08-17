@@ -18,11 +18,11 @@ color = (data, threshold) ->
   if data.get('children')
     success = allSuccessful(data.get('children'))
   else
-    success = data.get('failed') == 0
+    success = data.get('content.failed') == 0
 
-  if data.get('failed') == 0 && data.get('passed') == 0
+  if data.get('content.failed') == 0 && data.get('content.passed') == 0
     '#bbb'      # gray
-  else if data.get('passed') / data.get('total') >= threshold
+  else if data.get('content.passed') / data.get('content.total') >= threshold
     '#417505'   # green
   else if !data.get('name') # data is being fetched
     '#eee'   # gray
@@ -33,20 +33,20 @@ color = (data, threshold) ->
 opacity = (data) ->
   d3.scale.linear()
     .domain([.5,1])
-    .range([.4,1])(Math.max(data.get('passed'), data.get('failed')) / data.get('total'))
+    .range([.4,1])(Math.max(data.get('content.passed'), data.get('content.failed')) / data.get('content.total'))
 
 # returns percent passing of a section
 percentMe = (data) ->
   if data.get('total') == 0
     0
   else
-    Math.round(data.get('passed') / data.get('total') * 100)
+    Math.round(data.get('content.passed') / data.get('content.total') * 100)
 
 # returns appropriate tool tip for section
 tip = d3.tip()
   .attr('class', 'd3-tip')
   .offset([-10, 0])
-  .html((d) -> "#{d.get('name')}:<br>#{d.get('passed')} / #{d.get('total')} passed (#{percentMe(d)}%)")
+  .html((d) -> "#{d.get('name')}:<br>#{d.get('content.passed')} / #{d.get('content.total')} passed (#{percentMe(d)}%)")
 
 # -------------------------- STARBURST COMPONENT ---------------------------- #
 
@@ -89,7 +89,7 @@ StarburstChartComponent = Ember.Component.extend(
     # define partition layout
     partition = d3.layout.partition()
       .sort(null)
-      .value((d) => logScale(Math.max(d.get('total') ,@get('minSize'))))
+      .value((d) => logScale(Math.max(d.get('content.total') ,@get('minSize'))))
 
     # define arc angles and radii
     arc = d3.svg.arc()
@@ -100,7 +100,7 @@ StarburstChartComponent = Ember.Component.extend(
 
     # updates node name text element
     updateNodeName = (d) ->
-      title.html("#{d.get('name')}:<p>#{d.get('passed')} / #{d.get('total')} passed (#{percentMe(d)}%)</p>")
+      title.html("#{d.get('name')}:<p>#{d.get('content.passed')} / #{d.get('content.total')} passed (#{percentMe(d)}%)</p>")
 
     # define root, initialize node to be the root, and update node name
     root = @get('data')
