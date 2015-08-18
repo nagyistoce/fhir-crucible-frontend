@@ -99,6 +99,9 @@
     margin-top: 10px;
     button{
       text-align: left;
+      &.hide{
+        visibility: none;
+      }
     }
   }
 }

@@ -33,18 +33,25 @@ TestRunsShowController = Ember.Controller.extend({
 
   selectAllBtnText: (->
     selectedCount = @get('selectedTests.length')
-    if selectedCount == @get('results.length')
-      'Deselect All'
+    if @get('groupBySuite')
+      if selectedCount == @get('results.length')
+        'Deselect All Test Suites'
+      else
+        'Select All Test Suites'
     else
-      'Select All'
-  ).property('selectedTests.length', 'results.length')
+      if selectedCount == @get('results.length')
+        'Deselect All Tests'
+      else
+        'Select All Tests'
+  ).property('selectedTests.length', 'results.length', 'groupBySuite')
 
   expandCollapseBtnText: (->
     expandedCount = @get('proxiedExpandedTests.length')
-    if expandedCount == @get('results.length')
-      'Collapse All'
-    else
-      'Expand All'
+    if @get('groupBySuite')
+      if expandedCount == @get('results.length')
+        'Collapse All Test Suites'
+      else
+        'Expand All Test Suites'
   ).property('proxiedExpandedTests.length', 'results.length')
 
   actions:
