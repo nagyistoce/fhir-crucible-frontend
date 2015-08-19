@@ -2,7 +2,7 @@
   <div class="toggleable panel-heading">
     <h4 class="panel-title">
       <label>
-      <td>{{input type="checkbox" name=individual_result.test_id}}</td>
+      <td>{{input type="checkbox" name=individual_result.test_id checked=proxiedIndivResult.selected}}</td>
       <td>
         <span class={{individual_result.status}}><i class="glyphicon {{if individual_result.passed 'glyphicon-ok-circle' 'glyphicon-remove-circle'}} {{if individual_result.passed 'passed' 'failed'}}"></i></span>
       </td>

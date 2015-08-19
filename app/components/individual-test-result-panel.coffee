@@ -1,7 +1,8 @@
 `import Ember from 'ember'`
 
 IndividualTestResultPanel = Ember.Component.extend({
-  individual_result: null
+  proxiedIndivResult: null
+  individual_result: Ember.computed.oneWay('proxiedIndivResult.content')
   filterValue: null
   filteredOut: (->
     IR_content = @get('individual_result.description')
