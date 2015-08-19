@@ -62,18 +62,17 @@
                     <button type="button" {{bind-attr class=":btn :secondary :col-md-6 groupBySuite:selected"}}{{action "groupByTestSuites"}}>Group By Crucible Test Suites</button>
                     <button type="button" {{bind-attr class=":btn :secondary :col-md-6 groupBySuite::selected"}} {{action "groupByIndividualTests"}}>Show Individual Tests</button>
                 </div>
-                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                  {{#if groupBySuite}}
+                <div class="panel-group test-results" id="accordion" role="tablist" aria-multiselectable="true">
+                  <div class="{{if groupBySuite '' 'hidden'}}">
                     {{#each proxiedTestResults as |result|}}
-                      {{test-run-result proxiedResult=result}}
+                      {{test-run-result proxiedResult=result filterValue=filterValue}}
                     {{/each}}
-                  {{else}}
-                    {{#each model.testResults as |result|}}
-                      {{#each result.results as |res|}}
-                        {{individual-test-result-panel individual_result=res filterValue=filterValue}}
-                      {{/each}}
+                  </div>
+                  <div class="{{if groupBySuite 'hidden' ''}}">
+                    {{#each proxiedIndivResults as |result|}}
+                      {{individual-test-result-panel proxiedIndivResult=result filterValue=filterValue}}
                     {{/each}}
-                  {{/if}}
+                  </div>
                 </div>
               </div>
             </div>

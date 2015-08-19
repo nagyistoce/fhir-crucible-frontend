@@ -66,6 +66,9 @@
 }
 
 .test-run-result {
+  &.filteredOut{
+    display: none;
+  }
   .panel-title{
     label {
       color: $brand-accent;
@@ -103,5 +106,11 @@
         visibility: none;
       }
     }
+  }
+}
+
+.test-results{
+  .hidden{
+    visibility: none;
   }
 }
