@@ -17,6 +17,7 @@
         <li><a href="#" class="navButton" {{action 'invalidateSession'}}>Logout</a></li>
       {{else}}
         <li>{{#link-to 'index' classNames="navButton"}}Server Test{{/link-to}}</li>
+        <li><a href="mailto:fhir-testing-list@lists.mitre.org?subject=Crucible" class="navButton">Contact Us</a></li>
         <li><a href="/users/login" class="navButton" {{action 'openLoginModal'}}>Login</a></li>
       {{/if}}
     </ul>
