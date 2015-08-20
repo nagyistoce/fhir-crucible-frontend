@@ -1,13 +1,14 @@
 `import Ember from 'ember'`
 `import fhirCategories from '../../utils/fhir-categories'`
+`import flattenArray from '../../utils/flatten-array'`
 
 TestRunsShowController = Ember.Controller.extend({
   server: null
   resultsBySuite: Ember.computed.oneWay('model.testResults')
-  resultsByIndivTest: ( ->
-    @get('resultsBySuite').mapBy('results').reduce((l, r) -> l.pushObjects r, [])
+ 
+  resultsByIndivTest: ( -> 
+    flattenArray(@get('resultsBySuite').getEach('results').mapBy('content'))
   ).property('resultsBySuite')
-
   proxiedIndivResults: Ember.computed.map('resultsByIndivTest', (test) -> Ember.Object.create(content: test, selected: false) )
   proxiedTestResults: Ember.computed.map('resultsBySuite', (test) -> Ember.Object.create(content: test, selected: false, expanded: false) )
 
@@ -67,6 +68,7 @@ TestRunsShowController = Ember.Controller.extend({
   ).property('proxiedExpandedTests.length', 'resultsBySuite.length')
 
   actions:
+
     rerun: ->
       if @get('model.isMultiserver')
         multiserver = {
