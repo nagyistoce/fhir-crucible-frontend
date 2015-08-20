@@ -6,16 +6,16 @@ TestRunsShowController = Ember.Controller.extend({
   server: null
   resultsBySuite: Ember.computed.oneWay('model.testResults')
  
-  resultsByIndivTest: ( -> 
-    flattenArray(@get('resultsBySuite').getEach('results').mapBy('content'))
-  ).property('resultsBySuite')
-  proxiedIndivResults: Ember.computed.map('resultsByIndivTest', (test) -> Ember.Object.create(content: test, selected: false) )
+  #resultsByIndivTest: ( -> 
+  #  flattenArray(@get('resultsBySuite').getEach('results').mapBy('content'))
+  #).property('resultsBySuite')
+  #proxiedIndivResults: Ember.computed.map('resultsByIndivTest', (test) -> Ember.Object.create(content: test, selected: false) )
   proxiedTestResults: Ember.computed.map('resultsBySuite', (test) -> Ember.Object.create(content: test, selected: false, expanded: false) )
 
-  selectedIndivTests: Ember.computed.mapBy('proxiedSelectedIndivTests', 'content')
+  #selectedIndivTests: Ember.computed.mapBy('proxiedSelectedIndivTests', 'content')
   selectedTests: Ember.computed.mapBy('proxiedSelectedTests', 'content')
 
-  proxiedSelectedIndivTests: Ember.computed.filterBy('proxiedIndivResults', 'selected', true)
+  #proxiedSelectedIndivTests: Ember.computed.filterBy('proxiedIndivResults', 'selected', true)
   proxiedSelectedTests: Ember.computed.filterBy('proxiedTestResults', 'selected', true)
 
   proxiedExpandedTests: Ember.computed.filterBy('proxiedTestResults', 'expanded', true)
@@ -51,12 +51,14 @@ TestRunsShowController = Ember.Controller.extend({
       else
         'Select All Test Suites'
     else
-       selectedCount = @get('selectedIndivTests.length')
-      if selectedCount == @get('resultsByIndivTest.length')
-        'Deselect All Tests'
-      else
-        'Select All Tests'
-  ).property('selectedTests.length', 'selectedIndivTests.length', 'resultsBySuite.length', 'resultsByIndivTest.length', 'groupBySuite')
+      #selectedCount = @get('selectedIndivTests.length')
+      #if selectedCount == @get('resultsByIndivTest.length')
+      #  'Deselect All Tests'
+      #else
+      #  'Select All Tests'
+      'Select All Tests'
+
+  ).property('selectedTests.length', 'resultsBySuite.length', 'groupBySuite')
 
   expandCollapseBtnText: (->
     expandedCount = @get('proxiedExpandedTests.length')
@@ -98,9 +100,9 @@ TestRunsShowController = Ember.Controller.extend({
         @get('proxiedTestResults').setEach('selected', prop)
         return
       else
-        selected = @get('selectedIndivTests')
-        prop = selected.length < @get('resultsByIndivTest.length')
-        @get('proxiedIndivResults').setEach('selected', prop)
+        #selected = @get('selectedIndivTests')
+        #prop = selected.length < @get('resultsByIndivTest.length')
+        #@get('proxiedIndivResults').setEach('selected', prop)
         return
 
     expandCollapseAll: ->

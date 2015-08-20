@@ -69,8 +69,13 @@
                     {{/each}}
                   </div>
                   <div class="{{if groupBySuite 'hidden' ''}}">
-                    {{#each proxiedIndivResults as |result|}}
+<!--                     {{#each proxiedIndivResults as |result|}}
                       {{individual-test-result-panel proxiedIndivResult=result filterValue=filterValue}}
+                    {{/each}} -->
+                    {{#each resultsBySuite as |result|}}
+                      {{#each result.results as |res|}}
+                        {{individual-test-result-panel individual_result=res filterValue=filterValue}}
+                      {{/each}}
                     {{/each}}
                   </div>
                 </div>
