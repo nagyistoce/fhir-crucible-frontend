@@ -9,16 +9,11 @@ TestRunResultComponent = Ember.Component.extend({
     @get('testRunResults.firstObject')
   ).property('testRunResults.[]')
 
-  _expandedObserver: (->
-    @$('div.panel-collapse').collapse(if @get('proxiedResult.expanded') then 'show' else 'hide')
-    return
-  ).observes('proxiedResult.expanded')
-
   actions:
     expandCollapse: ->
       @toggleProperty('proxiedResult.expanded')
+      @$('div.panel-collapse').collapse(if @get('proxiedResult.expanded') then 'show' else 'hide')
       return
-
 })
 
 `export default TestRunResultComponent`
