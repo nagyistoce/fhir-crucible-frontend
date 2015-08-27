@@ -21,8 +21,6 @@
           </div>
         </div>
 
-        {{server-fhir-specification data=model.server.summary showTestResults=true}}
-
         {{#if testsExecuting}}
           <div class="row">
             <div class="progress">
@@ -37,13 +35,15 @@
           <ul class="nav nav-tabs tabbed-data-container">
             <li class="tabbed-data active"><a data-toggle="tab" href="#test-data">Tests</a></li>
             <li class="tabbed-data"><a data-toggle="tab" href="#conformance-data">Conformance</a></li>
+            <li class="tabbed-data"><a data-toggle="tab" href="#test-run-summary-data">Test Run Summary</a></li>
           </ul>
         </div>
         <div class="row">
           <div class="tab-content">
-
-            {{test-run-results-filtered resultsBySuite=resultsBySuite}}
-
+            <!-- TEST PANEL START -->
+            <div class="tab-pane active test-results" id="test-data">
+              {{test-run-results-filtered overallData=model}}
+            </div>
             <!-- CONFORMANCE PANEL START -->
             <div class="tab-pane" id="conformance-data">
               {{#if model.isMultiserver}}
@@ -51,6 +51,9 @@
               {{else}}
                 {{conformance-view conformance=content.conformance testResults=content.testResults}}
               {{/if}}
+            </div>
+            <div class="tab-pane" id="test-run-summary-data">
+              {{server-fhir-specification data=model.server.summary}}
             </div>
           </div>
         </div>

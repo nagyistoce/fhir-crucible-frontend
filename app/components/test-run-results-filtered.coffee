@@ -1,12 +1,23 @@
 `import Ember from 'ember'`
 
 TestRunResultsFilteredComponent = Ember.Component.extend(
-  #testRunResults: null
-  resultsBySuite: null
- 
+
+  overallData: null
+
+  data: (-> 
+    @get('overallData.server.summary')
+  ).property('overallData')
+
+  #feed this to the starburst component
+  chartData: Ember.computed.oneWay('data.compliance')
+
   groupBySuite: true
   filterValue: null
 
+  resultsBySuite: (-> 
+    @get('overallData.testResults')
+  ).property('overallData')
+  
   #resultsByIndivTest: ( -> 
   #  flattenArray(@get('resultsBySuite').getEach('results').mapBy('content'))
   #).property('resultsBySuite')
@@ -49,6 +60,11 @@ TestRunResultsFilteredComponent = Ember.Component.extend(
 
   actions:
   
+    updateCategories: (rootNode) ->
+      @set('topLevelCategories', rootNode.children)
+      @set('issues', rootNode.issues)
+      return
+
     groupByIndividualTests: ->
       @set('groupBySuite', false)
       return

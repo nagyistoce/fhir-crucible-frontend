@@ -4,9 +4,10 @@ ServerFhirSpecificationComponent = Ember.Component.extend(
   server: null
   threshold: null
   data: null
+  #delete the data passed is the model.server.summary of the testrun on the test runs page
+
   suites: null
   hasFailures: false
-  showTestResultData: false
 
   hasData: Ember.computed.gt('chartData.total', 0)
 
