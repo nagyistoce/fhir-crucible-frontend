@@ -3,6 +3,7 @@
 TestRunResultComponent = Ember.Component.extend({
   proxiedResult: null
   result: Ember.computed.oneWay('proxiedResult.content')
+  expanded: Ember.computed.oneWay('proxiedResult.expanded')
   testRunResults: Ember.computed.oneWay('result.results')
   selectedTestResult: ((key, value) ->
     return value if arguments.length > 1
