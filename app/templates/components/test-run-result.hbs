@@ -2,7 +2,7 @@
   <div class="toggleable panel-heading">
     <h4 class="panel-title">
       {{input type="checkbox" name=result.test.id checked=proxiedResult.selected}}
-      <a class="collapsed" data-toggle="collapse" data-target={{result.toggleSelector}} aria-expanded="false">
+      <a class="{{if expanded '' 'collapsed'}}" data-toggle="collapse" data-target={{result.toggleSelector}} aria-expanded="false">
         <label>
           {{title-case result.test.name}}</label>
       </a>
@@ -13,7 +13,7 @@
       {{/if}}
     </h4>
   </div>
-  <div id={{result.toggleId}} class="panel-collapse collapse">
+  <div id={{result.toggleId}} class="panel-collapse {{if expanded '' 'collapse'}}">
     <p class="helper_text">{{result.test.description}}</p>
     <div class="row details">
       <div class="col-md-5">
