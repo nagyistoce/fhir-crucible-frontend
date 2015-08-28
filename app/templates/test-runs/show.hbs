@@ -47,10 +47,12 @@
 
               <!-- START: Left side, with filters -->
               <div class="col-md-3 filter {{if testsExecuting 'disabled'}}">
-                {{input enter="filter" value=filterValue class="form-control" placeholder="Enter Search" disabled=testsExecuting}}
-                <div class="button-holder">
+                <div class="{{if groupBySuite 'hidden' ''}}">
+                  {{input enter="filter" value=filterValue class="form-control" placeholder="Enter Search" disabled=testsExecuting}}
+                </div>
+                <div class="button-holder {{if groupBySuite '' 'hide'}}">
                   <button type="button" class="btn secondary" {{action "selectDeselectAll"}}><i class="fa fa-check"></i>&nbsp;{{selectAllBtnText}}</button>
-                  <button type="button" class="btn secondary {{if groupBySuite '' 'hide'}}" {{action "expandCollapseAll"}}><i class="fa fa-expand"></i>&nbsp;{{expandCollapseBtnText}}</button>
+                  <button type="button" class="btn secondary" {{action "expandCollapseAll"}}><i class="fa fa-expand"></i>&nbsp;{{expandCollapseBtnText}}</button>
                 </div>
               </div> 
               <!-- END: Left side, with filters -->
