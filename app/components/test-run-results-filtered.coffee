@@ -3,10 +3,24 @@
 TestRunResultsFilteredComponent = Ember.Component.extend(
 
   overallData: null
+  topLevelCategories: null
+  topLevelIssues: null
 
   data: (-> 
     @get('overallData.server.summary')
   ).property('overallData')
+
+  testIdByStarburst: (-> 
+    if @topLevelIssues
+      return @get('topLevelIssues').mapBy('test_id')
+    return "empty"
+  ).property('topLevelIssues')
+
+  suiteIdByStarburst: (-> 
+    if @topLevelIssues
+      return @get('topLevelIssues').mapBy('suite_id')
+    return "empty"
+  ).property('topLevelIssues')
 
   #feed this to the starburst component
   chartData: Ember.computed.oneWay('data.compliance')
@@ -62,7 +76,8 @@ TestRunResultsFilteredComponent = Ember.Component.extend(
   
     updateCategories: (rootNode) ->
       @set('topLevelCategories', rootNode.children)
-      @set('issues', rootNode.issues)
+      @set('topLevelIssues', rootNode.issues)
+      debugger
       return
 
     groupByIndividualTests: ->
