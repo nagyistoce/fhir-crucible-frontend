@@ -1,8 +1,11 @@
 `import Ember from 'ember'`
 `import fhirCategories from '../../utils/fhir-categories'`
+`import flattenArray from '../../utils/flatten-array'`
 
 TestRunsShowController = Ember.Controller.extend({
   server: null
+  resultsBySuite: Ember.computed.oneWay('model.testResults')
+
   destinationServer: null
 
   testsExecuting: (->
@@ -21,8 +24,11 @@ TestRunsShowController = Ember.Controller.extend({
     progress = @get('executionProgress') || 2
     Ember.$('.execution-progressbar').css("width","#{progress}%")
   ).observes('executionProgress')
-  
+
+  savingTestRun: false
+
   actions:
+
     rerun: ->
       if @get('model.isMultiserver')
         multiserver = {

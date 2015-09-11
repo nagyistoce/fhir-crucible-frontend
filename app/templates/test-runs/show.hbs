@@ -15,10 +15,11 @@
           </div>
         </div>
         <p class="helper_text">Each of the run tests provide details on the results of the test along with information about how the test relates to the specification and the server's conformance document.</p>
-
-        {{server-details server=server}} {{#if model.isMultiserver}}{{server-details server=destinationServer}}{{/if}}
-
-        {{server-fhir-specification data=model.server.summary}}
+        <div class="row">
+          <div class="col-md-7 col-md-offset-4 server-test-details">
+          {{server-details server=server}} {{#if model.isMultiserver}}{{server-details server=destinationServer}}{{/if}}
+          </div>
+        </div>
 
         {{#if testsExecuting}}
           <div class="row">
@@ -34,22 +35,15 @@
           <ul class="nav nav-tabs tabbed-data-container">
             <li class="tabbed-data active"><a data-toggle="tab" href="#test-data">Tests</a></li>
             <li class="tabbed-data"><a data-toggle="tab" href="#conformance-data">Conformance</a></li>
+            <li class="tabbed-data"><a data-toggle="tab" href="#test-run-summary-data">Test Run Summary</a></li>
           </ul>
         </div>
         <div class="row">
           <div class="tab-content">
-
             <!-- TEST PANEL START -->
             <div class="tab-pane active test-results" id="test-data">
-              <div class="col-md-12 tab-content-holder">
-                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                  {{#each model.testResults as |result|}}
-                    {{test-run-result result=result}}
-                  {{/each}}
-                </div>
-              </div>
+              {{test-run-results-filtered overallData=model}}
             </div>
-
             <!-- CONFORMANCE PANEL START -->
             <div class="tab-pane" id="conformance-data">
               {{#if model.isMultiserver}}
@@ -57,6 +51,9 @@
               {{else}}
                 {{conformance-view conformance=content.conformance testResults=content.testResults}}
               {{/if}}
+            </div>
+            <div class="tab-pane" id="test-run-summary-data">
+              {{server-fhir-specification data=model.server.summary}}
             </div>
           </div>
         </div>

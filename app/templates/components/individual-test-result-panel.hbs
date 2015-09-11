@@ -1,0 +1,93 @@
+<div class="individual-test-result-panel {{if filteredOut 'filteredOut'}}">
+  <div class="toggleable panel-heading">
+    <h4 class="panel-title">
+      <label>
+      <td>{{input type="checkbox" name=individual_result.test_id checked=proxiedIndivResult.selected}}</td>
+      <td>
+        <span class={{individual_result.status}}><i class="glyphicon {{if individual_result.passed 'glyphicon-ok-circle' 'glyphicon-remove-circle'}} {{if individual_result.passed 'passed' 'failed'}}"></i></span>
+      </td>
+      <td>
+        {{#if individual_result.warnings}}
+          <i class="fa fa-exclamation-triangle warning"></i>
+        {{/if}}
+      </td>
+      <td>
+        {{individual_result.description}}
+      </td>
+      </label>
+      <a class="collapsed" data-toggle="collapse" data-target={{individual_result.toggleSelector}} aria-expanded="false">
+      </a>
+    </h4>
+  </div>
+  <div id={{individual_result.toggleId}} class="panel-collapse collapse">
+    <div class="row">
+      <div class="col-md-12 tab-content">
+        <div class="media">
+          <h4 class="test-run-result-id">{{individual_result.test_id}}: {{individual_result.description}}</h4>
+
+          {{#if individual_result.message}}
+            <div class="media test-message">
+              <div class="media-body">
+                <h4 class="media-heading">Message</h4>
+                {{individual_result.message}}
+              </div>
+            </div>
+          {{/if}}
+
+          {{#if individual_result.warnings}}
+            <div class="media test-warnings">
+              <div class="media-body">
+                <h4 class="media-heading">Warnings</h4>
+                {{#each individual_result.warnings as |warning|}}
+                  <div>{{warning}}</div>
+                {{/each}}
+              </div>
+            </div>
+          {{/if}}
+
+          {{#if individual_result.links}}
+            <div class="media test-links">
+              <div class="media-body">
+                <h4 class="media-heading">Links</h4>
+                {{#each individual_result.links as |link|}}
+                  <div><a href={{link}} target="_blank">Related FHIR Spec Location</a></div>
+                {{/each}}
+              </div>
+            </div>
+          {{/if}}
+
+          {{#if individual_result.requires}}
+            <div class="media test-requires">
+              <div class="media-body">
+                <h4 class="media-heading">Test Requires</h4>
+                  {{#each individual_result.requires as |requirement|}}
+                    <div>{{#if requirement.resource}}{{requirement.resource}}{{else}}System{{/if}}: {{requirement.methods}}</div>
+                  {{/each}}
+              </div>
+            </div>
+          {{/if}}
+
+          {{#if individual_result.validates}}
+            <div class="media test-validates">
+              <div class="media-body">
+                <h4 class="media-heading">Test Validates</h4>
+                  {{#each individual_result.validates as |requirement|}}
+                    <div>{{#if requirement.resource}}{{requirement.resource}}{{else}}System{{/if}}: {{requirement.methods}}</div>
+                  {{/each}}
+              </div>
+            </div>
+          {{/if}}
+
+          {{#if individual_result.responseData}}
+            <div class="media test-response-data">
+              <div class="media-body">
+                <h4 class="media-heading">Data</h4>
+                {{individual_result.responseData}}
+              </div>
+            </div>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

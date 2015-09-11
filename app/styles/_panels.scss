@@ -60,6 +60,24 @@
   }
 }
 
+.individual-test-result-panel{
+  & .panel-title{
+    margin-bottom: 10px;
+  }
+  & .panel-heading{
+    label{
+      font-size: 14px;
+    }
+  }
+  & .tab-content{
+    margin-left: 23px;
+    margin-bottom: 25px;
+    font-size: 16px;
+  }
+  &.filteredOut{
+    display: none;
+  }
+}
 
 
 
