@@ -8,29 +8,28 @@ TestRunResultsFilteredComponent = Ember.Component.extend(
     @get('overallData.server.summary')
   ).property('overallData')
 
-  #feed this to the starburst component
   chartData: Ember.computed.oneWay('data.compliance')
 
   groupBySuite: true
   filterValue: null
 
+  issues: null
+  filteredSuites: Ember.computed.mapBy('issues', 'suite_id')
+
   resultsBySuite: (-> 
     @get('overallData.testResults')
   ).property('overallData')
-  
-  #resultsByIndivTest: ( -> 
-  #  flattenArray(@get('resultsBySuite').getEach('results').mapBy('content'))
-  #).property('resultsBySuite')
-  #proxiedIndivResults: Ember.computed.map('resultsByIndivTest', (test) -> Ember.Object.create(content: test, selected: false) )
-  proxiedTestResults: Ember.computed.map('resultsBySuite', (test) -> Ember.Object.create(content: test, selected: false, expanded: false) )
 
-  #selectedIndivTests: Ember.computed.mapBy('proxiedSelectedIndivTests', 'content')
+
+  proxiedTestResults: Ember.computed.map('resultsBySuite', (result) -> Ember.Object.create(content: result, selected: false, expanded: false, suite_id: result.test.id, filteredOut: false) )
   selectedTests: Ember.computed.mapBy('proxiedSelectedTests', 'content')
-
-  #proxiedSelectedIndivTests: Ember.computed.filterBy('proxiedIndivResults', 'selected', true)
   proxiedSelectedTests: Ember.computed.filterBy('proxiedTestResults', 'selected', true)
-
   proxiedExpandedTests: Ember.computed.filterBy('proxiedTestResults', 'expanded', true)
+
+  temp: ( ->  
+    values = @get('filteredSuites')
+    @get('proxiedTestResults').filter((suite) -> values.contains(suite.suite_id))
+  ).property('proxiedTestResults', 'filteredSuites')
 
   selectAllBtnText: (->
     if @get('groupBySuite')
@@ -40,13 +39,7 @@ TestRunResultsFilteredComponent = Ember.Component.extend(
       else
         'Select All Test Suites'
     else
-      #selectedCount = @get('selectedIndivTests.length')
-      #if selectedCount == @get('resultsByIndivTest.length')
-      #  'Deselect All Tests'
-      #else
-      #  'Select All Tests'
       'Select All Tests'
-
   ).property('selectedTests.length', 'resultsBySuite.length', 'groupBySuite')
 
   expandCollapseBtnText: (->
@@ -61,8 +54,8 @@ TestRunResultsFilteredComponent = Ember.Component.extend(
   actions:
   
     updateCategories: (rootNode) ->
-      @set('topLevelCategories', rootNode.children)
       @set('issues', rootNode.issues)
+      @get('temp').setEach('filteredOut', true)
       return
 
     groupByIndividualTests: ->
@@ -83,9 +76,6 @@ TestRunResultsFilteredComponent = Ember.Component.extend(
         @get('proxiedTestResults').setEach('selected', prop)
         return
       else
-        #selected = @get('selectedIndivTests')
-        #prop = selected.length < @get('resultsByIndivTest.length')
-        #@get('proxiedIndivResults').setEach('selected', prop)
         return
 
     expandCollapseAll: ->
