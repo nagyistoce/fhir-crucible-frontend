@@ -17,7 +17,9 @@ TestRunResultsFilteredComponent = Ember.Component.extend(
     @get('chartData.issues')
   ).property('chartData')
 
-  filteredSuites: Ember.computed.mapBy('issues', 'suite_id')
+  filteredSuites: (->
+    @get('issues')
+  ).property('issues')
 
   resultsBySuite: (-> 
     @get('overallData.testResults')
@@ -52,14 +54,14 @@ TestRunResultsFilteredComponent = Ember.Component.extend(
   
     updateCategories: (rootNode) ->
       @set('issues', rootNode.issues)
-      # list = Ember.computed.mapBy('rootNode.issues', 'suite_id')
-      # for result in @get('proxiedTestResults')
-      #   if list.contains(result.get('suite_id'))
-      #     debugger
-      #     result.set('filteredOut', false)
-      #   else 
-      #     result.set('filteredOut', true)
-
+      list = @get('filteredSuites').mapBy('suite_id')
+      debugger
+      for result in @get('proxiedTestResults')
+        id = result.get('suite_id')
+        if list.contains(id)
+          result.set('filteredOut', false)
+        else 
+          result.set('filteredOut', true)
       return
 
     groupByIndividualTests: ->

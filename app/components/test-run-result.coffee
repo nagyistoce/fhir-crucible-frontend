@@ -3,15 +3,8 @@
 TestRunResultComponent = Ember.Component.extend({
   proxiedResult: null
   result: Ember.computed.oneWay('proxiedResult.content')
-  list: []
   id: Ember.computed.oneWay('proxiedResult.suite_id')
-  filteredOut: (->
-    temp = @get('list')
-    if temp.contains(@get('id'))
-      return false
-    else
-      return true
-  ).property('list')
+  filteredOut: Ember.computed.oneWay('proxiedResult.filteredOut')
 
   testRunResults: Ember.computed.oneWay('result.results')
   selectedTestResult: ((key, value) ->
