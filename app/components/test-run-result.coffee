@@ -2,8 +2,17 @@
 
 TestRunResultComponent = Ember.Component.extend({
   proxiedResult: null
-  filteredOut: Ember.computed.oneWay('proxiedResult.filteredOut')
   result: Ember.computed.oneWay('proxiedResult.content')
+  list: []
+  id: Ember.computed.oneWay('proxiedResult.suite_id')
+  filteredOut: (->
+    temp = @get('list')
+    if temp.contains(@get('id'))
+      return false
+    else
+      return true
+  ).property('list')
+
   testRunResults: Ember.computed.oneWay('result.results')
   selectedTestResult: ((key, value) ->
     return value if arguments.length > 1
@@ -19,6 +28,10 @@ TestRunResultComponent = Ember.Component.extend({
   actions:
     expandCollapse: ->
       @toggleProperty('proxiedResult.expanded')
+      return
+
+    test: ->
+      debugger
       return
 
 })

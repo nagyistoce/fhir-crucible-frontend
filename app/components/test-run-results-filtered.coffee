@@ -13,23 +13,20 @@ TestRunResultsFilteredComponent = Ember.Component.extend(
   groupBySuite: true
   filterValue: null
 
-  issues: null
+  issues: (->
+    @get('chartData.issues')
+  ).property('chartData')
+
   filteredSuites: Ember.computed.mapBy('issues', 'suite_id')
 
   resultsBySuite: (-> 
     @get('overallData.testResults')
   ).property('overallData')
 
-
-  proxiedTestResults: Ember.computed.map('resultsBySuite', (result) -> Ember.Object.create(content: result, selected: false, expanded: false, suite_id: result.test.id, filteredOut: false) )
+  proxiedTestResults: Ember.computed.map('resultsBySuite', (result) -> Ember.Object.create(content: result, selected: false, expanded: false, suite_id: result.get('test.id'), filteredOut: false))
   selectedTests: Ember.computed.mapBy('proxiedSelectedTests', 'content')
   proxiedSelectedTests: Ember.computed.filterBy('proxiedTestResults', 'selected', true)
   proxiedExpandedTests: Ember.computed.filterBy('proxiedTestResults', 'expanded', true)
-
-  temp: ( ->  
-    values = @get('filteredSuites')
-    @get('proxiedTestResults').filter((suite) -> values.contains(suite.suite_id))
-  ).property('proxiedTestResults', 'filteredSuites')
 
   selectAllBtnText: (->
     if @get('groupBySuite')
@@ -55,7 +52,14 @@ TestRunResultsFilteredComponent = Ember.Component.extend(
   
     updateCategories: (rootNode) ->
       @set('issues', rootNode.issues)
-      @get('temp').setEach('filteredOut', true)
+      # list = Ember.computed.mapBy('rootNode.issues', 'suite_id')
+      # for result in @get('proxiedTestResults')
+      #   if list.contains(result.get('suite_id'))
+      #     debugger
+      #     result.set('filteredOut', false)
+      #   else 
+      #     result.set('filteredOut', true)
+
       return
 
     groupByIndividualTests: ->
