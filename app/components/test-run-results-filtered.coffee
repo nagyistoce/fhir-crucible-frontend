@@ -17,10 +17,6 @@ TestRunResultsFilteredComponent = Ember.Component.extend(
     @get('chartData.issues')
   ).property('chartData')
 
-  filteredSuites: (->
-    @get('issues')
-  ).property('issues')
-
   resultsBySuite: (-> 
     @get('overallData.testResults')
   ).property('overallData')
@@ -54,11 +50,10 @@ TestRunResultsFilteredComponent = Ember.Component.extend(
   
     updateCategories: (rootNode) ->
       @set('issues', rootNode.issues)
-      list = @get('filteredSuites').mapBy('suite_id')
-      debugger
+      filteredSuitesList = @get('issues').mapBy('suite_id')
       for result in @get('proxiedTestResults')
         id = result.get('suite_id')
-        if list.contains(id)
+        if filteredSuitesList.contains(id)
           result.set('filteredOut', false)
         else 
           result.set('filteredOut', true)

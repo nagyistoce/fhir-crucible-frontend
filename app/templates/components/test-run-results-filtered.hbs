@@ -26,13 +26,10 @@
   <div class="panel-group test-results" id="accordion" role="tablist" aria-multiselectable="true">
     <div class="{{if groupBySuite '' 'hidden'}}">
       {{#each proxiedTestResults as |result|}}
-        {{test-run-result proxiedResult=result filterValue=filterValue list=filteredSuites}}
+        {{test-run-result proxiedResult=result filterValue=filterValue}}
       {{/each}}
     </div>
     <div class="{{if groupBySuite 'hidden' ''}}">
-<!--                     {{#each proxiedIndivResults as |result|}}
-        {{individual-test-result-panel proxiedIndivResult=result filterValue=filterValue}}
-      {{/each}} -->
       {{#each resultsBySuite as |result|}}
         {{#each result.results as |res|}}
           {{individual-test-result-panel individual_result=res filterValue=filterValue}}
