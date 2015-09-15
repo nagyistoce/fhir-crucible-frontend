@@ -3,27 +3,17 @@
 TestRunResultsFilteredComponent = Ember.Component.extend(
 
   overallData: null
-  topLevelCategories: null
-  topLevelIssues: null
 
   data: (-> 
     @get('overallData.server.summary')
   ).property('overallData')
 
-  testIdByStarburst: (-> 
-    if @topLevelIssues
-      return @get('topLevelIssues').mapBy('test_id')
-    return "empty"
-  ).property('topLevelIssues')
-
-  suiteIdByStarburst: (-> 
-    if @topLevelIssues
-      return @get('topLevelIssues').mapBy('suite_id')
-    return "empty"
-  ).property('topLevelIssues')
-
   #feed this to the starburst component
   chartData: Ember.computed.oneWay('data.compliance')
+
+  issues: (->
+    @get('chartData.issues')
+  ).property('chartData')
 
   groupBySuite: true
   filterValue: null
@@ -32,19 +22,21 @@ TestRunResultsFilteredComponent = Ember.Component.extend(
     @get('overallData.testResults')
   ).property('overallData')
   
-  #resultsByIndivTest: ( -> 
-  #  flattenArray(@get('resultsBySuite').getEach('results').mapBy('content'))
-  #).property('resultsBySuite')
-  #proxiedIndivResults: Ember.computed.map('resultsByIndivTest', (test) -> Ember.Object.create(content: test, selected: false) )
   proxiedTestResults: Ember.computed.map('resultsBySuite', (test) -> Ember.Object.create(content: test, selected: false, expanded: false) )
-
-  #selectedIndivTests: Ember.computed.mapBy('proxiedSelectedIndivTests', 'content')
   selectedTests: Ember.computed.mapBy('proxiedSelectedTests', 'content')
-
-  #proxiedSelectedIndivTests: Ember.computed.filterBy('proxiedIndivResults', 'selected', true)
   proxiedSelectedTests: Ember.computed.filterBy('proxiedTestResults', 'selected', true)
-
   proxiedExpandedTests: Ember.computed.filterBy('proxiedTestResults', 'expanded', true)
+
+  mapped: (->
+    @get('resultsBySuite').mapBy('results').mapBy('content').mapBy('canonicalState').reduce(((prev, cur) -> prev.concat(cur)))
+  ).property('resultsBySuite')
+
+  mapped1: (->
+    @get('resultsBySuite').mapBy('results').reduce(((prev, cur) -> prev.concat(cur)))
+  ).property('resultsBySuite')
+
+  proxiedIndivResults: Ember.computed.map('mapped', (test) -> Ember.Object.create(content: test, selected: false) )
+
 
   selectAllBtnText: (->
     if @get('groupBySuite')
@@ -75,9 +67,15 @@ TestRunResultsFilteredComponent = Ember.Component.extend(
   actions:
   
     updateCategories: (rootNode) ->
-      @set('topLevelCategories', rootNode.children)
-      @set('topLevelIssues', rootNode.issues)
+      @set('issues', rootNode.issues)
+      list = @get('issues').mapBy('suite_id')
       debugger
+      for result in @get('proxiedTestResults')
+        id = result.get('suite_id')
+        if list.contains(id)
+          result.set('filteredOut', false)
+        else 
+          result.set('filteredOut', true)
       return
 
     groupByIndividualTests: ->

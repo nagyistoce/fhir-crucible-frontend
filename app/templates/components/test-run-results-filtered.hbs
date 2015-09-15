@@ -7,7 +7,6 @@
   </div>
   <div>
     {{starburst-chart data=chartData on-zoom="updateCategories" selectedNode=currentNodeName showHeader=false}}
-    {{suiteIdByStarburst}}
   </div>
 </div> 
 <!-- END: Left side, with filters -->
@@ -27,14 +26,12 @@
       {{/each}}
     </div>
     <div class="{{if groupBySuite 'hidden' ''}}">
-<!--                     {{#each proxiedIndivResults as |result|}}
-        {{individual-test-result-panel proxiedIndivResult=result filterValue=filterValue}}
-      {{/each}} -->
-      {{#each resultsBySuite as |result|}}
+      {{mapped.length}}
+<!--       {{#each resultsBySuite as |result|}}
         {{#each result.results as |res|}}
           {{individual-test-result-panel individual_result=res filterValue=filterValue}}
         {{/each}}
-      {{/each}}
+      {{/each}} -->
     </div>
   </div>    
 </div>
