@@ -2,7 +2,7 @@
 
 ServerSerializer = DS.ActiveModelSerializer.extend({
   normalize: (type, hash, prop) ->
-    hash.links = {conformance: 'conformance', summary:"summary"}
+    hash.links = {conformance: 'conformance', summary:"summary", issues:"issues"}
     @_super(type,hash,prop)
 })
 

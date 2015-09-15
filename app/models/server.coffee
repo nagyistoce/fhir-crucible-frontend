@@ -7,6 +7,7 @@ Server = DS.Model.extend({
   unsortedTests: DS.attr()
   selected: DS.attr("boolean")
   summary: DS.belongsTo('summary',{async:true, inverse: 'server'})
+  issues: DS.hasMany('issue', async:true)
 
   activeTestCount: (->
     @get('tests').filterBy('active', true).getEach('tests').getEach('length').reduce(((s,t) -> s + t),0)
