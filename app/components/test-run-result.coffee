@@ -3,11 +3,14 @@
 TestRunResultComponent = Ember.Component.extend({
   proxiedResult: null
   result: Ember.computed.oneWay('proxiedResult.content')
+  filteredOut: Ember.computed.oneWay('proxiedResult.filteredOut')
+
   testRunResults: Ember.computed.oneWay('result.results')
   selectedTestResult: ((key, value) ->
     return value if arguments.length > 1
     @get('testRunResults.firstObject')
   ).property('testRunResults.[]')
+
 
   _expandedObserver: (->
     @$('div.panel-collapse').collapse(if @get('proxiedResult.expanded') then 'show' else 'hide')
