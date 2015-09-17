@@ -11,4 +11,5 @@ Issue = DS.Model.extend
   validates: DS.attr()
   links: DS.attr()
   testData: DS.attr("string")
+
 `export default Issue`

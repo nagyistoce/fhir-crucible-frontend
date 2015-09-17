@@ -29,7 +29,6 @@ Server = DS.Model.extend({
     @get('issues.length') > 0
   )
 
-
   activeTestCount: (->
     @get('tests').filterBy('active', true).getEach('tests').getEach('length').reduce(((s,t) -> s + t),0)
   ).property('tests.@each.active')
