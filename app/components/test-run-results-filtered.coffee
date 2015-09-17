@@ -27,12 +27,12 @@ TestRunResultsFilteredComponent = Ember.Component.extend(
   proxiedSelectedTests: Ember.computed.filterBy('proxiedTestResults', 'selected', true)
   proxiedExpandedTests: Ember.computed.filterBy('proxiedTestResults', 'expanded', true)
 
-  mapped: (->
+  mapped2: (->
     @get('resultsBySuite').mapBy('results').mapBy('content').mapBy('canonicalState').reduce(((prev, cur) -> prev.concat(cur)))
   ).property('resultsBySuite')
 
   mapped1: (->
-    @get('resultsBySuite').mapBy('results').reduce(((prev, cur) -> prev.concat(cur)))
+    @get('resultsBySuite').mapBy('results').reduce(((prev, cur) -> prev.concat(cur)), [])
   ).property('resultsBySuite')
 
   proxiedIndivResults: Ember.computed.map('mapped', (test) -> Ember.Object.create(content: test, selected: false) )
