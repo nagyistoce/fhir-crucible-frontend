@@ -9,6 +9,27 @@ Server = DS.Model.extend({
   summary: DS.belongsTo('summary',{async:true, inverse: 'server'})
   issues: DS.hasMany('issue', async:true)
 
+  failedIssues: Ember.computed.filterBy('issues', 'status', 'fail')
+
+  issuesByTag: Ember.computed('failedIssues', ->
+    nest = d3.nest().key((d) -> d.get('method'))
+    groupedIssues = nest.entries(@get('failedIssues').toArray()).sort((a,b) ->
+      b.values.length - a.values.length
+    )
+  )
+
+  issuesByMessage: Ember.computed('failedIssues', ->
+    nest = d3.nest().key((d) -> d.get('message'))
+    groupedIssues = nest.entries(@get('failedIssues').toArray()).sort((a,b) ->
+      b.values.length - a.values.length
+    )
+  )
+
+  hasData: Ember.computed('issues', ->
+    @get('issues.length') > 0
+  )
+
+
   activeTestCount: (->
     @get('tests').filterBy('active', true).getEach('tests').getEach('length').reduce(((s,t) -> s + t),0)
   ).property('tests.@each.active')

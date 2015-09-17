@@ -14,7 +14,9 @@
     </div>
 
     <div class="col-md-8 test-stats-validates">
-      TEST VALIDATES
+      {{#each validates as |validate|}}
+        {{validate}} <br>
+      {{/each}}
     </div>
 
     <div class="col-md-4 test-stats-label">
@@ -22,7 +24,9 @@
     </div>
 
     <div class="col-md-8 test-stats-links">
-      LINKS
+      {{#each links as |link|}}
+        <a href="{{link}}">{{link}}</a> <br>
+      {{/each}}
     </div>
 
     <div class="col-md-4 test-stats-label">
@@ -30,7 +34,7 @@
     </div>
 
     <div class="col-md-5 test-stats-data">
-      DATA
+          {{!issue.testData}}
     </div>
 
     <div class="col-md-3">

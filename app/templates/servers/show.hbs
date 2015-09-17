@@ -8,7 +8,19 @@
       <button class="btn" {{action "testRunsPage"}}>Test Results</button>
     </div>
     <div class="col-md-12 server-fhir-spec-display">
-      {{server-fhir-specification data=server.summary suites=suites hasFailures=true}}
+      {{#if server.hasData}}
+        {{#each server.issuesByMessage as |issueGroup|}}
+          <b>{{issueGroup.key}} ({{issueGroup.values.length}})</b> <br>
+          {{#each issueGroup.values as |issue|}}
+            <div class="">
+              {{failed-test issue=issue tag=issue.method}}
+            </div>
+          {{/each}}
+        {{/each}}
+      {{else}}
+        <span class="fa fa-lg fa-fw fa-spinner fa-pulse"></span> Loading data...
+      {{/if}}
+      {{!server-fhir-specification data=server.summary suites=suites hasFailures=true}}
     </div>
   </div>
 </div>
