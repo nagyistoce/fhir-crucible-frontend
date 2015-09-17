@@ -1,11 +1,12 @@
 `import Ember from 'ember'`
 `import trueNullProperty from '../utils/true-null-property'`
 
+
 ServerDetailsComponent = Ember.Component.extend(
   server: null
   position: 'center'
-
   name: null
+
   editingServerName: false
   savingServerName: false
 
@@ -27,10 +28,15 @@ ServerDetailsComponent = Ember.Component.extend(
         @setProperties(editingServerName: false, savingServerName: false)
         return
 
-      server = @get('server')
-      server.set('name', @get('name'))
-      server.save().then(successFn, errorFn)
-      return
+      if this.session.isAuthenticated
+        server = @get('server')
+        server.set('name', @get('name'))
+        server.save().then(successFn, errorFn)
+        return
+      else
+        alert('Must log in to change server name')
+        @setProperties(editingServerName: false, savingServerName: false)
+        return
 )
 
 `export default ServerDetailsComponent`
